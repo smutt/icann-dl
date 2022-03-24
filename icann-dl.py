@@ -23,7 +23,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-base_dir = os.environ['HOME'] + '/www/depht.com/icann/pubs/'
+base_dir = '/home/smutt/www/depht.com/icann/pubs/'
 
 groups = {}
 groups['ssac'] = {}
