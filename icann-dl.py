@@ -58,6 +58,11 @@ groups['ge']['uri'] = 'https://www.icann.org/en/government-engagement/publicatio
 groups['ge']['regex'] = []
 groups['ge']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
+groups['rzerc'] = {}
+groups['rzerc']['uri'] = 'https://www.icann.org/en/rzerc#documents'
+groups['rzerc']['regex'] = []
+groups['rzerc']['regex'].append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
+
 exclude = []
 exclude.append('/en/system/files/files/didp-response-process-29oct13-en.pdf')
 exclude.append('https://www.icann.org/en/system/files/files/registrar-billing-faq-21dec21-en.pdf')
@@ -85,6 +90,7 @@ for gr in groups:
       if href is None:
         continue
       if href.endswith('.pdf'):
+        #print(href)
         for reg in groups[gr]['regex']:
           if reg.match(href):
             if not href in exclude:
