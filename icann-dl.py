@@ -27,41 +27,49 @@ base_dir = '/home/smutt/www/depht.com/icann/pubs/'
 
 groups = {}
 groups['ssac'] = {}
-groups['ssac']['uri'] = 'https://www.icann.org/groups/ssac/documents'
+groups['ssac']['uri']  = []
+groups['ssac']['uri'].append('https://www.icann.org/groups/ssac/documents')
 groups['ssac']['regex'] = []
 groups['ssac']['regex'].append(re.compile('.*/groups/ssac/documents/sac-.*\.pdf$'))
 groups['ssac']['regex'].append(re.compile('.*/system/files/files/sac-.*\.pdf$'))
 
 groups['ssac_cor'] = {}
-groups['ssac_cor']['uri'] = 'https://www.icann.org/groups/ssac/documents-correspondence'
+groups['ssac_cor']['uri'] = []
+groups['ssac_cor']['uri'].append('https://www.icann.org/groups/ssac/documents-correspondence')
 groups['ssac_cor']['regex'] = []
 groups['ssac_cor']['regex'].append(re.compile('.*/system/files/files/ssac2.*\.pdf$'))
 
 groups['rssac'] = {}
-groups['rssac']['uri'] = 'https://www.icann.org/groups/rssac/documents'
+groups['rssac']['uri'] = []
+groups['rssac']['uri'].append('https://www.icann.org/groups/rssac/documents')
 groups['rssac']['regex'] = []
 groups['rssac']['regex'].append(re.compile('.*/system/files/files/.*rssac-.*\.pdf$'))
 groups['rssac']['regex'].append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
 groups['octo'] = {}
-groups['octo']['uri'] = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
+groups['octo']['uri'] = []
+groups['octo']['uri'].append('https://www.icann.org/resources/pages/octo-publications-2019-05-24-en')
 groups['octo']['regex'] = []
 groups['octo']['regex'].append(re.compile('.*/octo-.*\.pdf$'))
 
 groups['octo_com'] = {}
-groups['octo_com']['uri'] = 'https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en'
+groups['octo_com']['uri'] = []
+groups['octo_com']['uri'].append('https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en')
 groups['octo_com']['regex'] = []
 groups['octo_com']['regex'].append(re.compile('.*/system/files/files/.*\.pdf$'))
 
 groups['ge'] = {}
-groups['ge']['uri'] = 'https://www.icann.org/en/government-engagement/publications?page=1'
+groups['ge']['uri'] = []
+groups['ge']['uri'].append('https://www.icann.org/en/government-engagement/publications?page=1')
 groups['ge']['regex'] = []
 groups['ge']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 groups['rzerc'] = {}
-groups['rzerc']['uri'] = 'https://www.icann.org/en/rzerc#documents'
+groups['rzerc']['uri'] = []
+groups['rzerc']['uri'].append('https://www.icann.org/en/rzerc#documents')
 groups['rzerc']['regex'] = []
 groups['rzerc']['regex'].append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
+
 
 exclude = []
 exclude.append('/en/system/files/files/didp-response-process-29oct13-en.pdf')
@@ -81,26 +89,28 @@ def download(uri, fname):
 
 
 for gr in groups:
-  req = requests.get(groups[gr]['uri'], data=None)
-  if req.status_code == 200:
-    links = []
-    soup = BeautifulSoup(req.text, 'html.parser')
-    for link in soup.find_all('a'):
-      href = link.get('href')
-      if href is None:
-        continue
-      if href.endswith('.pdf'):
-        #print(href)
-        for reg in groups[gr]['regex']:
-          if reg.match(href):
-            if not href in exclude:
-              if href.startswith('https://'):
-                links.append(href)
-              else:
-                links.append('https://www.icann.org' + href)
+  links = []
+  for URI in groups[gr]['uri']:
+    req = requests.get(URI, data=None)
+    if req.status_code == 200:
+      soup = BeautifulSoup(req.text, 'html.parser')
+      for link in soup.find_all('a'):
+        href = link.get('href')
+        if href is None:
+          continue
+        if href.endswith('.pdf'):
+          #print(href)
+          for reg in groups[gr]['regex']:
+            if reg.match(href):
+              if not href in exclude:
+                if href.startswith('https://'):
+                  links.append(href)
+                else:
+                  links.append('https://www.icann.org' + href)
 
-    for ll in links:
-      fname = base_dir + gr + '/' + ll.split("/")[-1]
-      if not os.path.exists(fname):
-        print(ll + ' ==> ' + fname)
-        download(ll, fname)
+  links = list(dict.fromkeys(links)) # Remove duplicates
+  for ll in links:
+    fname = base_dir + gr + '/' + ll.split("/")[-1]
+    if not os.path.exists(fname):
+      print(ll + ' ==> ' + fname)
+      download(ll, fname)
