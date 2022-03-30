@@ -24,7 +24,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib3 import util as Util
 
-base_dir = '/var/www/htdocs/icann-pdf.depht.com/pub'
+base_dir = '/var/www/htdocs/icann-pdf.depht.com/pub/'
 
 exclude = []
 exclude.append(re.compile('.*/didp-response-process-29oct13-en\.pdf$'))
@@ -109,6 +109,9 @@ groups['gac']['regex'].append(re.compile('^.*/.*communique.*\.pdf[\?language_id.
 
 # Grab a file and write to disk
 def download(uri, fname):
+  if os.path.exists(fname):
+    return
+
   print(uri + ' ==> ' + fname)
   try:
     req = requests.get(uri,stream=True)
@@ -160,19 +163,13 @@ for gr in groups:
   if gr == 'board_cor':
     for sub_dir,URI in groups[gr]['sub_dir'].items():
       for ll in get_links(URI, groups[gr]['regex']):
-        fname = base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1]
-        if not os.path.exists(fname):
-          download(ll, fname)
+        download(ll, base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1])
 
   elif gr == 'gac':
     for page in get_links(groups[gr]['uri'], groups[gr]['option_regex'], ['option', 'value']):
       for ll in get_links(page, groups[gr]['regex']):
-        fname = base_dir + gr + '/' + ll.split('/')[-1]
-        if not os.path.exists(fname):
-          download(ll, fname)
+        download(ll, base_dir + gr + '/' + ll.split('/')[-1])
 
   else:
     for ll in get_links(groups[gr]['uri'], groups[gr]['regex']):
-      fname = base_dir + gr + '/' + ll.split('/')[-1]
-      if not os.path.exists(fname):
-        download(ll, fname)
+      download(ll, base_dir + gr + '/' + ll.split('/')[-1])
