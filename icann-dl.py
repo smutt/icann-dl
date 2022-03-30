@@ -24,7 +24,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib3 import util as Util
 
-base_dir = '/home/smutt/www/depht.com/icann/pubs/'
+base_dir = '/var/www/htdocs/icann-pdf.depht.com/pub'
 
 exclude = []
 exclude.append(re.compile('.*/didp-response-process-29oct13-en\.pdf$'))
