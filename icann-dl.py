@@ -23,6 +23,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from urllib3 import util as Util
+from datetime import date
 
 base_dir = '/var/www/htdocs/icann-pdf.depht.com/pub/'
 
@@ -49,7 +50,7 @@ groups['rssac'] = {}
 groups['rssac']['uri'] = 'https://www.icann.org/groups/rssac/documents'
 groups['rssac']['regex'] = []
 groups['rssac']['regex'].append(re.compile('.*/system/files/files/.*rssac-.*\.pdf$'))
-groups['rssac']['regex'].append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
+#groups['rssac']['regex'].append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
 groups['octo'] = {}
 groups['octo']['uri'] = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
@@ -95,9 +96,8 @@ groups['board_cor']['sub_dir']['2021'] = 'https://www.icann.org/resources/pages/
 groups['board_cor']['sub_dir']['2022'] = 'https://www.icann.org/resources/pages/correspondence-2022'
 groups['board_cor']['regex'] = []
 groups['board_cor']['regex'].append(re.compile('.*/correspondence/.*\.pdf$'))
-groups['board_cor']['regex'].append(re.compile('.*/news/correspondence/.*\.pdf$'))
 groups['board_cor']['regex'].append(re.compile('.*/system/files/files/.*\.pdf$'))
-groups['board_cor']['regex'].append(re.compile('.*/system/files/correspondence/.*\.pdf$'))
+groups['board_cor']['regex'].append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
 
 groups['gac'] = {}
 groups['gac']['uri'] = 'https://gac.icann.org/contentMigrated/icann1-singapore-communique'
@@ -162,8 +162,13 @@ def get_links(URI, regex, tags=['a', 'href']):
 for gr in groups:
   if gr == 'board_cor':
     for sub_dir,URI in groups[gr]['sub_dir'].items():
-      for ll in get_links(URI, groups[gr]['regex']):
-        download(ll, base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1])
+      if sub_dir == str(date.today().year):
+        for ll in get_links(URI, groups[gr]['regex']):
+          #if not ll.endswith('.pdf'): # 2012 and 2013 sometimes add another level of redirection
+          #  for mm in get_links(ll, groups[gr]['regex']):
+          #    download(mm, base_dir + gr + '/' + sub_dir + '/' + mm.split('/')[-1])
+          #else:
+          download(ll, base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1])
 
   elif gr == 'gac':
     for page in get_links(groups[gr]['uri'], groups[gr]['option_regex'], ['option', 'value']):
