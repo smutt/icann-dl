@@ -122,9 +122,9 @@ def download(uri, fname):
             f.write(chunk)
       os.chmod(fname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644
     else:
-      print("dl_bad_response:" + uri)
+      print("err:dl_bad_response:" + uri)
   except requests.RequestException:
-    print("req_exception:" + uri)
+    print("err:req_exception:" + uri)
 
 
 # Grab links in tags matching regex
@@ -139,7 +139,12 @@ def get_links(URI, regex, tags=['a', 'href']):
   links = []
   url_t = Util.parse_url(URI)
 
-  req = requests.get(URI)
+  try:
+    req = requests.get(URI)
+  except requests.RequestException:
+    print("err:req_exception:" + uri)
+    return []
+
   if req.status_code == 200:
     soup = BeautifulSoup(req.text, 'html.parser')
     for tag in soup.find_all(tags[0]):
