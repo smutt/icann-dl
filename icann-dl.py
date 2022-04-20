@@ -72,32 +72,32 @@ groups['rzerc']['uri'] = 'https://www.icann.org/en/rzerc#documents'
 groups['rzerc']['regex'] = []
 groups['rzerc']['regex'].append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
 
-groups['board_cor'] = {}
-groups['board_cor']['sub_dir'] = {} # Before 2003 there are no PDFs
-groups['board_cor']['sub_dir']['2003'] = 'https://www.icann.org/resources/pages/2003-2012-10-11-en'
-groups['board_cor']['sub_dir']['2004'] = 'https://www.icann.org/resources/pages/2004-2012-10-11-en'
-groups['board_cor']['sub_dir']['2005'] = 'https://www.icann.org/resources/pages/2005-2012-10-11-en'
-groups['board_cor']['sub_dir']['2006'] = 'https://www.icann.org/resources/pages/2006-2012-10-11-en'
-groups['board_cor']['sub_dir']['2007'] = 'https://www.icann.org/resources/pages/2007-2012-10-11-en'
-groups['board_cor']['sub_dir']['2008'] = 'https://www.icann.org/resources/pages/2008-2012-10-11-en'
-groups['board_cor']['sub_dir']['2009'] = 'https://www.icann.org/resources/pages/2009-2012-10-11-en'
-groups['board_cor']['sub_dir']['2010'] = 'https://www.icann.org/resources/pages/2010-2012-10-11-en'
-groups['board_cor']['sub_dir']['2011'] = 'https://www.icann.org/resources/pages/2011-2012-02-25-en'
-groups['board_cor']['sub_dir']['2012'] = 'https://www.icann.org/resources/pages/2012-2013-01-10-en'
-groups['board_cor']['sub_dir']['2013'] = 'https://www.icann.org/resources/pages/2013-2014-01-24-en'
-groups['board_cor']['sub_dir']['2014'] = 'https://www.icann.org/resources/pages/2014-2014-01-24-en'
-groups['board_cor']['sub_dir']['2015'] = 'https://www.icann.org/resources/pages/correspondence-2015'
-groups['board_cor']['sub_dir']['2016'] = 'https://www.icann.org/resources/pages/correspondence-2016'
-groups['board_cor']['sub_dir']['2017'] = 'https://www.icann.org/resources/pages/correspondence-2017'
-groups['board_cor']['sub_dir']['2018'] = 'https://www.icann.org/resources/pages/correspondence-2018'
-groups['board_cor']['sub_dir']['2019'] = 'https://www.icann.org/resources/pages/correspondence-2019'
-groups['board_cor']['sub_dir']['2020'] = 'https://www.icann.org/resources/pages/correspondence-2020'
-groups['board_cor']['sub_dir']['2021'] = 'https://www.icann.org/resources/pages/correspondence-2021'
-groups['board_cor']['sub_dir']['2022'] = 'https://www.icann.org/resources/pages/correspondence-2022'
-groups['board_cor']['regex'] = []
-groups['board_cor']['regex'].append(re.compile('.*/correspondence/.*\.pdf$'))
-groups['board_cor']['regex'].append(re.compile('.*/system/files/files/.*\.pdf$'))
-groups['board_cor']['regex'].append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
+groups['icann_cor'] = {}
+groups['icann_cor']['sub_dir'] = {} # Before 2003 there are no PDFs
+groups['icann_cor']['sub_dir']['2003'] = 'https://www.icann.org/resources/pages/2003-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2004'] = 'https://www.icann.org/resources/pages/2004-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2005'] = 'https://www.icann.org/resources/pages/2005-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2006'] = 'https://www.icann.org/resources/pages/2006-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2007'] = 'https://www.icann.org/resources/pages/2007-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2008'] = 'https://www.icann.org/resources/pages/2008-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2009'] = 'https://www.icann.org/resources/pages/2009-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2010'] = 'https://www.icann.org/resources/pages/2010-2012-10-11-en'
+groups['icann_cor']['sub_dir']['2011'] = 'https://www.icann.org/resources/pages/2011-2012-02-25-en'
+groups['icann_cor']['sub_dir']['2012'] = 'https://www.icann.org/resources/pages/2012-2013-01-10-en'
+groups['icann_cor']['sub_dir']['2013'] = 'https://www.icann.org/resources/pages/2013-2014-01-24-en'
+groups['icann_cor']['sub_dir']['2014'] = 'https://www.icann.org/resources/pages/2014-2014-01-24-en'
+groups['icann_cor']['sub_dir']['2015'] = 'https://www.icann.org/resources/pages/correspondence-2015'
+groups['icann_cor']['sub_dir']['2016'] = 'https://www.icann.org/resources/pages/correspondence-2016'
+groups['icann_cor']['sub_dir']['2017'] = 'https://www.icann.org/resources/pages/correspondence-2017'
+groups['icann_cor']['sub_dir']['2018'] = 'https://www.icann.org/resources/pages/correspondence-2018'
+groups['icann_cor']['sub_dir']['2019'] = 'https://www.icann.org/resources/pages/correspondence-2019'
+groups['icann_cor']['sub_dir']['2020'] = 'https://www.icann.org/resources/pages/correspondence-2020'
+groups['icann_cor']['sub_dir']['2021'] = 'https://www.icann.org/resources/pages/correspondence-2021'
+groups['icann_cor']['sub_dir']['2022'] = 'https://www.icann.org/resources/pages/correspondence-2022'
+groups['icann_cor']['regex'] = []
+groups['icann_cor']['regex'].append(re.compile('.*/correspondence/.*\.pdf$'))
+groups['icann_cor']['regex'].append(re.compile('.*/system/files/files/.*\.pdf$'))
+groups['icann_cor']['regex'].append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
 
 groups['gac'] = {}
 groups['gac']['uri'] = 'https://gac.icann.org/contentMigrated/icann1-singapore-communique'
@@ -165,7 +165,7 @@ def get_links(URI, regex, tags=['a', 'href']):
 
 # BEGIN EXECUTION
 for gr in groups:
-  if gr == 'board_cor':
+  if gr == 'icann_cor':
     for sub_dir,URI in groups[gr]['sub_dir'].items():
       if sub_dir == str(date.today().year):
         for ll in get_links(URI, groups[gr]['regex']):
