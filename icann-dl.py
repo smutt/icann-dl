@@ -23,7 +23,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 from urllib3 import util as Util
-from datetime import date
+from datetime import datetime, date
 
 base_dir = '/var/www/htdocs/icann-pdf.depht.com/pub/'
 
@@ -106,13 +106,16 @@ groups['gac']['option_regex'].append(re.compile('^/contentMigrated/icann.*-commu
 groups['gac']['regex'] = []
 groups['gac']['regex'].append(re.compile('^.*/.*communique.*\.pdf[\?language_id.*]?', flags=re.ASCII | re.IGNORECASE))
 
+# Basic logging to stdout
+def logit(s):
+  print(datetime.isoformat(datetime.utcnow()) + ' ' + s.strip())
 
 # Grab a file and write to disk
 def download(uri, fname):
   if os.path.exists(fname):
     return
 
-  print(uri + ' ==> ' + fname)
+  logit(uri + ' ' + fname)
   try:
     req = requests.get(uri,stream=True)
     if req.status_code == 200:
@@ -122,9 +125,9 @@ def download(uri, fname):
             f.write(chunk)
       os.chmod(fname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644
     else:
-      print("err:dl_bad_response:" + uri)
+      logit("err:dl_bad_response:" + uri)
   except requests.RequestException:
-    print("err:req_exception:" + uri)
+    logit("err:req_exception:" + uri)
 
 
 # Grab links in tags matching regex
@@ -142,7 +145,7 @@ def get_links(URI, regex, tags=['a', 'href']):
   try:
     req = requests.get(URI)
   except requests.RequestException:
-    print("err:req_exception:" + uri)
+    logit("err:req_exception:" + uri)
     return []
 
   if req.status_code == 200:
