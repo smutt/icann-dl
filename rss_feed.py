@@ -87,3 +87,7 @@ for k,v in old_files.items():
 fp = open(rss_xml, 'w')
 feed.write(fp, 'utf-8')
 fp.close()
+
+fp = open(rss_lastrun, 'w')
+fp.write(datetime.isoformat(datetime.utcnow()))
+fp.close()
