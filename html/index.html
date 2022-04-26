@@ -12,7 +12,7 @@
   <tr><td>Government Engagement Publications</td><td>ge</td></tr>
   <tr><td>ICANN Correspondence including Board Correspondence</td><td>icann_cor</td></tr>
   <tr><td>Office of the Chief Technology Officer Publications</td><td>octo</td></tr>
-  <tr><td>Office of the Chief Technology Officer Commissioned Publications</td><td>octo_cor</td></tr>
+  <tr><td>Office of the Chief Technology Officer Commissioned Publications</td><td>octo_com</td></tr>
   <tr><td>Root Server System Advisory Committee Publications</td><td>rssac</td></tr>
   <tr><td>Root Zone Evolution Review Committee Publications</td><td>rzerc</td></tr>
   <tr><td>Security and Stability Advisory Committee Reports</td><td>ssac</td></tr>
@@ -27,7 +27,7 @@
   <div class='bigger'>rsync</div>
   Please do not mass download files over HTTPS. For mirroring please use either sftp or rsync.<br/>
 
-  <a href='https://en.wikipedia.org/wiki/Rsync'>rsync </a>is the preferred method for mirroring. icann-pdf runs an rsync server on TCP port 873. No password is required.<br/><br/>
+  <a href='https://en.wikipedia.org/wiki/Rsync'>rsync</a> is the preferred method for mirroring. icann-pdf runs an rsync server on TCP port 873. No password is required.<br/><br/>
 
   Test before downloading anything.
   <div class='cli'>rsync -nrtv icann-pdf.depht.com::pub . </div>
@@ -39,7 +39,7 @@
   <div class='cli'>rsync -rtv icann-pdf.depht.com::pub/gac . </div>
 
   <div class='bigger'>sftp</div>
-  <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp </a>is provided for users who wish to mirror over an encrypted connection. icann-pdf runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck </a>is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone </a>provides archiving over sftp similar to rysnc.<br/><br/>
+  <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. icann-pdf runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
 
   <table>
     <tr><th>Hostname</th><th>Username</th> <th>Password</th></tr>
@@ -63,7 +63,7 @@
 
 
   <div class='bigger'>Bug Reports / Feature Requests</div>
-This site is maintained by Andrew McConachie. For bug reports and feature requests please raise an issue on <a href='https://github.com/smutt/icann-dl'>Github</a>. For questions, concerns or general ranting please contact Andrew @ andrew@depht.com.
+This site is maintained by Andrew McConachie as a public service in the hope that it is useful. For bug reports and feature requests please raise an issue on <a href='https://github.com/smutt/icann-dl'>Github</a>. For questions, concerns, or rants please contact Andrew @ andrew@depht.com.
 
 </body>
 </html>
