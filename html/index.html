@@ -52,7 +52,7 @@
 
 
   <div class='bigger'>RSS</div>
-  An <a href='rss.xml'>RSS feed</a> is updated when new files are added.<br/>
+  An <a href='rss.xml'>RSS feed</a> is updated when new files are added.
 
 
   <div class='bigger'>rsync</div>
@@ -68,6 +68,10 @@
 
   Specific directories can be singled out for downloading. Below we only download GAC Communiques.
   <div class='cli'>rsync -rtv icann-pdf.depht.com::pub/gac . </div>
+
+  Specific directories can be excluded from download. Below we tell rsync to not download ICANN Correspondence.
+  <div class='cli'>rsync -rtv --exclude="icann_cor/*" icann-pdf.depht.com::pub .</div>
+
 
   <div class='bigger'>sftp</div>
   <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. icann-pdf runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
