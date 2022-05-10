@@ -18,10 +18,20 @@
     <td id="size-ge">@@@size-ge@@@</td>
     <td><a href='/pub/ge'>pub/ge</a></td>
   </tr>
+  <tr><td>Government Engagement Bi-monthly Reports to GAC</td>
+    <td id="files-ge_gac">@@@files-ge_gac@@@</td>
+    <td id="size-ge_gac">@@@size-ge_gac@@@</td>
+    <td><a href='/pub/ge_gac'>pub/ge_gac</a></td>
+  </tr>
   <tr><td>ICANN Correspondence including Board Correspondence</td>
     <td id="files-icann_cor">@@@files-icann_cor@@@</td>
     <td id="size-icann_cor">@@@size-icann_cor@@@</td>
     <td><a href='/pub/icann_cor'>pub/icann_cor</a></td>
+  </tr>
+  <tr><td>ICANN Submissions to External Bodies</td>
+    <td id="files-icann_ext">@@@files-icann_ext@@@</td>
+    <td id="size-icann_ext">@@@size-icann_ext@@@</td>
+    <td><a href='/pub/icann_ext'>pub/icann_ext</a></td>
   </tr>
   <tr><td>Office of the Chief Technology Officer Publications</td>
     <td id="files-octo">@@@files-octo@@@</td>
