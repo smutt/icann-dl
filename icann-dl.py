@@ -17,6 +17,7 @@
 #
 #  Copyright (C) 2022, Andrew McConachie, <andrew.mcconachie@icann.org>
 
+import argparse
 import os
 import stat
 import re
@@ -66,6 +67,16 @@ groups['ge'] = {}
 groups['ge']['uri'] = 'https://www.icann.org/en/government-engagement/publications?page=1'
 groups['ge']['regex'] = []
 groups['ge']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
+
+groups['ge_gac'] = {}
+groups['ge_gac']['uri'] = 'https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities'
+groups['ge_gac']['regex'] = []
+groups['ge_gac']['regex'].append(re.compile('.*/reports/public/.*\.pdf$'))
+
+groups['ge_ext'] = {}
+groups['ge_ext']['uri'] = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
+groups['ge_ext']['regex'] = []
+groups['ge_ext']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 groups['rzerc'] = {}
 groups['rzerc']['uri'] = 'https://www.icann.org/en/rzerc#documents'
@@ -167,7 +178,15 @@ def get_links(URI, regex, tags=['a', 'href']):
   return list(dict.fromkeys(links))
 
 # BEGIN EXECUTION
+ap = argparse.ArgumentParser(description='Download PDFs from icann.org')
+ap.add_argument('-g', '--group', type=str, action='store', default='all',
+                  choices=groups.keys(), help='Selected group to download')
+ARGS = ap.parse_args()
+
 for gr in groups:
+  if ARGS.group != 'all' and ARGS.group != gr:
+    continue
+
   if gr == 'icann_cor':
     for sub_dir,URI in groups[gr]['sub_dir'].items():
       if sub_dir == str(date.today().year):
