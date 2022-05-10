@@ -73,11 +73,6 @@ groups['ge_gac']['uri'] = 'https://gac.icann.org/activity/bi-monthly-report-ican
 groups['ge_gac']['regex'] = []
 groups['ge_gac']['regex'].append(re.compile('.*/reports/public/.*\.pdf$'))
 
-groups['ge_ext'] = {}
-groups['ge_ext']['uri'] = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
-groups['ge_ext']['regex'] = []
-groups['ge_ext']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
-
 groups['rzerc'] = {}
 groups['rzerc']['uri'] = 'https://www.icann.org/en/rzerc#documents'
 groups['rzerc']['regex'] = []
@@ -109,6 +104,11 @@ groups['icann_cor']['regex'] = []
 groups['icann_cor']['regex'].append(re.compile('.*/correspondence/.*\.pdf$'))
 groups['icann_cor']['regex'].append(re.compile('.*/system/files/files/.*\.pdf$'))
 groups['icann_cor']['regex'].append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
+
+groups['icann_ext'] = {}
+groups['icann_ext']['uri'] = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
+groups['icann_ext']['regex'] = []
+groups['icann_ext']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 groups['gac'] = {}
 groups['gac']['uri'] = 'https://gac.icann.org/contentMigrated/icann1-singapore-communique'
