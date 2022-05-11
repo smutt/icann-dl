@@ -70,9 +70,9 @@ for k,v in old_files.items():
 fh.close()
 
 feed = fg.Rss201rev2Feed(
-  title = u"ICANN Publications",
-  link = u"https://icann-pdf.depht.com/pub",
-  description = u"New ICANN Publications as they are discovered from icann.org.",
+  title = u"ICANN PDF",
+  link = u"https://icann-pdf.depht.com/index.html",
+  description = u"New ICANN PDFs as they are discovered on icann.org.",
   language = u"en"
 )
 
@@ -81,7 +81,7 @@ for k,v in old_files.items():
   feed.add_item(
     title = fname,
     link = "https://icann-pdf.depht.com/pub/" + k.split("pub/")[1],
-    description = fname
+    description = "<a href=" + v['remote'] + ">" + fname + "</a>"
   )
 
 fp = open(rss_xml, 'w')
