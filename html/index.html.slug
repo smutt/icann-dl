@@ -8,57 +8,68 @@
 
   <table>
   <tr><th>Collection</th><th>Files</th><th>Size (MB)</th><th>Directory</th></tr>
-  <tr><td>Governmental Advisory Committee Communiques</td>
+  <tr><td><a href="https://gac.icann.org/contentMigrated/icann73-gac-communique">
+        GAC Communiques</a></td>
     <td id="files-gac">@@@files-gac@@@</td>
     <td id="size-gac">@@@size-gac@@@</td>
     <td><a href='/pub/gac'>pub/gac</a></td>
   </tr>
-  <tr><td>Government Engagement Publications</td>
-    <td id="files-ge">@@@files-ge@@@</td>
-    <td id="size-ge">@@@size-ge@@@</td>
-    <td><a href='/pub/ge'>pub/ge</a></td>
-  </tr>
-  <tr><td>Government Engagement Bi-monthly Reports to GAC</td>
-    <td id="files-ge_gac">@@@files-ge_gac@@@</td>
-    <td id="size-ge_gac">@@@size-ge_gac@@@</td>
-    <td><a href='/pub/ge_gac'>pub/ge_gac</a></td>
-  </tr>
-  <tr><td>ICANN Correspondence including Board Correspondence</td>
+  <tr><td><a href="https://www.icann.org/resources/pages/correspondence">
+        ICANN Correspondence including Board Correspondence</a></td>
     <td id="files-icann_cor">@@@files-icann_cor@@@</td>
     <td id="size-icann_cor">@@@size-icann_cor@@@</td>
     <td><a href='/pub/icann_cor'>pub/icann_cor</a></td>
   </tr>
-  <tr><td>ICANN Submissions to External Bodies</td>
+  <tr><td><a href="https://www.icann.org/en/government-engagement/publications">
+      ICANN Government Engagement Publications</a></td>
+    <td id="files-ge">@@@files-ge@@@</td>
+    <td id="size-ge">@@@size-ge@@@</td>
+    <td><a href='/pub/ge'>pub/ge</a></td>
+  </tr>
+  <tr><td><a href="https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities">
+           ICANN Government Engagement Bi-monthly Reports to GAC</a></td>
+    <td id="files-ge_gac">@@@files-ge_gac@@@</td>
+    <td id="size-ge_gac">@@@size-ge_gac@@@</td>
+    <td><a href='/pub/ge_gac'>pub/ge_gac</a></td>
+  </tr>
+  <tr><td><a href="https://www.icann.org/en/government-engagement/submissions-to-external-bodies">
+      ICANN Submissions to External Bodies</a></td>
     <td id="files-icann_ext">@@@files-icann_ext@@@</td>
     <td id="size-icann_ext">@@@size-icann_ext@@@</td>
     <td><a href='/pub/icann_ext'>pub/icann_ext</a></td>
   </tr>
-  <tr><td>Office of the Chief Technology Officer Publications</td>
+  <tr><td><a href="https://www.icann.org/octo/publications">
+      ICANN OCTO Publications</a></td>
     <td id="files-octo">@@@files-octo@@@</td>
     <td id="size-octo">@@@size-octo@@@</td>
     <td><a href='/pub/octo'>pub/octo</a></td>
   </tr>
-  <tr><td>Office of the Chief Technology Officer Commissioned Publications</td>
+<tr><td><a href="https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en">
+      ICANN OCTO Commissioned Publications</a></td>
     <td id="files-octo_com">@@@files-octo_com@@@</td>
     <td id="size-octo_com">@@@size-octo_com@@@</td>
     <td><a href='/pub/octo_com'>pub/octo_com</a></td>
   </tr>
-  <tr><td>Root Server System Advisory Committee Publications</td>
+<tr><td><a href="https://www.icann.org/groups/rssac/documents">
+      RSSAC Publications</a></td>
     <td id="files-rssac">@@@files-rssac@@@</td>
     <td id="size-rssac">@@@size-rssac@@@</td>
     <td><a href='/pub/rssac'>pub/rssac</a></td>
   </tr>
-  <tr><td>Root Zone Evolution Review Committee Publications</td>
+<tr><td><a href="https://www.icann.org/rzerc#documents">
+      RZERC Publications</a></td>
     <td id="files-rzerc">@@@files-rzerc@@@</td>
     <td id="size-rzerc">@@@size-rzerc@@@</td>
     <td><a href='/pub/rzerc'>pub/rzerc</a></td>
   </tr>
-  <tr><td>Security and Stability Advisory Committee Reports</td>
+<tr><td><a href="https://www.icann.org/groups/ssac/documents">
+      SSAC Reports</a></td>
     <td id="files-ssac">@@@files-ssac@@@</td>
     <td id="size-ssac">@@@size-ssac@@@</td>
     <td><a href='/pub/ssac'>pub/ssac</a></td>
   </tr>
-  <tr><td>Security and Stability Advisory Committee Correspondence</td>
+<tr><td><a href="https://www.icann.org/groups/ssac/documents-correspondence">
+      SSAC Correspondence</a></td>
     <td id="files-ssac_cor">@@@files-ssac_cor@@@</td>
     <td id="size-ssac_cor">@@@size-ssac_cor@@@</td>
     <td><a href='/pub/ssac_cor'>pub/ssac_cor</a></td>
