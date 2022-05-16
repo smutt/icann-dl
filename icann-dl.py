@@ -187,6 +187,11 @@ for gr in groups:
   if ARGS.group != 'all' and ARGS.group != gr:
     continue
 
+  existing = {} # Dict of group files on local disk
+  for _, _, files in os.walk(base_dir + gr):
+    for ff in files:
+      existing[ff] = True
+
   if gr == 'icann_cor':
     for sub_dir,URI in groups[gr]['sub_dir'].items():
       if sub_dir == str(date.today().year):
@@ -195,13 +200,16 @@ for gr in groups:
           #  for mm in get_links(ll, groups[gr]['regex']):
           #    download(mm, base_dir + gr + '/' + sub_dir + '/' + mm.split('/')[-1])
           #else:
-          download(ll, base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1])
+          if Util.parse_url(ll).path.split('/')[-1] not in existing:
+            download(ll, base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1])
 
   elif gr == 'gac':
     for page in get_links(groups[gr]['uri'], groups[gr]['option_regex'], ['option', 'value']):
       for ll in get_links(page, groups[gr]['regex']):
-        download(ll, base_dir + gr + '/' + ll.split('/')[-1])
+        if Util.parse_url(ll).path.split('/')[-1] not in existing:
+          download(ll, base_dir + gr + '/' + ll.split('/')[-1])
 
   else:
     for ll in get_links(groups[gr]['uri'], groups[gr]['regex']):
-      download(ll, base_dir + gr + '/' + ll.split('/')[-1])
+      if Util.parse_url(ll).path.split('/')[-1] not in existing:
+        download(ll, base_dir + gr + '/' + ll.split('/')[-1])
