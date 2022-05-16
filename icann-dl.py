@@ -196,12 +196,13 @@ for gr in groups:
     for sub_dir,URI in groups[gr]['sub_dir'].items():
       if sub_dir == str(date.today().year):
         for ll in get_links(URI, groups[gr]['regex']):
-          #if not ll.endswith('.pdf'): # 2012 and 2013 sometimes add another level of redirection
-          #  for mm in get_links(ll, groups[gr]['regex']):
-          #    download(mm, base_dir + gr + '/' + sub_dir + '/' + mm.split('/')[-1])
-          #else:
-          if Util.parse_url(ll).path.split('/')[-1] not in existing:
-            download(ll, base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1])
+          if ll.endswith('.pdf'): # 2012 and 2013 sometimes add another level of redirection
+            if Util.parse_url(ll).path.split('/')[-1] not in existing:
+              download(ll, base_dir + gr + '/' + sub_dir + '/' + ll.split('/')[-1])
+          else:
+            for mm in get_links(ll, groups[gr]['regex']):
+              if Util.parse_url(mm).path.split('/')[-1] not in existing:
+                download(mm, base_dir + gr + '/' + sub_dir + '/' + mm.split('/')[-1])
 
   elif gr == 'gac':
     for page in get_links(groups[gr]['uri'], groups[gr]['option_regex'], ['option', 'value']):
