@@ -23,11 +23,11 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, date
 import uuid
 
-link_base = 'https://icann-pdf.depht.com/pub/'
 dl_log = '/home/smutt/log/icann-dl.log'
-atom_lastrun = '/home/smutt/hacking/python/temp/atom_feed.lastrun'
-atom_xml = '/home/smutt/hacking/python/temp/atom_feed.xml'
+atom_lastrun = '/home/smutt/log/atom_feed.lastrun'
+atom_xml = '/home/smutt/www/icann-pdf.depht.com/feed.xml'
 atom_ns = 'http://www.w3.org/2005/Atom'
+link_base = 'https://icann-pdf.depht.com/pub/'
 
 # Basic logging to stdout
 def logit(s):
@@ -68,7 +68,14 @@ if last_run == None:
   logit('err: Unable to determine lastrun time')
   exit(1)
 
+fp = open(atom_lastrun, 'w')
+fp.write(datetime.utcnow().isoformat(timespec='seconds'))
+fp.close()
+
 new_files = get_files(dl_log, last_run)
+if len(new_files) == 0:
+  exit(0)
+
 tree = ET.parse(atom_xml)
 ET.register_namespace('', atom_ns)
 
@@ -90,8 +97,4 @@ for k,v in new_files.items():
   tree.find('.').append(ET.fromstring(new_entry))
 
 ET.indent(tree)
-tree.write('atom_test.xml', xml_declaration=True, encoding='UTF-8')
-
-fp = open(atom_lastrun, 'w')
-fp.write(datetime.utcnow().isoformat(timespec='seconds'))
-fp.close()
+tree.write(atom_xml, xml_declaration=True, encoding='UTF-8')
