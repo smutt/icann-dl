@@ -78,10 +78,7 @@ if len(new_files) == 0:
 
 tree = ET.parse(atom_xml)
 ET.register_namespace('', atom_ns)
-
 tree.find('./{' + atom_ns + '}updated').text = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-#tree.find('./updated').text = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
-#tree.find('.').attrib = {'xmlns': atom_ns}
 
 for k,v in new_files.items():
   fname = os.path.basename(k)
@@ -92,6 +89,7 @@ for k,v in new_files.items():
     <id>urn:uuid:" + UID + "</id> \
     <updated>" + datetime.utcnow().isoformat(timespec='seconds') + 'Z' + "</updated> \
     <summary/></entry>"
+    #<updated>" + datetime.fromisoformat(v['ts']).isoformat(timespec='seconds') + "Z</updated> \
     #<summary>" + "<a href=\"" + v['remote'] + "\">" + fname + "</a></summary></entry>"
 
   tree.find('.').append(ET.fromstring(new_entry))
