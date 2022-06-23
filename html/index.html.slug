@@ -82,8 +82,8 @@
   </table></br>
 
 
-  <div class='bigger'>RSS</div>
-  An <a href='rss.xml'>RSS feed</a> is updated when new files are added.
+  <div class='bigger'>Atom</div>
+  An <a href='feed.xml'>Atom feed</a> is updated when new files are added.
 
 
   <div class='bigger'>rsync</div>
