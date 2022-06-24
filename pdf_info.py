@@ -59,10 +59,12 @@ def check_image(fh):
 ###################
 
 ap = argparse.ArgumentParser(description='Print names of PDFs that have specific properties')
+ap.add_argument('-b', '--broken', action='store_true', help='Find broken PDFs only')
 ap.add_argument('-i', '--image', action='store_true', help='Find image only PDFs')
-ap.add_argument('-s', '--sandwich', action='store_true',  help='Find sandwich PDFs')
+ap.add_argument('-m', '--metadata', nargs='?', help='Print passed metadata field or {all}')
+ap.add_argument('-s', '--sandwich', action='store_true',  help='Find sandwich PDFs {NOT IMPLEMENTED}')
 ap.add_argument('-r', '--recursive', action='store_true', help='Recursively search directories')
-ap.add_argument('path', nargs='?', type=pathlib.Path, help='File or directory')
+ap.add_argument('path', type=pathlib.Path, help='File or directory')
 args = ap.parse_args()
 
 pdfs = []
@@ -85,9 +87,20 @@ elif args.path.is_dir():
           if os.access(line, os.R_OK):
             pdfs.append(line.path)
 
-            #print(repr(pdfs))
 for pdf in pdfs:
-  fh = PdfReader(pdf)
+  try:
+    fh = PdfReader(pdf)
+  except:
+    print("Broken pdf: " + pdf)
+    continue
+
+  if args.broken:
+    continue
+
+  if fh.is_encrypted:
+    print(pdf + ' is encrypted')
+    continue
+
   if len(fh.pages) == 0:
     continue
   if args.image:
@@ -97,3 +110,17 @@ for pdf in pdfs:
   if args.sandwich:
     if check_sandwich(fh):
       print(pdf)
+
+  if args.metadata:
+    if fh.metadata == None:
+      print(pdf)
+
+    elif args.metadata == 'all':
+      rv = pdf + ' {'
+      for key in fh.metadata:
+        rv += "\'" + key + "\': \'" + str(fh.metadata[key]) + "\', "
+      print(rv.strip(', ') + '}')
+
+    else:
+      if args.metadata in fh.metadata:
+        print(pdf + ' {\'' + args.metadata + '\': \'' + str(fh.metadata[args.metadata]) + '\'}')
