@@ -34,7 +34,7 @@ import argparse
 import os
 import stat
 from datetime import datetime, date
-from PyPDF2 import PdfFileReader, PdfFileWriter
+from PyPDF2 import PdfReader
 import pathlib
 
 # Takes a PDF file handle
@@ -46,11 +46,10 @@ def check_sandwich(fh):
 # Returns true if PDF is an image
 def check_image(fh):
   for page in fh.pages:
-    text = page.extractText().strip()
+    text = page.extract_text().strip()
     if len(text) == 0:
       continue
     else:
-      print("IMG FOUND")
       return False
   return True
 
@@ -74,7 +73,7 @@ if args.path.is_file():
 
 elif args.path.is_dir():
   sdirs = [args.path]
-  while len(sdirs) > 0:
+  while sdirs:
     for line in os.scandir(sdirs.pop(0)):
       if line.is_symlink():
         continue
@@ -86,9 +85,11 @@ elif args.path.is_dir():
           if os.access(line, os.R_OK):
             pdfs.append(line.path)
 
-#print(repr(pdfs))
+            #print(repr(pdfs))
 for pdf in pdfs:
-  fh = PdfFileReader(pdf)
+  fh = PdfReader(pdf)
+  if len(fh.pages) == 0:
+    continue
   if args.image:
     if check_image(fh):
       print(pdf)
@@ -96,8 +97,3 @@ for pdf in pdfs:
   if args.sandwich:
     if check_sandwich(fh):
       print(pdf)
-
-
-#fh = PdfFileReader(str(args.infile))
-#print(str(args.infile) + ":" + str(fh.numPages))
-#print(repr(fh.getDocumentInfo()))
