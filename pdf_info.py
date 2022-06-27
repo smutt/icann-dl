@@ -46,7 +46,11 @@ def check_sandwich(fh):
 # Returns true if PDF is an image
 def check_image(fh):
   for page in fh.pages:
-    text = page.extract_text().strip()
+    try:
+      text = page.extract_text().strip()
+    except:
+      continue
+
     if len(text) == 0:
       continue
     else:
@@ -60,6 +64,7 @@ def check_image(fh):
 
 ap = argparse.ArgumentParser(description='Print names of PDFs that have specific properties')
 ap.add_argument('-b', '--broken', action='store_true', help='Find broken PDFs only')
+ap.add_argument('-e', '--encrypted', action='store_true', help='Find encrypted PDFs only')
 ap.add_argument('-i', '--image', action='store_true', help='Find image only PDFs')
 ap.add_argument('-m', '--metadata', nargs='?', help='Print passed metadata field or {all}')
 ap.add_argument('-s', '--sandwich', action='store_true',  help='Find sandwich PDFs {NOT IMPLEMENTED}')
@@ -88,6 +93,7 @@ elif args.path.is_dir():
             pdfs.append(line.path)
 
 for pdf in pdfs:
+  #print(pdf)
   try:
     fh = PdfReader(pdf)
   except:
@@ -97,9 +103,26 @@ for pdf in pdfs:
   if args.broken:
     continue
 
+  # Deal with encryption brokenness
+  # https://github.com/py-pdf/PyPDF2/issues/245
   if fh.is_encrypted:
-    print(pdf + ' is encrypted')
-    continue
+    if args.encrypted:
+      print(pdf + ' is encrypted, attempting decryption with NULL password')
+
+    try:
+      fh.decrypt('')
+      _ = len(fh.pages)
+    except:
+      try:
+        fh._override_encryption=True
+        fh._flatten()
+        _ = len(fh.pages)
+      except:
+        print(pdf + ' decryption failed')
+        continue
+    if args.encrypted:
+      continue
+
 
   if len(fh.pages) == 0:
     continue
