@@ -15,7 +15,7 @@
     <td><a href='/pub/gac'>pub/gac</a></td>
   </tr>
   <tr><td><a href="https://www.icann.org/resources/pages/correspondence">
-        ICANN Correspondence including Board Correspondence</a></td>
+        ICANN & Board Correspondence </a></td>
     <td id="files-icann_cor">@@@files-icann_cor@@@</td>
     <td id="size-icann_cor">@@@size-icann_cor@@@</td>
     <td><a href='/pub/icann_cor'>pub/icann_cor</a></td>
@@ -27,7 +27,7 @@
     <td><a href='/pub/ge'>pub/ge</a></td>
   </tr>
   <tr><td><a href="https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities">
-           ICANN Government Engagement Bi-monthly Reports to GAC</a></td>
+           ICANN Government Engagement Reports to GAC</a></td>
     <td id="files-ge_gac">@@@files-ge_gac@@@</td>
     <td id="size-ge_gac">@@@size-ge_gac@@@</td>
     <td><a href='/pub/ge_gac'>pub/ge_gac</a></td>
