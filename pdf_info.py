@@ -36,11 +36,8 @@ import stat
 from datetime import datetime, date
 from PyPDF2 import PdfReader
 import pathlib
+import warnings
 
-# Takes a PDF file handle
-# Returns true if PDF is a sandwich
-def check_sandwich(fh):
-  return False
 
 # Takes a PDF file handle
 # Returns true if PDF is an image
@@ -67,10 +64,13 @@ ap.add_argument('-b', '--broken', action='store_true', help='Find broken PDFs on
 ap.add_argument('-e', '--encrypted', action='store_true', help='Find encrypted PDFs only')
 ap.add_argument('-i', '--image', action='store_true', help='Find image only PDFs')
 ap.add_argument('-m', '--metadata', nargs='?', help='Print passed metadata field or {all}')
-ap.add_argument('-s', '--sandwich', action='store_true',  help='Find sandwich PDFs {NOT IMPLEMENTED}')
 ap.add_argument('-r', '--recursive', action='store_true', help='Recursively search directories')
+ap.add_argument('-w', '--nowarn', action='store_true', help='Suppress warnings')
 ap.add_argument('path', type=pathlib.Path, help='File or directory')
 args = ap.parse_args()
+
+if args.nowarn:
+  warnings.simplefilter('ignore')
 
 pdfs = []
 if args.path.is_file():
@@ -128,10 +128,6 @@ for pdf in pdfs:
     continue
   if args.image:
     if check_image(fh):
-      print(pdf)
-
-  if args.sandwich:
-    if check_sandwich(fh):
       print(pdf)
 
   if args.metadata:
