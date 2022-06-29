@@ -35,24 +35,35 @@ def count_files(func, cur_dir):
       rv += func(dd)
   return rv
 
+# Takes an os.DirEntry
+def is_ocr(de):
+  if de.name.endswith('_ocr.pdf'):
+    return 1
+  else:
+    return 0
+
+
 # BEGIN EXECUTION
 fin = open(html_in, 'r')
 output = fin.read()
 fin.close()
-total_count = total_MB = 0
+total_count = total_MB = total_OCR = 0
 for dd in os.scandir(base_dir):
   if dd.is_dir():
     group = dd.name
     count = count_files(lambda x: 1, base_dir + group)
     MB = math.ceil(count_files(lambda x: x.stat().st_blocks, base_dir + group) / 2000)
+    OCR = count_files(is_ocr, base_dir + group)
     total_count += count
     total_MB += MB
+    total_OCR += OCR
 
     output = output.replace('@@@files-' + group + '@@@', "{:,}".format(count))
     output = output.replace('@@@size-' + group + '@@@', "{:,}".format(MB))
 
 output = output.replace('@@@files-total@@@', "{:,}".format(total_count))
 output = output.replace('@@@size-total@@@', "{:,}".format(total_MB))
+output = output.replace('@@@ocr-total@@@', "{:,}".format(total_OCR))
 
 fout = open(html_out, 'w')
 fout.write(output)
