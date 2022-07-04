@@ -63,7 +63,8 @@ ap = argparse.ArgumentParser(description='Print names of PDFs that have specific
 ap.add_argument('-b', '--broken', action='store_true', help='Find broken PDFs only')
 ap.add_argument('-e', '--encrypted', action='store_true', help='Find encrypted PDFs only')
 ap.add_argument('-i', '--image', action='store_true', help='Find image only PDFs')
-ap.add_argument('-m', '--metadata', nargs='?', help='Print passed metadata field or {all}')
+ap.add_argument('-m', '--metadata', help='Print only the passed metadata field')
+ap.add_argument('--mall', action='store_true', help='Print all metadata fields')
 ap.add_argument('-r', '--recursive', action='store_true', help='Recursively search directories')
 ap.add_argument('-w', '--nowarn', action='store_true', help='Suppress warnings')
 ap.add_argument('path', type=pathlib.Path, help='File or directory')
@@ -130,16 +131,14 @@ for pdf in pdfs:
     if check_image(fh):
       print(pdf)
 
-  if args.metadata:
-    if fh.metadata == None:
-      print(pdf)
+  if args.mall:
+    rv = pdf + ' {'
+    for key in fh.metadata:
+      rv += "\'" + key + "\': \'" + str(fh.metadata[key]) + "\', "
+    print(rv.strip(', ') + '}')
 
-    elif args.metadata == 'all':
-      rv = pdf + ' {'
-      for key in fh.metadata:
-        rv += "\'" + key + "\': \'" + str(fh.metadata[key]) + "\', "
-      print(rv.strip(', ') + '}')
-
-    else:
-      if args.metadata in fh.metadata:
-        print(pdf + ' {\'' + args.metadata + '\': \'' + str(fh.metadata[args.metadata]) + '\'}')
+  elif args.metadata:
+    rv = pdf + ' {'
+    if args.metadata in fh.metadata:
+      rv += "\'" + args.metadata + "\': \'" + str(fh.metadata[args.metadata]) + "\', "
+    print(rv.strip(', ') + '}')
