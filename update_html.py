@@ -19,9 +19,10 @@
 
 import math
 import os
+import groups
 
-base_dir = '/var/www/htdocs/icann-pdf.depht.com/pub/'
-html_out = '/var/www/htdocs/icann-pdf.depht.com/index.html'
+base_dir = '/var/www/htdocs/icann-hamster.nl/ham/'
+html_out = '/var/www/htdocs/icann-hamster.nl/index.html'
 html_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
 
 # High-order func to recursively count files
@@ -48,18 +49,17 @@ fin = open(html_in, 'r')
 output = fin.read()
 fin.close()
 total_count = total_MB = total_OCR = 0
-for dd in os.scandir(base_dir):
-  if dd.is_dir():
-    group = dd.name
-    count = count_files(lambda x: 1, base_dir + group)
-    MB = math.ceil(count_files(lambda x: x.stat().st_blocks, base_dir + group) / 2000)
-    OCR = count_files(is_ocr, base_dir + group)
-    total_count += count
-    total_MB += MB
-    total_OCR += OCR
 
-    output = output.replace('@@@files-' + group + '@@@', "{:,}".format(count))
-    output = output.replace('@@@size-' + group + '@@@', "{:,}".format(MB))
+for name,gr in groups.groups.items():
+  count = count_files(lambda x: 1, base_dir + gr['path'])
+  MB = math.ceil(count_files(lambda x: x.stat().st_blocks, base_dir + gr['path']) / 2000)
+  OCR = count_files(is_ocr, base_dir + gr['path'])
+  total_count += count
+  total_MB += MB
+  total_OCR += OCR
+
+  output = output.replace('@@@files-' + name + '@@@', "{:,}".format(count))
+  output = output.replace('@@@size-' + name + '@@@', "{:,}".format(MB))
 
 output = output.replace('@@@files-total@@@', "{:,}".format(total_count))
 output = output.replace('@@@size-total@@@', "{:,}".format(total_MB))

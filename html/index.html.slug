@@ -1,10 +1,12 @@
 <html>
 <head>
-<title>ICANN PDF</title>
+<title>ICANN Hamster</title>
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
-  <div class='biggest'>ICANN PDF</div> <div class='big'>An unofficial collection of <a href='/pub'>PDF files </a>downloaded from <a href='https://www.icann.org'>icann.org</a>.</div><br/>
+  <div class='biggest'>ICANN Hamster</div>
+  <div class='big'>An unofficial collection of mostly<a href='/ham'> PDF files </a>downloaded from <a href='https://www.icann.org'>icann.org</a>.</div><br/>
+
 
   <table>
   <tr><th>Collection</th><th>Files</th><th>Size (MB)</th><th>Directory</th></tr>
@@ -12,72 +14,72 @@
         GAC Communiques</a></td>
     <td id="files-gac">@@@files-gac@@@</td>
     <td id="size-gac">@@@size-gac@@@</td>
-    <td><a href='/pub/gac'>pub/gac</a></td>
+    <td><a href='/ham/soac/gac/com'>ham/soac/gac/com</a></td>
   </tr>
   <tr><td><a href="https://www.icann.org/resources/pages/correspondence">
         ICANN & Board Correspondence </a></td>
     <td id="files-icann_cor">@@@files-icann_cor@@@</td>
     <td id="size-icann_cor">@@@size-icann_cor@@@</td>
-    <td><a href='/pub/icann_cor'>pub/icann_cor</a></td>
+    <td><a href='/ham/icann/cor'>ham/icann/cor</a></td>
   </tr>
   <tr><td><a href="https://www.icann.org/en/government-engagement/publications">
       ICANN Government Engagement Publications</a></td>
     <td id="files-ge">@@@files-ge@@@</td>
     <td id="size-ge">@@@size-ge@@@</td>
-    <td><a href='/pub/ge'>pub/ge</a></td>
+    <td><a href='/ham/icann/ge/pub'>ham/icann/ge/pub</a></td>
   </tr>
   <tr><td><a href="https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities">
            ICANN Government Engagement Reports to GAC</a></td>
     <td id="files-ge_gac">@@@files-ge_gac@@@</td>
     <td id="size-ge_gac">@@@size-ge_gac@@@</td>
-    <td><a href='/pub/ge_gac'>pub/ge_gac</a></td>
+    <td><a href='/ham/icann/ge/gac'>ham/icann/ge/gac</a></td>
   </tr>
   <tr><td><a href="https://www.icann.org/en/government-engagement/submissions-to-external-bodies">
       ICANN Submissions to External Bodies</a></td>
     <td id="files-icann_ext">@@@files-icann_ext@@@</td>
     <td id="size-icann_ext">@@@size-icann_ext@@@</td>
-    <td><a href='/pub/icann_ext'>pub/icann_ext</a></td>
+    <td><a href='/ham/icann/ext'>ham/icann/ext</a></td>
   </tr>
   <tr><td><a href="https://www.icann.org/octo/publications">
       ICANN OCTO Publications</a></td>
     <td id="files-octo">@@@files-octo@@@</td>
     <td id="size-octo">@@@size-octo@@@</td>
-    <td><a href='/pub/octo'>pub/octo</a></td>
+    <td><a href='/ham/icann/octo/pub'>ham/icann/octo/pub</a></td>
   </tr>
 <tr><td><a href="https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en">
       ICANN OCTO Commissioned Publications</a></td>
     <td id="files-octo_com">@@@files-octo_com@@@</td>
     <td id="size-octo_com">@@@size-octo_com@@@</td>
-    <td><a href='/pub/octo_com'>pub/octo_com</a></td>
+    <td><a href='/ham/icann/octo/com'>ham/icann/octo/com</a></td>
   </tr>
 <tr><td><a href="https://www.icann.org/groups/rssac/documents">
       RSSAC Publications</a></td>
     <td id="files-rssac">@@@files-rssac@@@</td>
     <td id="size-rssac">@@@size-rssac@@@</td>
-    <td><a href='/pub/rssac'>pub/rssac</a></td>
+    <td><a href='/ham/soac/rssac/pub'>ham/soac/rssac/pub</a></td>
   </tr>
 <tr><td><a href="https://www.icann.org/rzerc#documents">
       RZERC Publications</a></td>
     <td id="files-rzerc">@@@files-rzerc@@@</td>
     <td id="size-rzerc">@@@size-rzerc@@@</td>
-    <td><a href='/pub/rzerc'>pub/rzerc</a></td>
+    <td><a href='/ham/soac/rzerc/pub'>ham/soac/rzerc/pub</a></td>
   </tr>
 <tr><td><a href="https://www.icann.org/groups/ssac/documents">
       SSAC Reports</a></td>
     <td id="files-ssac">@@@files-ssac@@@</td>
     <td id="size-ssac">@@@size-ssac@@@</td>
-    <td><a href='/pub/ssac'>pub/ssac</a></td>
+    <td><a href='/ham/soac/ssac/reports'>ham/soac/ssac/reports</a></td>
   </tr>
 <tr><td><a href="https://www.icann.org/groups/ssac/documents-correspondence">
       SSAC Correspondence</a></td>
     <td id="files-ssac_cor">@@@files-ssac_cor@@@</td>
     <td id="size-ssac_cor">@@@size-ssac_cor@@@</td>
-    <td><a href='/pub/ssac_cor'>pub/ssac_cor</a></td>
+    <td><a href='/ham/soac/ssac/cor'>ham/soac/ssac/cor</a></td>
   </tr>
   <tr><td>All Collections</td>
     <td id="files-all">@@@files-total@@@</td>
     <td id="size-all">@@@size-total@@@</td>
-    <td><a href='/pub'>pub</a></td>
+    <td><a href='/ham'>ham</a></td>
   </tr>
   </table></br>
 
@@ -86,7 +88,7 @@
   An <a href='feed.xml'>Atom feed</a> is updated when new files are added.
 
   <div class='bigger'>OCR</div>
-  Optical character recognition is done with <a href='http://www.tobias-elze.de/pdfsandwich/'>pdfsandwich</a>. PDFs that have been OCR'd end with _ocr.pdf. For example, if document.pdf requires OCR processing a new file called document_ocr.pdf will be created with text. Both files will be kept. We currently have @@@ocr-total@@@ OCR'd files.<br/> 
+  Optical character recognition is done with <a href='http://www.tobias-elze.de/pdfsandwich/'>pdfsandwich</a>. PDFs that have been OCR'd end with _ocr.pdf. For example, if document.pdf requires OCR processing a new file called document_ocr.pdf will be created with text. Both files will be kept. We currently have @@@ocr-total@@@ OCR'd files.<br/>
 
   <div class='bigger'>rsync</div>
   Please do not mass download files over HTTPS. For mirroring please use either sftp or rsync.<br/>
@@ -94,24 +96,24 @@
   <a href='https://en.wikipedia.org/wiki/Rsync'>rsync</a> is the preferred method for mirroring. icann-pdf runs an rsync server on TCP port 873. No password is required.<br/><br/>
 
   Test before downloading anything.
-  <div class='cli'>rsync -nrtv icann-pdf.depht.com::pub . </div>
+  <div class='cli'>rsync -nrtv icann-hamster.nl::ham . </div>
 
   When you are ready download everything to your current directory.
-  <div class='cli'>rsync -rtv icann-pdf.depht.com::pub . </div>
+  <div class='cli'>rsync -rtv icann-hamster.nl::ham . </div>
 
   Specific directories can be singled out for downloading. Below we only download GAC Communiques.
-  <div class='cli'>rsync -rtv icann-pdf.depht.com::pub/gac . </div>
+  <div class='cli'>rsync -rtv icann-hamster.nl::ham/gac/com . </div>
 
   Specific directories can be excluded from download. Below we tell rsync to not download ICANN Correspondence.
-  <div class='cli'>rsync -rtv --exclude="icann_cor/*" icann-pdf.depht.com::pub .</div>
+  <div class='cli'>rsync -rtv --exclude="icann/cor/*" icann-hamster.nl::ham .</div>
 
 
   <div class='bigger'>sftp</div>
-  <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. icann-pdf runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
+  <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. ICANN Hamster runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
 
   <table>
     <tr><th>Hostname</th><th>Username</th> <th>Password</th></tr>
-    <tr><td>icann-pdf.depht.com</td><td>pub</td><td>icann-pdf</td></tr>
+    <tr><td>icann-hamster.nl</td><td>hamster</td><td>hamster-pw</td></tr>
   </table>
 
 
@@ -138,11 +140,15 @@ This site is maintained by Andrew McConachie as a public service in the hope tha
     <li><a href='https://gitlab.com/pdfgrep/pdfgrep'>pdfgrep</a></li>
     <li><a href='https://www.google.com/'>Google</a></li>
     <ul>
-      <li>Below we use Google to search all SSAC publications for the string "IANA"</li>
-      <li><a href="https://www.google.com/search?q=site%3Aicann-pdf.depht.com%2Fpub%2Fssac+IANA">
-          <div class='cli'>site:icann-pdf.depht.com/pub/ssac IANA</div>
+      <li>Below we use Google to search all SSAC reports for the string "IANA"</li>
+      <li><a href="https://www.google.com/search?q=site%3Aicann-hamster.nl%2Fham%2Fsoac%2Fssac%2Freports+IANA">
+          <div class='cli'>site:icann-hamster.nl/ham/soac/ssac/reports IANA</div>
       </a></li>
     </ul>
   </ul>
+
+  <div class='bigger'>What's up with hamsters?</div>
+  <i>Hamsteren</i> in Dutch means <i>to hoard.</i> It's similar to the English phrase <i>to squirrel away</i>. A Japanese friend of mine told me that <i> to marmot</i> has a similar meaning in Japanese. If you know more examples of languages that use small critters to suggest hoarding please send me a mail and tell me about them.
+
 </body>
 </html>
