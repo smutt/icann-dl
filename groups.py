@@ -67,7 +67,7 @@ groups['ge_gac']['regex'] = []
 groups['ge_gac']['regex'].append(re.compile('.*/reports/public/.*\.pdf$'))
 
 groups['rzerc'] = {}
-groups['rzerc']['path'] = 'icann/rzerc/pub'
+groups['rzerc']['path'] = 'soac/rzerc/pub'
 groups['rzerc']['uri'] = 'https://www.icann.org/en/rzerc#documents'
 groups['rzerc']['regex'] = []
 groups['rzerc']['regex'].append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
