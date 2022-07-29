@@ -26,7 +26,7 @@ from bs4 import BeautifulSoup
 from urllib3 import util as Util
 from datetime import datetime, date
 
-base_dir = '/var/www/htdocs/icann-pdf.depht.com/pub/'
+base_dir = '/var/www/htdocs/icann-hamster.nl/ham/'
 
 exclude = []
 exclude.append(re.compile('.*/didp-response-process-29oct13-en\.pdf$'))
@@ -37,57 +37,57 @@ exclude.append(re.compile('.*/mosapi-specification\.pdf$'))
 
 groups = {}
 groups['ssac'] = {}
-groups['ssac']['path'] = 'ssac'
+groups['ssac']['path'] = 'soac/ssac/reports'
 groups['ssac']['uri'] = 'https://www.icann.org/groups/ssac/documents'
 groups['ssac']['regex'] = []
 groups['ssac']['regex'].append(re.compile('.*/groups/ssac/documents/sac-.*\.pdf$'))
 groups['ssac']['regex'].append(re.compile('.*/system/files/files/sac-.*\.pdf$'))
 
 groups['ssac_cor'] = {}
-groups['ssac_cor']['path'] = 'ssac_cor'
+groups['ssac_cor']['path'] = 'soac/ssac/cor'
 groups['ssac_cor']['uri'] = 'https://www.icann.org/groups/ssac/documents-correspondence'
 groups['ssac_cor']['regex'] = []
 groups['ssac_cor']['regex'].append(re.compile('.*/system/files/files/ssac2.*\.pdf$'))
 
 groups['rssac'] = {}
-groups['rssac']['path'] = 'rssac'
+groups['rssac']['path'] = 'soac/rssac/pub'
 groups['rssac']['uri'] = 'https://www.icann.org/groups/rssac/documents'
 groups['rssac']['regex'] = []
 groups['rssac']['regex'].append(re.compile('.*/system/files/files/.*rssac-.*\.pdf$'))
 #groups['rssac']['regex'].append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
 groups['octo'] = {}
-groups['octo']['path'] = 'octo'
+groups['octo']['path'] = 'icann/octo/pub'
 groups['octo']['uri'] = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
 groups['octo']['regex'] = []
 groups['octo']['regex'].append(re.compile('.*/octo-.*\.pdf$'))
 
 groups['octo_com'] = {}
-groups['octo_com']['path'] = 'octo_com'
+groups['octo_com']['path'] = 'icann/octo/com'
 groups['octo_com']['uri'] = 'https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en'
 groups['octo_com']['regex'] = []
 groups['octo_com']['regex'].append(re.compile('.*/system/files/files/.*\.pdf$'))
 
 groups['ge'] = {}
-groups['ge']['path'] = 'ge'
+groups['ge']['path'] = 'icann/ge/pub'
 groups['ge']['uri'] = 'https://www.icann.org/en/government-engagement/publications?page=1'
 groups['ge']['regex'] = []
 groups['ge']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 groups['ge_gac'] = {}
-groups['ge_gac']['path'] = 'ge_gac'
+groups['ge_gac']['path'] = 'icann/ge/gac'
 groups['ge_gac']['uri'] = 'https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities'
 groups['ge_gac']['regex'] = []
 groups['ge_gac']['regex'].append(re.compile('.*/reports/public/.*\.pdf$'))
 
 groups['rzerc'] = {}
-groups['rzerc']['path'] = 'rzerc'
+groups['rzerc']['path'] = 'soac/rzerc/pub'
 groups['rzerc']['uri'] = 'https://www.icann.org/en/rzerc#documents'
 groups['rzerc']['regex'] = []
 groups['rzerc']['regex'].append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
 
 groups['icann_cor'] = {}
-groups['icann_cor']['path'] = 'icann_cor'
+groups['icann_cor']['path'] = 'icann/cor'
 groups['icann_cor']['sub_dir'] = {} # Before 2003 there are no PDFs
 groups['icann_cor']['sub_dir']['2003'] = 'https://www.icann.org/resources/pages/2003-2012-10-11-en'
 groups['icann_cor']['sub_dir']['2004'] = 'https://www.icann.org/resources/pages/2004-2012-10-11-en'
@@ -115,13 +115,13 @@ groups['icann_cor']['regex'].append(re.compile('.*/system/files/files/.*\.pdf$')
 groups['icann_cor']['regex'].append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
 
 groups['icann_ext'] = {}
-groups['icann_ext']['path'] = 'icann_ext'
+groups['icann_ext']['path'] = 'icann/ext'
 groups['icann_ext']['uri'] = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
 groups['icann_ext']['regex'] = []
 groups['icann_ext']['regex'].append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 groups['gac'] = {}
-groups['gac']['path'] = 'gac'
+groups['gac']['path'] = 'soac/gac/com'
 groups['gac']['uri'] = 'https://gac.icann.org/contentMigrated/icann1-singapore-communique'
 groups['gac']['option_regex'] = []
 groups['gac']['option_regex'].append(re.compile('^/contentMigrated/icann.*-communique$'))
