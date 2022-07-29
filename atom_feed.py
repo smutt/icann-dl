@@ -25,9 +25,9 @@ import uuid
 
 dl_log = '/home/smutt/log/icann-dl.log'
 atom_lastrun = '/home/smutt/log/atom_feed.lastrun'
-atom_xml = '/home/smutt/www/icann-pdf.depht.com/feed.xml'
+atom_xml = '/home/smutt/www/icann-hamster.nl/feed.xml'
 atom_ns = 'http://www.w3.org/2005/Atom'
-link_base = 'https://icann-pdf.depht.com/pub/'
+link_base = 'https://icann-hamster.nl/ham'
 
 # Basic logging to stdout
 def logit(s):
