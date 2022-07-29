@@ -167,7 +167,7 @@ def get_links(URI, regex, tags=['a', 'href']):
   try:
     req = requests.get(URI)
   except requests.RequestException:
-    logit("err:req_exception:" + uri)
+    logit("err:req_exception:" + URI)
     return []
 
   if req.status_code == 200:
