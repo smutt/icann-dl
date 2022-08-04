@@ -32,6 +32,7 @@ def logit(s):
 
 class DL_Group():
   def __init__(self):
+    self.regex = []
     self.base_dir = '/var/www/htdocs/icann-hamster.nl/ham/' # Where the local fun starts
 
     self.exclude = [] # Links to exclude for all groups
@@ -40,12 +41,6 @@ class DL_Group():
     self.exclude.append(re.compile('.*/gdd-ops-handbook-registry-operators-15aug18-en\.pdf$'))
     self.exclude.append(re.compile('.*/rsep-process-workflow-14jun19-en\.pdf$'))
     self.exclude.append(re.compile('.*/mosapi-specification\.pdf$'))
-
-  def __repr__(self):
-    return ''
-
-  def __str__(self):
-    return self.__repr__()
 
   # Grab a file and write to disk
   # Takes a remote URI and a local filename
@@ -124,13 +119,20 @@ class DL_Group():
   def get_links(self):
     return self._get_links(self.uri, self.regex, ['a', 'href'])
 
+# CEO Reports to the Board
+class Ceo(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.path = 'icann/ceo/board'
+    self.uri = 'https://www.icann.org/reports-to-board'
+    self.regex.append(re.compile('^.*/uploads/board_report/attachment/.*\.pdf$'))
+
 # GAC
 class Gac(DL_Group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/gac/com'
     self.uri = 'https://gac.icann.org/contentMigrated/icann1-singapore-communique'
-    self.regex = []
     self.regex.append(re.compile('^.*/.*communique.*\.pdf[\?language_id.*]?', flags=re.ASCII | re.IGNORECASE))
     self.option_regex = []
     self.option_regex.append(re.compile('^/contentMigrated/icann.*-communique\?.*$'))
@@ -147,7 +149,6 @@ class Ge(DL_Group):
     super().__init__()
     self.path = 'icann/ge/pub'
     self.uri = 'https://www.icann.org/en/government-engagement/publications?page=1'
-    self.regex = []
     self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 # Government Engagement Reports to the GAC
@@ -164,7 +165,6 @@ class Icann_cor(DL_Group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/cor'
-    self.regex = []
     self.regex.append(re.compile('.*/correspondence/.*\.pdf$'))
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
     self.regex.append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
@@ -210,7 +210,6 @@ class Icann_ext(DL_Group):
     super().__init__()
     self.path = 'icann/ext'
     self.uri = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
-    self.regex = []
     self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 # OCTO Publications
@@ -219,7 +218,6 @@ class Octo(DL_Group):
     super().__init__()
     self.path = 'icann/octo/pub'
     self.uri = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
-    self.regex = []
     self.regex.append(re.compile('.*/octo-.*\.pdf$'))
 
 # OCTO Commissioned Publications
@@ -228,7 +226,6 @@ class Octo_com(DL_Group):
     super().__init__()
     self.path = 'icann/octo/com/'
     self.uri = 'https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en'
-    self.regex = []
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
 
 # RSSAC Publications
@@ -237,7 +234,6 @@ class Rssac(DL_Group):
     super().__init__()
     self.path = 'soac/rssac/pub'
     self.uri = 'https://www.icann.org/groups/rssac/documents'
-    self.regex = []
     self.regex.append(re.compile('.*/system/files/files/.*rssac-.*\.pdf$'))
     self.regex.append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
@@ -247,7 +243,6 @@ class Rzerc(DL_Group):
     super().__init__()
     self.path = 'soac/rzerc/pub'
     self.uri = 'https://www.icann.org/en/rzerc#documents'
-    self.regex = []
     self.regex.append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
 
 # SSAC Reports
@@ -256,7 +251,6 @@ class Ssac(DL_Group):
     super().__init__()
     self.path = 'soac/ssac/reports'
     self.uri = 'https://www.icann.org/groups/ssac/documents'
-    self.regex = []
     self.regex.append(re.compile('.*/groups/ssac/documents/sac-.*\.pdf$'))
     self.regex.append(re.compile('.*/system/files/files/sac-.*\.pdf$'))
 
@@ -266,5 +260,20 @@ class Ssac_cor(DL_Group):
     super().__init__()
     self.path = 'soac/ssac/cor'
     self.uri = 'https://www.icann.org/groups/ssac/documents-correspondence'
-    self.regex = []
     self.regex.append(re.compile('.*/system/files/files/ssac2.*\.pdf$'))
+
+
+# All our groups
+groups = {}
+groups['ceo'] = Ceo()
+groups['gac'] = Gac()
+groups['ge'] = Ge()
+groups['ge_gac'] = Ge_gac()
+groups['icann_cor'] = Icann_cor()
+groups['icann_ext'] = Icann_ext()
+groups['octo'] = Octo()
+groups['octo_com'] = Octo_com()
+groups['rssac'] = Rssac()
+groups['rzerc'] = Rzerc()
+groups['ssac'] = Ssac()
+groups['ssac_cor'] = Ssac_cor()

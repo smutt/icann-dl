@@ -19,7 +19,7 @@
 
 import math
 import os
-import groups
+import group
 
 base_dir = '/var/www/htdocs/icann-hamster.nl/ham/'
 html_out = '/var/www/htdocs/icann-hamster.nl/index.html'
@@ -43,17 +43,18 @@ def is_ocr(de):
   else:
     return 0
 
-
-# BEGIN EXECUTION
+###################
+# BEGIN EXECUTION #
+###################
 fin = open(html_in, 'r')
 output = fin.read()
 fin.close()
 total_count = total_MB = total_OCR = 0
 
-for name,gr in groups.groups.items():
-  count = count_files(lambda x: 1, base_dir + gr['path'])
-  MB = math.ceil(count_files(lambda x: x.stat().st_blocks, base_dir + gr['path']) / 2000)
-  OCR = count_files(is_ocr, base_dir + gr['path'])
+for name,gr in group.groups.items():
+  count = count_files(lambda x: 1, gr.base_dir + gr.path)
+  MB = math.ceil(count_files(lambda x: x.stat().st_blocks, gr.base_dir + gr.path) / 2000)
+  OCR = count_files(is_ocr, gr.base_dir + gr.path)
   total_count += count
   total_MB += MB
   total_OCR += OCR

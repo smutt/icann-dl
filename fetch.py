@@ -25,32 +25,17 @@ from urllib3 import util as Util
 ###################
 # BEGIN EXECUTION #
 ###################
-
-# All our groups
-groups = {}
-groups['gac'] = group.Gac()
-groups['ge'] = group.Ge()
-groups['ge_gac'] = group.Ge_gac()
-groups['icann_cor'] = group.Icann_cor()
-groups['icann_ext'] = group.Icann_ext()
-groups['octo'] = group.Octo()
-groups['octo_com'] = group.Octo_com()
-groups['rssac'] = group.Rssac()
-groups['rzerc'] = group.Rzerc()
-groups['ssac'] = group.Ssac()
-groups['ssac_cor'] = group.Ssac_cor()
-
 ap = argparse.ArgumentParser(description='Fetch PDFs from icann.org. By default fetches all groups.')
 ap.add_argument('-g', '--group', type=str, action='store', default='all',
-                choices=groups.keys(), help='Fetch single group then exit')
+                choices=group.groups.keys(), help='Fetch single group then exit')
 ap.add_argument('-e', '--exclude', type=str, action='store', default=None,
-                choices=groups.keys(), help='Fetch all groups except excluded group')
+                choices=group.groups.keys(), help='Fetch all groups except excluded group')
 ARGS = ap.parse_args()
 
 if ARGS.exclude != None:
-  del groups[ARGS.exclude]
+  del group.groups[ARGS.exclude]
 
-for key,gr in groups.items():
+for key,gr in group.groups.items():
   if ARGS.group != 'all' and ARGS.group != key:
     continue
 

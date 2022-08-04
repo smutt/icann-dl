@@ -22,6 +22,12 @@
     <td id="size-icann_cor">@@@size-icann_cor@@@</td>
     <td><a href='/ham/icann/cor'>ham/icann/cor</a></td>
   </tr>
+  <tr><td><a href="https://www.icann.org/reports-to-board">
+      ICANN CEO Reports</a></td>
+    <td id="files-ceo">@@@files-ceo@@@</td>
+    <td id="size-ceo">@@@size-ceo@@@</td>
+    <td><a href='/ham/icann/ceo/board'>ham/icann/ceo/board</a></td>
+  </tr>
   <tr><td><a href="https://www.icann.org/en/government-engagement/publications">
       ICANN Government Engagement Publications</a></td>
     <td id="files-ge">@@@files-ge@@@</td>
