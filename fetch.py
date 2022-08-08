@@ -26,10 +26,11 @@ from urllib3 import util as Util
 # BEGIN EXECUTION #
 ###################
 ap = argparse.ArgumentParser(description='Fetch PDFs from icann.org. By default fetches all groups.')
-ap.add_argument('-g', '--group', type=str, action='store', default='all',
-                choices=group.groups.keys(), help='Fetch single group then exit')
+ap.add_argument('-d', '--debug', action='store_true', help='Fetch nothing. Instead print what URLs would be fetched.')
 ap.add_argument('-e', '--exclude', type=str, action='store', default=None,
                 choices=group.groups.keys(), help='Fetch all groups except excluded group')
+ap.add_argument('-g', '--group', type=str, action='store', default='all',
+                choices=group.groups.keys(), help='Fetch single group then exit')
 ARGS = ap.parse_args()
 
 if ARGS.exclude != None:
@@ -39,10 +40,13 @@ for key,gr in group.groups.items():
   if ARGS.group != 'all' and ARGS.group != key:
     continue
 
-  if not gr.enabled:
+  if ARGS.group == 'all' and not gr.enabled: # Skip disabled groups unless --group is passed
     continue
 
   for ll in gr.get_links():
     remote_file = Url_parse.unquote(Util.parse_url(ll).path.split('/')[-1])
     if remote_file not in gr.local_files():
-      gr.download(ll)
+      if ARGS.debug:
+        print(ll)
+      else:
+        gr.download(ll)
