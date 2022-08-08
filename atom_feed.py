@@ -17,6 +17,8 @@
 #
 #  Copyright (C) 2022, Andrew McConachie, <andrew.mcconachie@icann.org>
 
+import argparse
+import group
 import os
 import stat
 import xml.etree.ElementTree as ET
@@ -36,44 +38,70 @@ def logit(s):
 # Takes a log filename to read and a minimum timestamp
 # Returns dict of file dicts ==> local_name = {ts, remote_name}
 def get_files(fname, min_ts):
+  def parse_line(line): # Returns a 3 tuple (ts, remote, local)
+    toks = line.split()
+    if len(toks) == 3:
+      return (toks[0], toks[1], toks[2])
+    elif len(toks) < 3:
+      return (None, None, None)
+    else:
+      start = len(toks[0])
+      end = line.find(group.DL_Group.base_dir)
+      return (toks[0], line[start:end].strip(), line[end:].strip())
+
   rv = {}
   with open(fname) as fh:
     for line in fh:
-      line = line.strip()
-      if len(line) == 0:
+      ts, remote, local = parse_line(line.strip())
+      if ts == None:
         continue
 
-      toks = line.split()
-      if len(toks) < 3:
-        continue
       try:
-        f_ts = datetime.fromisoformat(toks[0])
+        f_ts = datetime.fromisoformat(ts)
       except:
         continue
-      if os.path.exists(toks[2]):
+
+      if os.path.exists(local):
         if min_ts <= f_ts:
-          rv[toks[2]] = {'ts': toks[0], 'remote': toks[1]}
+          rv[local] = {'ts': ts, 'remote': remote}
   return rv
 
 ###################
 # BEGIN EXECUTION #
 ###################
+ap = argparse.ArgumentParser(description='Update atom feed with new PDFs found.')
+ap.add_argument('-l', '--lastrun', action='store', type=str, help='Use passed lastrun. Do not read or write lastrun from file.')
+ap.add_argument('-d', '--debug', action='store_true', help='Debug. Do not write feed instead print links to STDOUT.')
+ARGS = ap.parse_args()
 
-last_run = None
-with open(atom_lastrun) as fh:
-  for line in fh:
-   last_run = datetime.fromisoformat(line.strip())
+if ARGS.lastrun:
+  try:
+    last_run = datetime.fromisoformat(ARGS.lastrun)
+  except:
+    print('Bad --lastrun')
+    exit(1)
 
-if last_run == None:
-  logit('err: Unable to determine lastrun time')
-  exit(1)
+else:
+  last_run = None
+  with open(atom_lastrun) as fh:
+    for line in fh:
+      last_run = datetime.fromisoformat(line.strip())
 
-fp = open(atom_lastrun, 'w')
-fp.write(datetime.utcnow().isoformat(timespec='seconds'))
-fp.close()
+  if last_run == None:
+    logit('err: Unable to determine lastrun time')
+    exit(1)
+
+  fp = open(atom_lastrun, 'w')
+  fp.write(datetime.utcnow().isoformat(timespec='seconds'))
+  fp.close()
 
 new_files = get_files(dl_log, last_run)
 if len(new_files) == 0:
+  exit(0)
+
+if ARGS.debug:
+  for key,val in new_files.items():
+    print(val['ts'] + ' :: ' + key + ' :: ' + val['remote'])
   exit(0)
 
 tree = ET.parse(atom_xml)
@@ -85,13 +113,10 @@ for k,v in new_files.items():
   UID = str(uuid.uuid5(uuid.NAMESPACE_URL, fname)) # uuid.RFC_4122 is broken
 
   new_entry = "<entry>\n<title>" + fname + "</title> \
-    <link href=\"" + link_base + k.split("pub/")[1] + "\"/> \
+    <link href=\"" + link_base + "/" + k.split(group.DL_Group.base_dir)[1] + "\"/> \
     <id>urn:uuid:" + UID + "</id> \
     <updated>" + datetime.utcnow().isoformat(timespec='seconds') + 'Z' + "</updated> \
     <summary/></entry>"
-    #<updated>" + datetime.fromisoformat(v['ts']).isoformat(timespec='seconds') + "Z</updated> \
-    #<summary>" + "<a href=\"" + v['remote'] + "\">" + fname + "</a></summary></entry>"
-
   tree.find('.').append(ET.fromstring(new_entry))
 
 ET.indent(tree)

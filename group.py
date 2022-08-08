@@ -31,9 +31,10 @@ def logit(s):
   print(datetime.isoformat(datetime.utcnow()) + ' ' + s.strip())
 
 class DL_Group():
+  base_dir = '/var/www/htdocs/icann-hamster.nl/ham/' # Where the local fun starts
+
   def __init__(self):
     self.regex = []
-    self.base_dir = '/var/www/htdocs/icann-hamster.nl/ham/' # Where the local fun starts
 
     self.exclude = [] # Links to exclude for all groups
     self.exclude.append(re.compile('.*/didp-response-process-29oct13-en\.pdf$'))
