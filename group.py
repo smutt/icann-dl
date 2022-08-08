@@ -204,6 +204,11 @@ class Icann_cor(DL_Group):
             rv.append(mm)
     return rv
 
+  def download(self, remote):
+    this_year = str(date.today().year)
+    if this_year in self.sub_dir:
+      return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + remote.split('/')[-1])
+
 # ICANN Correspondence Sent Externally
 class Icann_ext(DL_Group):
   def __init__(self):
