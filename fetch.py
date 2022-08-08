@@ -39,6 +39,9 @@ for key,gr in group.groups.items():
   if ARGS.group != 'all' and ARGS.group != key:
     continue
 
+  if not gr.enabled:
+    continue
+
   for ll in gr.get_links():
     remote_file = Url_parse.unquote(Util.parse_url(ll).path.split('/')[-1])
     if remote_file not in gr.local_files():

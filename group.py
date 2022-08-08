@@ -34,6 +34,7 @@ class DL_Group():
   base_dir = '/var/www/htdocs/icann-hamster.nl/ham/' # Where the local fun starts
 
   def __init__(self):
+    self.enabled = True
     self.regex = []
 
     self.exclude = [] # Links to exclude for all groups
