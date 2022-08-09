@@ -7,9 +7,14 @@
   <div class='biggest'>ICANN Hamster</div>
   <div class='big'>An unofficial collection of mostly<a href='/ham'> PDF files </a>downloaded from <a href='https://www.icann.org'>icann.org</a>.</div><br/>
 
-
   <table>
   <tr><th>Collection</th><th>Files</th><th>Size (MB)</th><th>Directory</th></tr>
+  <tr><td><a href="https://atlarge.icann.org/policy-summary">
+        ALAC Publications</a></td>
+    <td id="files-alac">@@@files-alac@@@</td>
+    <td id="size-alac">@@@size-alac@@@</td>
+    <td><a href='/ham/soac/alac/pub'>ham/soac/alac/pub</a></td>
+  </tr>
   <tr><td><a href="https://gac.icann.org/contentMigrated/icann73-gac-communique">
         GAC Communiques</a></td>
     <td id="files-gac">@@@files-gac@@@</td>

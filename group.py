@@ -121,6 +121,35 @@ class DL_Group():
   def get_links(self):
     return self._get_links(self.uri, self.regex, ['a', 'href'])
 
+#####################
+# Individual Groups #
+#####################
+
+# ALAC
+class Alac(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/alac/pub'
+    self.uri = 'https://atlarge.icann.org/policy-summary?page=1'
+    self.top_regex = []
+    self.top_regex.append(re.compile('^.*/advice_statements/.*$'))
+    self.regex.append(re.compile('.*/uploads/advice_statement_document/document/.*\.pdf$'))
+
+    # This needs to be changed every year
+    # Create the directory and change this to acivate downloads again
+    self.active_year = '2022'
+
+  def download(self, remote):
+    if self.active_year ==  str(date.today().year):
+      return self._download(remote, self.base_dir + self.path + '/' + \
+                            self.active_year + '/' + remote.split('/')[-1])
+
+  def get_links(self):
+    rv = []
+    for doc in self._get_links(self.uri, self.top_regex, ['a', 'href']):
+      rv.extend(self._get_links(doc, self.regex, ['option', 'value']))
+    return rv
+
 # CEO Reports to the Board
 class Ceo(DL_Group):
   def __init__(self):
@@ -272,6 +301,7 @@ class Ssac_cor(DL_Group):
 
 # All our groups
 groups = {}
+groups['alac'] = Alac()
 groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
