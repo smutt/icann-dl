@@ -150,6 +150,15 @@ class Alac(DL_Group):
       rv.extend(self._get_links(doc, self.regex, ['option', 'value']))
     return rv
 
+# CCNSO Correspondence
+class Ccnso_cor(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/ccnso/cor'
+    self.uri = 'https://ccnso.icann.org/en/library?tid[19]=19&page=0'
+    self.top_regex = []
+    self.regex.append(re.compile('.*\.pdf$'))
+
 # CEO Reports to the Board
 class Ceo(DL_Group):
   def __init__(self):
@@ -302,6 +311,7 @@ class Ssac_cor(DL_Group):
 # All our groups
 groups = {}
 groups['alac'] = Alac()
+groups['ccnso_cor'] = Ccnso_cor()
 groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
