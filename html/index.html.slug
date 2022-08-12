@@ -113,10 +113,10 @@
   <div class='cli'>rsync -rtv icann-hamster.nl::ham . </div>
 
   Specific directories can be singled out for downloading. Below we only download GAC Communiques.
-  <div class='cli'>rsync -rtv icann-hamster.nl::ham/gac/com . </div>
+  <div class='cli'>rsync -rtv icann-hamster.nl::ham/soac/gac/com . </div>
 
   Specific directories can be excluded from download. Below we tell rsync to not download ICANN Correspondence.
-  <div class='cli'>rsync -rtv --exclude="icann/cor/*" icann-hamster.nl::ham .</div>
+  <div class='cli'>rsync -rtv --exclude="ham/icann/cor/*" icann-hamster.nl::ham .</div>
 
 
   <div class='bigger'>sftp</div>
