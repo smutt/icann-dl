@@ -60,7 +60,7 @@ def check_image(fh):
 ###################
 
 ap = argparse.ArgumentParser(description='Print names of PDFs that have specific properties')
-ap.add_argument('-b', '--broken', action='store_true', help='Find broken PDFs only')
+ap.add_argument('-b', '--broken', action='store_true', help='Find really broken PDFs only')
 ap.add_argument('-e', '--encrypted', action='store_true', help='Find encrypted PDFs only')
 ap.add_argument('-i', '--image', action='store_true', help='Find image only PDFs')
 ap.add_argument('-m', '--metadata', help='Print only the passed metadata field')
@@ -124,9 +124,14 @@ for pdf in pdfs:
     if args.encrypted:
       continue
 
-
-  if len(fh.pages) == 0:
+  try:
+    if len(fh.pages) == 0:
+      continue
+  except:
+    if not args.nowarn:
+      print(pdf + ' bad page count')
     continue
+
   if args.image:
     if check_image(fh):
       print(pdf)
