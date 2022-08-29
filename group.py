@@ -70,12 +70,16 @@ class DL_Group():
 
   # Return dict of files existing locally on disk for group
   # Whitespaces in files are escaped with %20
-  def local_files(self):
+  def _local_files(self, path):
     rv = {}
-    for _, _, files in os.walk(self.base_dir + self.path):
+    for _, _, files in os.walk(self.base_dir + path):
       for ff in files:
         rv[ff.strip()] = True
     return rv
+
+  # Wrapper for _local_files()
+  def local_files(self):
+    return self._local_files(self.path)
 
   # Should we exclude passed link
   def is_excluded(self, s):
@@ -150,13 +154,32 @@ class Alac(DL_Group):
       rv.extend(self._get_links(doc, self.regex, ['option', 'value']))
     return rv
 
+
+# CCNSO Parent Class
+# The primary reason for doing this is to prevent the same file showing up in multiple CCNSO groups
+class Ccnso(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.root_path = 'soac/ccnso'
+
+  # Wrapper for _local_files()
+  def local_files(self):
+    return self._local_files(self.root_path)
+
 # CCNSO Correspondence
-class Ccnso_cor(DL_Group):
+class Ccnso_cor(Ccnso):
   def __init__(self):
     super().__init__()
     self.path = 'soac/ccnso/cor'
     self.uri = 'https://ccnso.icann.org/en/library?tid[19]=19&page=0'
-    self.top_regex = []
+    self.regex.append(re.compile('.*\.pdf$'))
+
+# CCNSO Presentations (not Tech Day)
+class Ccnso_pres(Ccnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/ccnso/pres/2022' # This needs to change every year
+    self.uri = 'https://ccnso.icann.org/en/library?tid[36]=36&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
 
 # CEO Reports to the Board
@@ -312,6 +335,7 @@ class Ssac_cor(DL_Group):
 groups = {}
 groups['alac'] = Alac()
 groups['ccnso_cor'] = Ccnso_cor()
+groups['ccnso_pres'] = Ccnso_pres()
 groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
