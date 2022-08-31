@@ -178,9 +178,14 @@ class Ccnso_cor(Ccnso):
 class Ccnso_pres(Ccnso):
   def __init__(self):
     super().__init__()
-    self.path = 'soac/ccnso/pres/2022' # This needs to change every year
+    self.path = 'soac/ccnso/pres'
     self.uri = 'https://ccnso.icann.org/en/library?tid[36]=36&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
+
+  def download(self, remote):
+    this_year = str(date.today().year)
+    if this_year in self.sub_dir:
+      return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + remote.split('/')[-1])
 
 # CEO Reports to the Board
 class Ceo(DL_Group):

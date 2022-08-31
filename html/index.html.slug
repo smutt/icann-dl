@@ -15,6 +15,18 @@
     <td id="size-alac">@@@size-alac@@@</td>
     <td><a href='/ham/soac/alac/pub'>ham/soac/alac/pub</a></td>
   </tr>
+  <tr><td><a href="https://ccnso.icann.org/en/library?tid[19]=19&page=0">
+        CCNSO Correspondence</a></td>
+    <td id="files-ccnso_cor">@@@files-ccnso_cor@@@</td>
+    <td id="size-ccnso_cor">@@@size-ccnso_cor@@@</td>
+    <td><a href='/ham/soac/ccnso/cor'>ham/soac/ccnso/cor</a></td>
+  </tr>
+  <tr><td><a href="https://ccnso.icann.org/en/library?tid[36]=36&page=0">
+        CCNSO Presentations</a></td>
+    <td id="files-ccnso_pres">@@@files-ccnso_pres@@@</td>
+    <td id="size-ccnso_pres">@@@size-ccnso_pres@@@</td>
+    <td><a href='/ham/soac/ccnso/pres'>ham/soac/ccnso/pres</a></td>
+  </tr>
   <tr><td><a href="https://gac.icann.org/contentMigrated/icann73-gac-communique">
         GAC Communiques</a></td>
     <td id="files-gac">@@@files-gac@@@</td>
