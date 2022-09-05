@@ -335,6 +335,12 @@ class Ssac_cor(DL_Group):
     self.uri = 'https://www.icann.org/groups/ssac/documents-correspondence'
     self.regex.append(re.compile('.*/system/files/files/ssac2.*\.pdf$'))
 
+# SSAC DNSSEC Workshop (now called DNSSEC & Security Workshop)
+class Ssac_dnssec(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.enabled = False
+    self.path = 'soac/ssac/dnssec/'
 
 # All our groups
 groups = {}
@@ -353,3 +359,4 @@ groups['rssac'] = Rssac()
 groups['rzerc'] = Rzerc()
 groups['ssac'] = Ssac()
 groups['ssac_cor'] = Ssac_cor()
+groups['ssac_dnssec'] = Ssac_dnssec()
