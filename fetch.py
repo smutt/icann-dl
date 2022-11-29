@@ -51,3 +51,6 @@ for key,gr in group.groups.items():
         print(ll)
       else:
         gr.download(ll)
+    else:
+      if ARGS.debug:
+        print('Skipping ' + ll)
