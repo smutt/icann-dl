@@ -154,6 +154,18 @@ class Alac(DL_Group):
       rv.extend(self._get_links(doc, self.regex, ['option', 'value']))
     return rv
 
+# ICANN Bylaws
+class Bylaws(DL_Group):
+  base_dir = '/home/smutt/temp/bylaws/'
+
+  def __init__(self):
+    super().__init__()
+    self.enabled = False
+    self.path = ''
+    self.uri = 'https://www.icann.org/resources/pages/governance/bylaws-archive-en'
+    self.regex.append(re.compile('^/resources/pages/bylaws-.*-en$'))
+    self.regex.append(re.compile('^/en/about/governance/bylaws/bylaws-.*-en.htm$'))
+
 
 # CCNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple CCNSO groups
@@ -186,6 +198,13 @@ class Ccnso_pres(Ccnso):
     this_year = str(date.today().year)
     if this_year in self.sub_dir:
       return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + remote.split('/')[-1])
+
+# CCNSO Tech Day
+class Ccnso_tech(Ccnso):
+  def __init__(self):
+    super().__init__()
+    self.enabled = False
+    self.path = 'soac/ccnso/techday'
 
 # CEO Reports to the Board
 class Ceo(DL_Group):
@@ -345,8 +364,10 @@ class Ssac_dnssec(DL_Group):
 # All our groups
 groups = {}
 groups['alac'] = Alac()
+groups['bylaws'] = Bylaws()
 groups['ccnso_cor'] = Ccnso_cor()
 groups['ccnso_pres'] = Ccnso_pres()
+groups['ccnso_tech'] = Ccnso_tech()
 groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
