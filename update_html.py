@@ -21,7 +21,6 @@ import math
 import os
 import group
 
-base_dir = '/var/www/htdocs/icann-hamster.nl/ham/'
 html_out = '/var/www/htdocs/icann-hamster.nl/index.html'
 html_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
 

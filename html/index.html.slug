@@ -27,6 +27,11 @@
     <td id="size-ccnso_pres">@@@size-ccnso_pres@@@</td>
     <td><a href='/ham/soac/ccnso/pres'>ham/soac/ccnso/pres</a></td>
   </tr>
+  <tr><td>CCNSO Tech Day</td>
+    <td id="files-ccnso_tech">@@@files-ccnso_tech@@@</td>
+    <td id="size-ccnso_tech">@@@size-ccnso_tech@@@</td>
+    <td><a href='/ham/soac/ccnso/techday'>ham/soac/ccnso/techday</a></td>
+  </tr>
   <tr><td>DNSSEC & Security Workshop</td>
     <td id="files-ssac_dnssec">@@@files-ssac_dnssec@@@</td>
     <td id="size-ssac_dnssec">@@@size-ssac_dnssec@@@</td>
@@ -74,35 +79,40 @@
     <td id="size-octo">@@@size-octo@@@</td>
     <td><a href='/ham/icann/octo/pub'>ham/icann/octo/pub</a></td>
   </tr>
-<tr><td><a href="https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en">
+  <tr><td><a href="https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en">
       ICANN OCTO Commissioned Publications</a></td>
     <td id="files-octo_com">@@@files-octo_com@@@</td>
     <td id="size-octo_com">@@@size-octo_com@@@</td>
     <td><a href='/ham/icann/octo/com'>ham/icann/octo/com</a></td>
   </tr>
-<tr><td><a href="https://www.icann.org/groups/rssac/documents">
+  <tr><td><a href="https://www.icann.org/groups/rssac/documents">
       RSSAC Publications</a></td>
     <td id="files-rssac">@@@files-rssac@@@</td>
     <td id="size-rssac">@@@size-rssac@@@</td>
     <td><a href='/ham/soac/rssac/pub'>ham/soac/rssac/pub</a></td>
   </tr>
-<tr><td><a href="https://www.icann.org/rzerc#documents">
+  <tr><td><a href="https://www.icann.org/rzerc#documents">
       RZERC Publications</a></td>
     <td id="files-rzerc">@@@files-rzerc@@@</td>
     <td id="size-rzerc">@@@size-rzerc@@@</td>
     <td><a href='/ham/soac/rzerc/pub'>ham/soac/rzerc/pub</a></td>
   </tr>
-<tr><td><a href="https://www.icann.org/groups/ssac/documents">
+  <tr><td><a href="https://www.icann.org/groups/ssac/documents">
       SSAC Reports</a></td>
     <td id="files-ssac">@@@files-ssac@@@</td>
     <td id="size-ssac">@@@size-ssac@@@</td>
     <td><a href='/ham/soac/ssac/reports'>ham/soac/ssac/reports</a></td>
   </tr>
-<tr><td><a href="https://www.icann.org/groups/ssac/documents-correspondence">
+  <tr><td><a href="https://www.icann.org/groups/ssac/documents-correspondence">
       SSAC Correspondence</a></td>
     <td id="files-ssac_cor">@@@files-ssac_cor@@@</td>
     <td id="size-ssac_cor">@@@size-ssac_cor@@@</td>
     <td><a href='/ham/soac/ssac/cor'>ham/soac/ssac/cor</a></td>
+  </tr>
+  <tr><td>Audio Recordings</a></td>
+    <td id="files-audio">@@@files-audio@@@</td>
+    <td id="size-audio">@@@size-audio@@@</td>
+    <td><a href='/audio/'>audio</a></td>
   </tr>
   <tr><td>All Collections</td>
     <td id="files-all">@@@files-total@@@</td>

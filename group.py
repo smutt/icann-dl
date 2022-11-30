@@ -154,6 +154,15 @@ class Alac(DL_Group):
       rv.extend(self._get_links(doc, self.regex, ['option', 'value']))
     return rv
 
+# Stub class for audio
+class Audio(DL_Group):
+  base_dir = '/var/www/htdocs/icann-hamster.nl/audio/' # Where the local fun starts
+
+  def __init__(self):
+    super().__init__()
+    self.enabled = False
+    self.path = ''
+
 # ICANN Bylaws
 class Bylaws(DL_Group):
   base_dir = '/home/smutt/temp/bylaws/'
@@ -165,7 +174,6 @@ class Bylaws(DL_Group):
     self.uri = 'https://www.icann.org/resources/pages/governance/bylaws-archive-en'
     self.regex.append(re.compile('^/resources/pages/bylaws-.*-en$'))
     self.regex.append(re.compile('^/en/about/governance/bylaws/bylaws-.*-en.htm$'))
-
 
 # CCNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple CCNSO groups
@@ -364,7 +372,8 @@ class Ssac_dnssec(DL_Group):
 # All our groups
 groups = {}
 groups['alac'] = Alac()
-groups['bylaws'] = Bylaws()
+groups['audio'] = Audio()
+#groups['bylaws'] = Bylaws()
 groups['ccnso_cor'] = Ccnso_cor()
 groups['ccnso_pres'] = Ccnso_pres()
 groups['ccnso_tech'] = Ccnso_tech()
