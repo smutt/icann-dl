@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-#  Copyright (C) 2022, Andrew McConachie, <andrew.mcconachie@icann.org>
+#  Copyright (C) 2023 Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import os
 import stat
@@ -129,6 +129,16 @@ class DL_Group():
 # Individual Groups #
 #####################
 
+'''
+There are 3 groups that need updating every January for the new year.
+Alac - create new year directory
+Ccnso_pres - create new year directory
+Icann_cor - create new year directory, update sub_dir URL for new year
+
+Then test using fetch.py -d -g 
+
+'''
+
 # ALAC
 class Alac(DL_Group):
   def __init__(self):
@@ -139,14 +149,11 @@ class Alac(DL_Group):
     self.top_regex.append(re.compile('^.*/advice_statements/.*$'))
     self.regex.append(re.compile('.*/uploads/advice_statement_document/document/.*\.pdf$'))
 
-    # This needs to be changed every year
-    # Create the directory and change this to acivate downloads again
-    self.active_year = '2022'
-
   def download(self, remote):
-    if self.active_year ==  str(date.today().year):
+    this_year = str(date.today().year)
+    if this_year in os.listdir(self.base_dir + '/' + self.path):
       return self._download(remote, self.base_dir + self.path + '/' + \
-                            self.active_year + '/' + remote.split('/')[-1])
+                            self.this_year + '/' + remote.split('/')[-1])
 
   def get_links(self):
     rv = []
@@ -155,8 +162,10 @@ class Alac(DL_Group):
     return rv
 
 # Stub class for audio
+# Audio files are never automatically fetched, we manage them manually.
+# This is just a stub class for counting the files and bytes
 class Audio(DL_Group):
-  base_dir = '/var/www/htdocs/icann-hamster.nl/audio/' # Where the local fun starts
+  base_dir = '/var/www/htdocs/icann-hamster.nl/audio/' # Overridden from DL_Group
 
   def __init__(self):
     super().__init__()
@@ -164,6 +173,7 @@ class Audio(DL_Group):
     self.path = ''
 
 # ICANN Bylaws
+# An experiment
 class Bylaws(DL_Group):
   base_dir = '/home/smutt/temp/bylaws/'
 
@@ -204,7 +214,7 @@ class Ccnso_pres(Ccnso):
 
   def download(self, remote):
     this_year = str(date.today().year)
-    if this_year in self.sub_dir:
+    if this_year in os.listdir(self.base_dir + '/' + self.path):
       return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + remote.split('/')[-1])
 
 # CCNSO Tech Day
