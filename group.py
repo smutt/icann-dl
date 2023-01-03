@@ -130,9 +130,8 @@ class DL_Group():
 #####################
 
 '''
-There are 3 groups that need updating every January for the new year.
+There are 2 groups that need updating every January for the new year.
 Alac - create new year directory
-Ccnso_pres - create new year directory
 Icann_cor - create new year directory, update sub_dir URL for new year
 
 Then test using fetch.py -d -g 
@@ -211,11 +210,6 @@ class Ccnso_pres(Ccnso):
     self.path = 'soac/ccnso/pres'
     self.uri = 'https://ccnso.icann.org/en/library?tid[36]=36&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
-
-  def download(self, remote):
-    this_year = str(date.today().year)
-    if this_year in os.listdir(self.base_dir + '/' + self.path):
-      return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + remote.split('/')[-1])
 
 # CCNSO Tech Day
 class Ccnso_tech(Ccnso):
