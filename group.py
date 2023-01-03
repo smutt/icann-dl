@@ -203,6 +203,14 @@ class Ccnso_cor(Ccnso):
     self.uri = 'https://ccnso.icann.org/en/library?tid[19]=19&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
 
+# CCNSO Meeting Minutes
+class Ccnso_min(Ccnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/ccnso/min'
+    self.uri = 'https://ccnso.icann.org/en/library?tid[28]=28&page=0'
+    self.regex.append(re.compile('.*\.pdf$'))
+
 # CCNSO Presentations (not Tech Day)
 class Ccnso_pres(Ccnso):
   def __init__(self):
@@ -379,6 +387,7 @@ groups['alac'] = Alac()
 groups['audio'] = Audio()
 #groups['bylaws'] = Bylaws()
 groups['ccnso_cor'] = Ccnso_cor()
+groups['ccnso_min'] = Ccnso_min()
 groups['ccnso_pres'] = Ccnso_pres()
 groups['ccnso_tech'] = Ccnso_tech()
 groups['ceo'] = Ceo()
