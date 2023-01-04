@@ -219,6 +219,14 @@ class Ccnso_pres(Ccnso):
     self.uri = 'https://ccnso.icann.org/en/library?tid[36]=36&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
 
+# CCNSO Reports
+class Ccnso_rep(Ccnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/ccnso/reports'
+    self.uri = 'https://ccnso.icann.org/en/library?tid[41]=41&page=0'
+    self.regex.append(re.compile('.*\.pdf$'))
+
 # CCNSO Tech Day
 class Ccnso_tech(Ccnso):
   def __init__(self):
@@ -389,6 +397,7 @@ groups['audio'] = Audio()
 groups['ccnso_cor'] = Ccnso_cor()
 groups['ccnso_min'] = Ccnso_min()
 groups['ccnso_pres'] = Ccnso_pres()
+groups['ccnso_rep'] = Ccnso_rep()
 groups['ccnso_tech'] = Ccnso_tech()
 groups['ceo'] = Ceo()
 groups['gac'] = Gac()
