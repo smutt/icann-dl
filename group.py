@@ -234,6 +234,14 @@ class Ccnso_tech(Ccnso):
     self.enabled = False
     self.path = 'soac/ccnso/techday'
 
+# CCNSO Transcripts
+class Ccnso_tran(Ccnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/ccnso/tran'
+    self.uri = 'https://ccnso.icann.org/en/library?tid[51]=51&page=0'
+    self.regex.append(re.compile('.*\.pdf$'))
+
 # CEO Reports to the Board
 class Ceo(DL_Group):
   def __init__(self):
@@ -357,6 +365,22 @@ class Rssac(DL_Group):
     self.regex.append(re.compile('.*/system/files/files/.*rssac-.*\.pdf$'))
     self.regex.append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
+# RSSAC Meeting Minutes
+class Rssac_min(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/rssac/min'
+    self.uri = 'https://www.icann.org/resources/pages/rssac-meetings-2014-05-06-en'
+    self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
+
+# RSSAC Caucus Meeting Minutes
+class Rssac_c_min(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/rssac/caucus/min'
+    self.uri = 'https://www.icann.org/resources/pages/rssac-caucus-meetings-2015-04-15-en'
+    self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
+
 # RZERC Publications
 class Rzerc(DL_Group):
   def __init__(self):
@@ -399,6 +423,7 @@ groups['ccnso_min'] = Ccnso_min()
 groups['ccnso_pres'] = Ccnso_pres()
 groups['ccnso_rep'] = Ccnso_rep()
 groups['ccnso_tech'] = Ccnso_tech()
+groups['ccnso_tran'] = Ccnso_tran()
 groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
@@ -408,6 +433,8 @@ groups['icann_ext'] = Icann_ext()
 groups['octo'] = Octo()
 groups['octo_com'] = Octo_com()
 groups['rssac'] = Rssac()
+groups['rssac_c_min'] = Rssac_c_min()
+groups['rssac_min'] = Rssac_min()
 groups['rzerc'] = Rzerc()
 groups['ssac'] = Ssac()
 groups['ssac_cor'] = Ssac_cor()
