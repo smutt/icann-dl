@@ -5,121 +5,12 @@
 </head>
 <body>
   <div class='biggest'>ICANN Hamster</div>
-  <div class='big'>An unofficial collection of mostly<a href='/ham'> PDF files </a>downloaded from <a href='https://www.icann.org'>icann.org</a>.</div><br/>
+  <div class='big'>An unofficial collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
+    Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.<br/><br/>
 
-  <table>
-  <tr><th>Collection</th><th>Files</th><th>Size (MB)</th><th>Directory</th></tr>
-  <tr><td><a href="https://atlarge.icann.org/policy-summary">
-        ALAC Publications</a></td>
-    <td id="files-alac">@@@files-alac@@@</td>
-    <td id="size-alac">@@@size-alac@@@</td>
-    <td><a href='/ham/soac/alac/pub'>ham/soac/alac/pub</a></td>
-  </tr>
-  <tr><td><a href="https://ccnso.icann.org/en/library?tid[19]=19&page=0">
-        CCNSO Correspondence</a></td>
-    <td id="files-ccnso_cor">@@@files-ccnso_cor@@@</td>
-    <td id="size-ccnso_cor">@@@size-ccnso_cor@@@</td>
-    <td><a href='/ham/soac/ccnso/cor'>ham/soac/ccnso/cor</a></td>
-  </tr>
-  <tr><td><a href="https://ccnso.icann.org/en/library?tid[36]=36&page=0">
-        CCNSO Presentations</a></td>
-    <td id="files-ccnso_pres">@@@files-ccnso_pres@@@</td>
-    <td id="size-ccnso_pres">@@@size-ccnso_pres@@@</td>
-    <td><a href='/ham/soac/ccnso/pres'>ham/soac/ccnso/pres</a></td>
-  </tr>
-  <tr><td>CCNSO Tech Day</td>
-    <td id="files-ccnso_tech">@@@files-ccnso_tech@@@</td>
-    <td id="size-ccnso_tech">@@@size-ccnso_tech@@@</td>
-    <td><a href='/ham/soac/ccnso/techday'>ham/soac/ccnso/techday</a></td>
-  </tr>
-  <tr><td>DNSSEC & Security Workshop</td>
-    <td id="files-ssac_dnssec">@@@files-ssac_dnssec@@@</td>
-    <td id="size-ssac_dnssec">@@@size-ssac_dnssec@@@</td>
-    <td><a href='/ham/soac/ssac/dnssec'>ham/soac/ssac/dnssec</a></td>
-  </tr>
-  <tr><td><a href="https://gac.icann.org/contentMigrated/icann73-gac-communique">
-        GAC Communiques</a></td>
-    <td id="files-gac">@@@files-gac@@@</td>
-    <td id="size-gac">@@@size-gac@@@</td>
-    <td><a href='/ham/soac/gac/com'>ham/soac/gac/com</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/resources/pages/correspondence">
-        ICANN & Board Correspondence </a></td>
-    <td id="files-icann_cor">@@@files-icann_cor@@@</td>
-    <td id="size-icann_cor">@@@size-icann_cor@@@</td>
-    <td><a href='/ham/icann/cor'>ham/icann/cor</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/reports-to-board">
-      ICANN CEO Reports</a></td>
-    <td id="files-ceo">@@@files-ceo@@@</td>
-    <td id="size-ceo">@@@size-ceo@@@</td>
-    <td><a href='/ham/icann/ceo/board'>ham/icann/ceo/board</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/en/government-engagement/publications">
-      ICANN Government Engagement Publications</a></td>
-    <td id="files-ge">@@@files-ge@@@</td>
-    <td id="size-ge">@@@size-ge@@@</td>
-    <td><a href='/ham/icann/ge/pub'>ham/icann/ge/pub</a></td>
-  </tr>
-  <tr><td><a href="https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities">
-           ICANN Government Engagement Reports to GAC</a></td>
-    <td id="files-ge_gac">@@@files-ge_gac@@@</td>
-    <td id="size-ge_gac">@@@size-ge_gac@@@</td>
-    <td><a href='/ham/icann/ge/gac'>ham/icann/ge/gac</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/en/government-engagement/submissions-to-external-bodies">
-      ICANN Submissions to External Bodies</a></td>
-    <td id="files-icann_ext">@@@files-icann_ext@@@</td>
-    <td id="size-icann_ext">@@@size-icann_ext@@@</td>
-    <td><a href='/ham/icann/ext'>ham/icann/ext</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/octo/publications">
-      ICANN OCTO Publications</a></td>
-    <td id="files-octo">@@@files-octo@@@</td>
-    <td id="size-octo">@@@size-octo@@@</td>
-    <td><a href='/ham/icann/octo/pub'>ham/icann/octo/pub</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en">
-      ICANN OCTO Commissioned Publications</a></td>
-    <td id="files-octo_com">@@@files-octo_com@@@</td>
-    <td id="size-octo_com">@@@size-octo_com@@@</td>
-    <td><a href='/ham/icann/octo/com'>ham/icann/octo/com</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/groups/rssac/documents">
-      RSSAC Publications</a></td>
-    <td id="files-rssac">@@@files-rssac@@@</td>
-    <td id="size-rssac">@@@size-rssac@@@</td>
-    <td><a href='/ham/soac/rssac/pub'>ham/soac/rssac/pub</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/rzerc#documents">
-      RZERC Publications</a></td>
-    <td id="files-rzerc">@@@files-rzerc@@@</td>
-    <td id="size-rzerc">@@@size-rzerc@@@</td>
-    <td><a href='/ham/soac/rzerc/pub'>ham/soac/rzerc/pub</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/groups/ssac/documents">
-      SSAC Reports</a></td>
-    <td id="files-ssac">@@@files-ssac@@@</td>
-    <td id="size-ssac">@@@size-ssac@@@</td>
-    <td><a href='/ham/soac/ssac/reports'>ham/soac/ssac/reports</a></td>
-  </tr>
-  <tr><td><a href="https://www.icann.org/groups/ssac/documents-correspondence">
-      SSAC Correspondence</a></td>
-    <td id="files-ssac_cor">@@@files-ssac_cor@@@</td>
-    <td id="size-ssac_cor">@@@size-ssac_cor@@@</td>
-    <td><a href='/ham/soac/ssac/cor'>ham/soac/ssac/cor</a></td>
-  </tr>
-  <tr><td>Audio Recordings</a></td>
-    <td id="files-audio">@@@files-audio@@@</td>
-    <td id="size-audio">@@@size-audio@@@</td>
-    <td><a href='/audio/'>audio</a></td>
-  </tr>
-  <tr><td>All Collections</td>
-    <td id="files-all">@@@files-total@@@</td>
-    <td id="size-all">@@@size-total@@@</td>
-    <td><a href='/ham'>ham</a></td>
-  </tr>
-  </table></br>
+    <a href='collections.html'>View the Collections</a><br/><br/>
+    <a href='/ham'>View the Files</a><br/>
+  </div><br/>
 
   <div class='bigger'>Atom</div>
   An <a href='feed.xml'>Atom feed</a> is updated when new files are added.

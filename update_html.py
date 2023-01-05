@@ -21,8 +21,10 @@ import math
 import os
 import group
 
-html_out = '/var/www/htdocs/icann-hamster.nl/index.html'
-html_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
+index_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
+index_out = '/var/www/htdocs/icann-hamster.nl/index.html'
+collections_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/collections.html.slug'
+collections_out = '/var/www/htdocs/icann-hamster.nl/collections.html'
 
 # High-order func to recursively count files
 # Return f(func(cur_dir)) total
@@ -45,9 +47,14 @@ def is_ocr(de):
 ###################
 # BEGIN EXECUTION #
 ###################
-fin = open(html_in, 'r')
-output = fin.read()
+fin = open(index_in, 'r')
+index_output = fin.read()
 fin.close()
+
+fin = open(collections_in, 'r')
+collections_output = fin.read()
+fin.close()
+
 total_count = total_MB = total_OCR = 0
 
 for name,gr in group.groups.items():
@@ -58,13 +65,20 @@ for name,gr in group.groups.items():
   total_MB += MB
   total_OCR += OCR
 
-  output = output.replace('@@@files-' + name + '@@@', "{:,}".format(count))
-  output = output.replace('@@@size-' + name + '@@@', "{:,}".format(MB))
+  collections_output = collections_output.replace('@@@files-' + name + '@@@', "{:,}".format(count))
+  collections_output = collections_output.replace('@@@size-' + name + '@@@', "{:,}".format(MB))
 
-output = output.replace('@@@files-total@@@', "{:,}".format(total_count))
-output = output.replace('@@@size-total@@@', "{:,}".format(total_MB))
-output = output.replace('@@@ocr-total@@@', "{:,}".format(total_OCR))
+index_output = index_output.replace('@@@files-total@@@', "{:,}".format(total_count))
+index_output = index_output.replace('@@@size-total@@@', "{:,}".format(total_MB))
+index_output = index_output.replace('@@@ocr-total@@@', "{:,}".format(total_OCR))
 
-fout = open(html_out, 'w')
-fout.write(output)
+collections_output = collections_output.replace('@@@files-total@@@', "{:,}".format(total_count))
+collections_output = collections_output.replace('@@@size-total@@@', "{:,}".format(total_MB))
+
+fout = open(index_out, 'w')
+fout.write(index_output)
+fout.close()
+
+fout = open(collections_out, 'w')
+fout.write(collections_output)
 fout.close()
