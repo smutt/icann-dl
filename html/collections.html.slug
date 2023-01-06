@@ -56,6 +56,14 @@
   </tr>
   <tr>
     <td></td>
+    <td><a href="https://ccnso.icann.org/en/library?tid[25]=25&page=0">
+        Guidelines</a></td>
+    <td id="files-ccnso_guide">@@@files-ccnso_guide@@@</td>
+    <td id="size-ccnso_guide">@@@size-ccnso_guide@@@</td>
+    <td><a href='/ham/soac/ccnso/guide'>ham/soac/ccnso/guide</a></td>
+  </tr>
+  <tr>
+    <td></td>
     <td><a href="https://ccnso.icann.org/en/library?tid[28]=28&page=0">
         Minutes</a></td>
     <td id="files-ccnso_min">@@@files-ccnso_min@@@</td>
