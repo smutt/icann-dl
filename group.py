@@ -321,7 +321,7 @@ class Icann_cor(DL_Group):
     self.sub_dir['2020'] = 'https://www.icann.org/resources/pages/correspondence-2020'
     self.sub_dir['2021'] = 'https://www.icann.org/resources/pages/correspondence-2021'
     self.sub_dir['2022'] = 'https://www.icann.org/resources/pages/correspondence-2022'
-    #self.sub_dir['2023'] = '' Will need to add these for each year
+    self.sub_dir['2023'] = 'https://www.icann.org/resources/pages/correspondence'
 
   def get_links(self):
     rv = []
