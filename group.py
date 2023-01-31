@@ -152,7 +152,7 @@ class Alac(DL_Group):
     this_year = str(date.today().year)
     if this_year in os.listdir(self.base_dir + '/' + self.path):
       return self._download(remote, self.base_dir + self.path + '/' + \
-                            self.this_year + '/' + remote.split('/')[-1])
+                            this_year + '/' + remote.split('/')[-1])
 
   def get_links(self):
     rv = []
