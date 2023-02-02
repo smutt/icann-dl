@@ -15,16 +15,22 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-#  Copyright (C) 2022, Andrew McConachie, <andrew.mcconachie@icann.org>
+#  Copyright (C) 2022, 2023 Andrew McConachie, <andrew.mcconachie@icann.org>
 
+from datetime import datetime
 import math
 import os
 import group
 
+www_base = '/var/www/htdocs/icann-hamster.nl/'
+
+fetch_num = 5 # How many of the last fetches do we want to display?
+fetch_log = os.environ['HOME'] + '/log/fetch.log'
+
 index_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
-index_out = '/var/www/htdocs/icann-hamster.nl/index.html'
+index_out = www_base + 'index.html'
 collections_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/collections.html.slug'
-collections_out = '/var/www/htdocs/icann-hamster.nl/collections.html'
+collections_out = www_base + 'collections.html'
 
 # High-order func to recursively count files
 # Return f(func(cur_dir)) total
@@ -74,6 +80,18 @@ index_output = index_output.replace('@@@ocr-total@@@', "{:,}".format(total_OCR))
 
 collections_output = collections_output.replace('@@@files-total@@@', "{:,}".format(total_count))
 collections_output = collections_output.replace('@@@size-total@@@', "{:,}".format(total_MB))
+
+# Create list of most recent downloaded docs
+fin = open(fetch_log, 'r')
+fetches = list(fin)
+fin.close()
+ss = ''
+for ii in range(1, fetch_num + 1):
+  idx = len(fetches) - ii
+  ts = datetime.fromisoformat(fetches[idx].strip().split()[0]).strftime('%a %b %d')
+  linky = fetches[idx].strip().split()[2].removeprefix(www_base)
+  ss += ts + ' <a href=\'' + linky + '\'>' + linky.split('/')[-1] + '</a><br/>\n'
+index_output = index_output.replace('@@@recent-fetches@@@', ss).strip('\n')
 
 fout = open(index_out, 'w')
 fout.write(index_output)

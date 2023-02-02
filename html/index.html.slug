@@ -8,9 +8,10 @@
   <div class='big'>An unofficial collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
     Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.<br/><br/>
 
-    <a href='collections.html'>View the Collections</a><br/><br/>
-    <a href='/ham'>View the Files</a><br/>
-  </div><br/>
+    <a href='collections.html'>View the Collections</a><br/><br/><br/></div>
+
+  <div class='bigger'>Recent Finds</div>
+    @@@recent-fetches@@@
 
   <div class='bigger'>Atom</div>
   An <a href='feed.xml'>Atom feed</a> is updated when new files are added.
@@ -34,7 +35,6 @@
 
   Specific directories can be excluded from download. Below we tell rsync to not download ICANN Correspondence.
   <div class='cli'>rsync -rtv --exclude="ham/icann/cor/*" icann-hamster.nl::ham .</div>
-
 
   <div class='bigger'>sftp</div>
   <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. ICANN Hamster runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
