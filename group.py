@@ -360,9 +360,34 @@ class Octo(DL_Group):
 class Octo_com(DL_Group):
   def __init__(self):
     super().__init__()
-    self.path = 'icann/octo/com/'
+    self.path = 'icann/octo/com'
     self.uri = 'https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en'
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
+
+# OCTO Archive
+class Octo_archive(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.path = 'icann/octo/archive'
+    self.uri = 'https://www.icann.org/octo-document-archive'
+    self.regex.append(re.compile('/en.*\.pdf$'))
+    self.regex.append(re.compile('/news.*$'))
+    self.regex.append(re.compile('/en.*\.htm$'))
+    self.regex2 = []
+    self.regex2.append(re.compile('/.*\.pdf$'))
+
+  def local_files(self):
+    return self._local_files(self.path) | self._local_files('soac/ssac/reports')
+
+  def get_links(self):
+    rv = []
+    for ll in super().get_links():
+      if ll.endswith('.pdf'):
+        rv.append(ll)
+      else:
+        for mm in self._get_links(ll, self.regex2, ['a', 'href']):
+          rv.append(mm)
+    return rv
 
 # RSSAC Publications
 class Rssac(DL_Group):
@@ -441,6 +466,7 @@ groups['icann_cor'] = Icann_cor()
 groups['icann_ext'] = Icann_ext()
 groups['octo'] = Octo()
 groups['octo_com'] = Octo_com()
+groups['octo_arc'] = Octo_archive()
 groups['rssac'] = Rssac()
 groups['rssac_c_min'] = Rssac_c_min()
 groups['rssac_min'] = Rssac_min()
