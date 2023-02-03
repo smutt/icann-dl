@@ -124,11 +124,11 @@
   </tr>
   <tr>
     <td></td>
-    <td><a href="https://www.icann.org/octo/publications">
-      Publications</a></td>
-    <td id="files-octo">@@@files-octo@@@</td>
-    <td id="size-octo">@@@size-octo@@@</td>
-    <td><a href='/ham/icann/octo/pub'>ham/icann/octo/pub</a></td>
+    <td><a href="https://www.icann.org/octo-document-archive">
+      Archive</a></td>
+    <td id="files-octo_arc">@@@files-octo_arc@@@</td>
+    <td id="size-octo_arc">@@@size-octo_arc@@@</td>
+    <td><a href='/ham/icann/octo/archive'>ham/icann/octo/archive</a></td>
   </tr>
   <tr>
     <td></td>
@@ -137,6 +137,14 @@
     <td id="files-octo_com">@@@files-octo_com@@@</td>
     <td id="size-octo_com">@@@size-octo_com@@@</td>
     <td><a href='/ham/icann/octo/com'>ham/icann/octo/com</a></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><a href="https://www.icann.org/octo/publications">
+      Publications</a></td>
+    <td id="files-octo">@@@files-octo@@@</td>
+    <td id="size-octo">@@@size-octo@@@</td>
+    <td><a href='/ham/icann/octo/pub'>ham/icann/octo/pub</a></td>
   </tr>
   <tr>
     <td><a href='https://www.icann.org/groups/rssac'>RSSAC</a></td>
