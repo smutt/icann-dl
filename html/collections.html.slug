@@ -12,6 +12,12 @@
     <td id="size-alac">@@@size-alac@@@</td>
     <td><a href='/ham/soac/alac/pub'>ham/soac/alac/pub</a></td>
   </tr>
+  <tr><td colspan='2'><a href="https://features.icann.org/board-advice">
+        Action Request Register Reports</a></td>
+    <td id="files-arr">@@@files-arr@@@</td>
+    <td id="size-arr">@@@size-arr@@@</td>
+    <td><a href='/ham/icann/arr'>ham/icann/arr</a></td>
+  </tr>
   <tr><td colspan='2'><a href="https://gac.icann.org/contentMigrated/icann73-gac-communique">
         GAC Communiques</a></td>
     <td id="files-gac">@@@files-gac@@@</td>
