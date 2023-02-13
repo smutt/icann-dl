@@ -21,19 +21,20 @@
 
   <div class='bigger'>rsync</div>
   Please do not mass download files over HTTPS. For mirroring please use either sftp or rsync.<br/>
+  <a href='https://en.wikipedia.org/wiki/Rsync'>rsync</a> is the preferred method for mirroring. ICANN Hamster runs an rsync server on TCP port 873. No password is required.<br/>
+  For a graphical frontend to rsync try <a href='https://en.wikipedia.org/wiki/Grsync'>grsync</a> or
+  <a href='https://apps.apple.com/us/app/grsyncx/id1506997025'>grsyncx</a> for Mac OS X.<br/><br/>
 
-  <a href='https://en.wikipedia.org/wiki/Rsync'>rsync</a> is the preferred method for mirroring. icann-pdf runs an rsync server on TCP port 873. No password is required.<br/><br/>
-
-  Test before downloading anything.
+  Test before downloading anything using the '-n' switch.
   <div class='cli'>rsync -nrtv icann-hamster.nl::ham . </div>
 
-  When you are ready download everything to your current directory.
+  When you are ready download everything (except audio) to your current directory.
   <div class='cli'>rsync -rtv icann-hamster.nl::ham . </div>
 
   Specific directories can be singled out for downloading. Below we only download GAC Communiques.
   <div class='cli'>rsync -rtv icann-hamster.nl::ham/soac/gac/com . </div>
 
-  Specific directories can be excluded from download. Below we tell rsync to not download ICANN Correspondence.
+  Specific directories can be excluded from downloading. Below we tell rsync to not download ICANN Correspondence.
   <div class='cli'>rsync -rtv --exclude="ham/icann/cor/*" icann-hamster.nl::ham .</div>
 
   <div class='bigger'>sftp</div>

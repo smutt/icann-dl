@@ -24,7 +24,7 @@ import group
 
 www_base = '/var/www/htdocs/icann-hamster.nl/'
 
-fetch_num = 5 # How many of the last fetches do we want to display?
+fetch_num = 10 # How many of the last fetches do we want to display?
 fetch_log = os.environ['HOME'] + '/log/fetch.log'
 
 index_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
