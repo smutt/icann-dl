@@ -102,7 +102,7 @@ while len(recent_fetches) < fetch_num or len(fetches) == 0:
 
 ss = ''
 for ts,linky in recent_fetches:
-  ss += ts + ' <a href=\'' + linky + '\'>' + linky.split('/')[-1] + '</a><br/>\n'
+  ss += '<tr id="rec"><td id="rec">' + ts + '</td><td id="rec"><a href=\'' + linky + '\'>' + linky.split('/')[-1] + '</a></td></tr>\n'
 index_output = index_output.replace('@@@recent-fetches@@@', ss).strip('\n')
 
 # Write output HTML

@@ -1,6 +1,7 @@
 body {
     margin: 2% 2% 5% 2%;
-    background-color: #e0ffdd;
+    /*background-color: #e0ffdd; */
+    background-color: skyblue;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     font-variant: normal;
@@ -32,9 +33,8 @@ div.cli {
     font-family: courier, fixed-width;
 }
 
-
-
-th, td {
+/* For the SFTP login information */
+#sftp {
     padding-top: 5px;
     padding-bottom: 5px;
     padding-left: 0px;
@@ -43,6 +43,16 @@ th, td {
     vertical-align: middle;
 }
 
-/*tr:nth-child(even) {
-  background-color: #D6EEEE;
-}*/
+/* For the collections table */
+#col {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 0px;
+    padding-right: 20px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+/* For the recent finds table */
+#rec {
+}
