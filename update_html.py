@@ -85,14 +85,27 @@ collections_output = collections_output.replace('@@@size-total@@@', "{:,}".forma
 fin = open(fetch_log, 'r')
 fetches = list(fin)
 fin.close()
+
+recent_fetches = []
+while len(recent_fetches) < fetch_num or len(fetches) == 0:
+  line = fetches.pop().strip()
+  if not line.split()[1].startswith('https://'):
+    continue
+
+  # Ugly hack for ARR reports, see issue 7 in Github, remove when fixed
+  if 'advice-status-current' in line:
+    continue
+
+  ts = datetime.fromisoformat(line.split()[0]).strftime('%a %b %d')
+  linky = line.split()[2].removeprefix(www_base)
+  recent_fetches.append([ts, linky])
+
 ss = ''
-for ii in range(1, fetch_num + 1):
-  idx = len(fetches) - ii
-  ts = datetime.fromisoformat(fetches[idx].strip().split()[0]).strftime('%a %b %d')
-  linky = fetches[idx].strip().split()[2].removeprefix(www_base)
+for ts,linky in recent_fetches:
   ss += ts + ' <a href=\'' + linky + '\'>' + linky.split('/')[-1] + '</a><br/>\n'
 index_output = index_output.replace('@@@recent-fetches@@@', ss).strip('\n')
 
+# Write output HTML
 fout = open(index_out, 'w')
 fout.write(index_output)
 fout.close()
