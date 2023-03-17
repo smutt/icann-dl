@@ -5,7 +5,7 @@
 </head>
 <body>
   <div class='biggest'>ICANN Hamster</div>
-  <div class='big'>An unofficial collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
+  <div class='big'>An unofficial public collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
     Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.<br/><br/>
 
     <a href='collections.html'>View the Collections</a><br/><br/></div>

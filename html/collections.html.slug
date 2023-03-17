@@ -49,6 +49,7 @@
     <td id="col">@@@size-rzerc@@@</td>
     <td id="col"><a href='/ham/soac/rzerc/pub'>ham/soac/rzerc/pub</a></td>
   </tr>
+
   <tr>
     <td id="col"><a href='https://ccnso.icann.org/en'>CCNSO</a></td>
   </tr>
@@ -106,6 +107,35 @@
     <td id="col">@@@size-ccnso_tran@@@</td>
     <td id="col"><a href='/ham/soac/ccnso/tran'>ham/soac/ccnso/tran</a></td>
   </tr>
+
+  <tr>
+    <td id="col"><a href='https://gnso.icann.org/en/library'>GNSO</a></td>
+  </tr>
+  <tr>
+    <td id="col"></td>
+    <td id="col"><a href="https://gnso.icann.org/en/library?tid[36]=36">
+        Presentations</a></td>
+    <td id="col">@@@files-gnso_pres@@@</td>
+    <td id="col">@@@size-gnso_pres@@@</td>
+    <td id="col"><a href='/ham/soac/gnso/pres'>ham/soac/gnso/pres</a></td>
+  </tr>
+  <tr>
+    <td id="col"></td>
+    <td id="col"><a href="https://gnso.icann.org/en/library?tid[41]=41">
+        Reports</a></td>
+    <td id="col">@@@files-gnso_rep@@@</td>
+    <td id="col">@@@size-gnso_rep@@@</td>
+    <td id="col"><a href='/ham/soac/gnso/reports'>ham/soac/gnso/reports</a></td>
+  </tr>
+  <tr>
+    <td id="col"></td>
+    <td id="col"><a href="https://gnso.icann.org/en/library?tid[51]=51">
+        Transcripts</a></td>
+    <td id="col">@@@files-gnso_tran@@@</td>
+    <td id="col">@@@size-gnso_tran@@@</td>
+    <td id="col"><a href='/ham/soac/gnso/tran'>ham/soac/gnso/tran</a></td>
+  </tr>
+
   <tr>
     <td id="col"><a href='https://www.icann.org/en/government-engagement'>ICANN GE</a></td>
   </tr>
@@ -125,6 +155,7 @@
     <td id="col">@@@size-ge_gac@@@</td>
     <td id="col"><a href='/ham/icann/ge/gac'>ham/icann/ge/gac</a></td>
   </tr>
+
   <tr>
     <td id="col"><a href='https://www.icann.org/octo'>ICANN OCTO</a></td>
   </tr>
@@ -152,6 +183,7 @@
     <td id="col">@@@size-octo@@@</td>
     <td id="col"><a href='/ham/icann/octo/pub'>ham/icann/octo/pub</a></td>
   </tr>
+
   <tr>
     <td id="col"><a href='https://www.icann.org/groups/rssac'>RSSAC</a></td>
   </tr>
@@ -179,6 +211,7 @@
     <td id="col">@@@size-rssac@@@</td>
     <td id="col"><a href='/ham/soac/rssac/pub'>ham/soac/rssac/pub</a></td>
   </tr>
+
   <tr>
     <td id="col"><a href='https://www.icann.org/groups/ssac'>SSAC</a></td>
   </tr>

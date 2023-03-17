@@ -52,7 +52,7 @@ class DL_Group():
 
     logit(uri + ' ' + fname)
     try:
-      req = requests.get(uri,stream=True)
+      req = requests.get(uri, stream=True)
       if req.status_code == 200:
         with open(fname, 'wb') as f:
           for chunk in req.iter_content(chunk_size=1024):
@@ -62,7 +62,7 @@ class DL_Group():
       else:
         logit("err:dl_bad_response:" + uri)
     except requests.RequestException:
-      logit("err:req_exception:" + uri)
+      logit("err:dl_req_exception:" + uri)
 
   # Wrapper for _download()
   def download(self, remote):
@@ -125,6 +125,22 @@ class DL_Group():
   def get_links(self):
     return self._get_links(self.uri, self.regex, ['a', 'href'])
 
+  # Returns the real filename of passed URI by reading HTTP headers
+  # TODO: Does not work because the icann.org webserver hangs forever if you send it an HTTP HEAD request
+  def _real_filename(self, uri):
+    try:
+      print("Trying requests.head")
+      req = requests.head(uri, allow_redirects=True, timeout=2)
+      if req.status_code == 200:
+        if 'content-disposition' in req.headers:
+          return req.headers['content-disposition']
+        else:
+          return False
+      else:
+        logit("err:rf_bad_response:" + uri)
+    except requests.RequestException:
+      logit("err:rf_req_exception:" + uri)
+
 #####################
 # Individual Groups #
 #####################
@@ -172,6 +188,9 @@ class Arr(DL_Group):
   def local_files(self):
     return self._local_files(self.path) | self._local_files('soac/alac') | self._local_files('soac/gac') | \
       self._local_files('soac/ssac') | self._local_files('soac/rssac') | self._local_files('icann/cor')
+
+  #def download(self, remote):
+  #  print(self._real_filename(remote))
 
 # Stub class for audio
 # Audio files are never automatically fetched, we manage them manually.
@@ -303,6 +322,46 @@ class Ge_gac(DL_Group):
     self.uri = 'https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities'
     self.regex = []
     self.regex.append(re.compile('.*/reports/public/.*\.pdf$'))
+
+# GNSO Parent Class
+# The primary reason for doing this is to prevent the same file showing up in multiple GNSO groups
+class Gnso(DL_Group):
+  def __init__(self):
+    super().__init__()
+    self.root_path = 'soac/gnso'
+
+  # Wrapper for _local_files()
+  def local_files(self):
+    return self._local_files(self.root_path)
+
+# GNSO Presentations
+class Gnso_pres(Gnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/gnso/pres'
+    self.uri = 'https://gnso.icann.org/en/library?tid[36]=36'
+    self.regex = []
+    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile('.*\.ppt$'))
+    self.regex.append(re.compile('.*\.pptx$'))
+
+# GNSO Reports
+class Gnso_rep(Gnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/gnso/reports'
+    self.uri = 'https://gnso.icann.org/en/library?tid[41]=41'
+    self.regex = []
+    self.regex.append(re.compile('.*\.pdf$'))
+
+# GNSO Transcripts
+class Gnso_tran(Gnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/gnso/tran'
+    self.uri = 'https://gnso.icann.org/en/library?tid[51]=51'
+    self.regex = []
+    self.regex.append(re.compile('.*\.pdf$'))
 
 # ICANN Correspondence
 class Icann_cor(DL_Group):
@@ -476,6 +535,9 @@ groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
 groups['ge_gac'] = Ge_gac()
+groups['gnso_pres'] = Gnso_pres()
+groups['gnso_rep'] = Gnso_rep()
+groups['gnso_tran'] = Gnso_tran()
 groups['icann_cor'] = Icann_cor()
 groups['icann_ext'] = Icann_ext()
 groups['octo'] = Octo()
