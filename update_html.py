@@ -97,7 +97,7 @@ while len(recent_fetches) < fetch_num or len(fetches) == 0:
     continue
 
   ts = datetime.fromisoformat(line.split()[0]).strftime('%a %b %d')
-  linky = line.split()[2].removeprefix(www_base)
+  linky = line.split(www_base)[1]
   recent_fetches.append([ts, linky])
 
 ss = ''
