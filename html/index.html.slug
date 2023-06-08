@@ -45,7 +45,7 @@
 
   <table>
     <tr><th id="sftp">Hostname</th><th id="sftp">Username</th> <th id="sftp">Password</th></tr>
-    <tr><td id="sftp">icannx-hamster.nl</td><td id="sftp">pub</td><td id="sftp">h@mster</td></tr>
+    <tr><td id="sftp">icann-hamster.nl</td><td id="sftp">pub</td><td id="sftp">h@mster</td></tr>
   </table>
 
 
