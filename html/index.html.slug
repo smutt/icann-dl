@@ -1,20 +1,31 @@
 <html>
 <head>
-<title>ICANN Hamster</title>
+  <title>ICANN Hamster</title>
   <link rel="stylesheet" type="text/css" href="index.css"/>
+  <script type='text/javascript'>
+    function prepend() {
+        if(document.getElementById('qs').value.startsWith('site:icann-hamster.nl')) { return }
+        document.getElementById('qs').value = 'site:icann-hamster.nl ' + document.getElementById('qs').value 
+    }
+  </script>
 </head>
 <body>
   <div class='biggest'>ICANN Hamster</div>
   <div class='big'>An unofficial public collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
     Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.<br/><br/>
 
-    <a href='collections.html'>View the Collections</a><br/><br/></div>
-
   <div class='bigger'>Recent Finds</div>
   <table>
     @@@recent-fetches@@@
   </table>
   <br/>
+
+  <a href='collections.html'>Browse the Collections</a><br/><br/></div>
+
+  Search with Google
+  <form action="https://www.google.com/search" method="get" onsubmit="prepend();">
+    <input type="text" id="qs" name="q"/>
+  </form>
 
   <div class='bigger'>Atom</div>
   An <a href='feed.xml'>Atom feed</a> is updated when new files are added.
