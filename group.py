@@ -499,17 +499,16 @@ class Ssac(DL_Group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/ssac/reports'
-    self.uri = 'https://www.icann.org/groups/ssac/documents'
-    self.regex.append(re.compile('.*/groups/ssac/documents/sac-.*\.pdf$'))
-    self.regex.append(re.compile('.*/system/files/files/sac-.*\.pdf$'))
+    self.uri = 'https://www.icann.org/en/ssac/publications'
+    self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/.*\.pdf$'))
 
 # SSAC Correspondence
 class Ssac_cor(DL_Group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/ssac/cor'
-    self.uri = 'https://www.icann.org/groups/ssac/documents-correspondence'
-    self.regex.append(re.compile('.*/system/files/files/ssac2.*\.pdf$'))
+    self.uri = 'https://www.icann.org/en/ssac/correspondence'
+    self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-correspondence/.*\.pdf'))
 
 # SSAC DNSSEC Workshop (now called DNSSEC & Security Workshop)
 class Ssac_dnssec(DL_Group):
