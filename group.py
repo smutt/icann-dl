@@ -393,7 +393,8 @@ class Icann_cor(DL_Group):
     self.sub_dir['2020'] = 'https://www.icann.org/resources/pages/correspondence-2020'
     self.sub_dir['2021'] = 'https://www.icann.org/resources/pages/correspondence-2021'
     self.sub_dir['2022'] = 'https://www.icann.org/resources/pages/correspondence-2022'
-    self.sub_dir['2023'] = 'https://www.icann.org/resources/pages/correspondence'
+    self.sub_dir['2023'] = 'https://www.icann.org/resources/pages/correspondence-2023'
+    self.sub_dir['2024'] = 'https://www.icann.org/resources/pages/correspondence'
 
   def get_links(self):
     rv = []
@@ -520,7 +521,7 @@ class Ssac_dnssec(DL_Group):
 # All our groups
 groups = {}
 groups['alac'] = Alac()
-groups['arr'] = Arr()
+#groups['arr'] = Arr() # Disabled until fixed
 groups['audio'] = Audio()
 #groups['bylaws'] = Bylaws()
 groups['ccnso_cor'] = Ccnso_cor()
