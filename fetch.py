@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-#  Copyright (C) 2022, Andrew McConachie, <andrew.mcconachie@icann.org>
+#  Copyright (C) 2022, 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import argparse
 import group
@@ -46,7 +46,7 @@ for key,gr in group.groups.items():
   local_files = gr.local_files()
   for ll in gr.get_links():
     remote_file = Util.parse_url(ll).path.split('/')[-1]
-    if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files:
+    if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files and gr.clean_filename(remote_file) not in local_files:
       if ARGS.debug:
         print(ll)
       else:

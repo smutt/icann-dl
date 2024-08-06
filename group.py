@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-#  Copyright (C) 2023 Andrew McConachie, <andrew.mcconachie@icann.org>
+#  Copyright (C) 2023, 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import os
 import stat
@@ -66,7 +66,7 @@ class DL_Group():
 
   # Wrapper for _download()
   def download(self, remote):
-    return self._download(remote, self.base_dir + self.path + '/' + remote.split('/')[-1])
+    return self._download(remote, self.base_dir + self.path + '/' + self.clean_filename(remote.split('/')[-1]))
 
   # Return dict of files existing locally on disk for group
   # Whitespaces in files are escaped with %20
@@ -125,6 +125,10 @@ class DL_Group():
   def get_links(self):
     return self._get_links(self.uri, self.regex, ['a', 'href'])
 
+  # Converts a dirty filename to a clean filename
+  def clean_filename(self, fname):
+    return fname.replace(" ", "-").replace("%20", "-")
+
   # Returns the real filename of passed URI by reading HTTP headers
   # TODO: Does not work because the icann.org webserver hangs forever if you send it an HTTP HEAD request
   def _real_filename(self, uri):
@@ -168,7 +172,7 @@ class Alac(DL_Group):
     this_year = str(date.today().year)
     if this_year in os.listdir(self.base_dir + '/' + self.path):
       return self._download(remote, self.base_dir + self.path + '/' + \
-                            this_year + '/' + remote.split('/')[-1])
+                            this_year + '/' + self.clean_filename(remote.split('/')[-1]))
 
   def get_links(self):
     rv = []
@@ -411,7 +415,7 @@ class Icann_cor(DL_Group):
   def download(self, remote):
     this_year = str(date.today().year)
     if this_year in self.sub_dir:
-      return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + remote.split('/')[-1])
+      return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + self.clean_filename(remote.split('/')[-1]))
 
 # ICANN Correspondence Sent Externally
 class Icann_ext(DL_Group):

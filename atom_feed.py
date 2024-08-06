@@ -15,7 +15,7 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-#  Copyright (C) 2022, Andrew McConachie, <andrew.mcconachie@icann.org>
+#  Copyright (C) 2022 2024, Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import argparse
 import group
@@ -63,15 +63,15 @@ def get_files(fname, min_ts):
 
       if os.path.exists(local):
         if min_ts <= f_ts:
-          rv[local] = {'ts': ts, 'remote': remote}
+          rv[local.replace("%", "%25")] = {'ts': ts, 'remote': remote}
   return rv
 
 ###################
 # BEGIN EXECUTION #
 ###################
-ap = argparse.ArgumentParser(description='Update atom feed with new PDFs found.')
+ap = argparse.ArgumentParser(description='Update atom feed with new documents found.')
 ap.add_argument('-l', '--lastrun', action='store', type=str, help='Use passed lastrun. Do not read or write lastrun from file.')
-ap.add_argument('-d', '--debug', action='store_true', help='Debug. Do not write feed instead print links to STDOUT.')
+ap.add_argument('-d', '--debug', action='store_true', help='Print links to STDOUT. Do not write feed. Do not write lastrun.')
 ARGS = ap.parse_args()
 
 if ARGS.lastrun:
@@ -90,10 +90,6 @@ else:
   if last_run == None:
     logit('err: Unable to determine lastrun time')
     exit(1)
-
-  fp = open(atom_lastrun, 'w')
-  fp.write(datetime.utcnow().isoformat(timespec='seconds'))
-  fp.close()
 
 new_files = get_files(dl_log, last_run)
 if len(new_files) == 0:
@@ -121,3 +117,7 @@ for k,v in new_files.items():
 
 ET.indent(tree)
 tree.write(atom_xml, xml_declaration=True, encoding='UTF-8')
+
+fp = open(atom_lastrun, 'w')
+fp.write(datetime.utcnow().isoformat(timespec='seconds'))
+fp.close()
