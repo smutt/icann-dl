@@ -4,6 +4,7 @@
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
+  <div class='biggest'>ICANN Hamster Collections</div>
   <table>
   <tr><th id="col">Collection</th><th id="col"></th><th id="col">Files</th><th id="col">Size (MB)</th><th id="col">Directory</th></tr>
   <tr><td id="col" colspan='2'><a href="https://atlarge.icann.org/policy-summary">

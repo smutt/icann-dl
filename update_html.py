@@ -24,13 +24,16 @@ import group
 
 www_base = '/var/www/htdocs/icann-hamster.nl/'
 
-fetch_num = 10 # How many of the last fetches do we want to display?
+fetch_num = 10 # How many of the last fetches to display on index.html
+fetch_num_more = 100 # How many of the last fetches to display on more_recent.html
 fetch_log = os.environ['HOME'] + '/log/fetch.log'
 
 index_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
 index_out = www_base + 'index.html'
-collections_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/collections.html.slug'
+collections_in = os.path.dirname(os.path.realpath(__file__)) + '/html/collections.html.slug'
 collections_out = www_base + 'collections.html'
+more_recent_in = os.path.dirname(os.path.realpath(__file__)) + '/html/more_recent.html.slug'
+more_recent_out = www_base + 'more_recent.html'
 
 # High-order func to recursively count files
 # Return f(func(cur_dir)) total
@@ -50,16 +53,28 @@ def is_ocr(de):
   else:
     return 0
 
+# Read in our slug files
+# Return string
+def read_in(fname):
+  fin = open(fname, 'r')
+  rv = fin.read()
+  fin.close()
+  return rv
+
+# Write output HTML
+# Overwrites existing files
+def write_out(fname, ss):
+  fout = open(fname, 'w')
+  fout.write(ss)
+  fout.close()
+
+
 ###################
 # BEGIN EXECUTION #
 ###################
-fin = open(index_in, 'r')
-index_output = fin.read()
-fin.close()
-
-fin = open(collections_in, 'r')
-collections_output = fin.read()
-fin.close()
+index_output = read_in(index_in)
+collections_output = read_in(collections_in)
+more_recent_output = read_in(more_recent_in)
 
 total_count = total_MB = total_OCR = 0
 
@@ -87,7 +102,7 @@ fetches = list(fin)
 fin.close()
 
 recent_fetches = []
-while len(recent_fetches) < fetch_num or len(fetches) == 0:
+while len(recent_fetches) < fetch_num_more or len(fetches) == 0:
   line = fetches.pop().strip()
   if not line.split()[1].startswith('https://'):
     continue
@@ -101,15 +116,19 @@ while len(recent_fetches) < fetch_num or len(fetches) == 0:
   recent_fetches.append([ts, linky])
 
 ss = ''
-for ts,linky in recent_fetches:
-  ss += '<tr id="rec"><td id="rec">' + ts + '</td><td id="rec"><a href=\'' + linky + '\'>' + linky.split('/')[-1] + '</a></td></tr>\n'
-index_output = index_output.replace('@@@recent-fetches@@@', ss).strip('\n')
+for ii in range(fetch_num):
+  ss += '<tr id="rec"><td id="rec">' + recent_fetches[ii][0] + '</td><td id="rec"><a href=\'' + recent_fetches[ii][1] + '\'>' + \
+    recent_fetches[ii][1].split('/')[-1] + '</a></td></tr>\n'
+index_output = index_output.replace('@@@recent-fetches@@@', ss.strip('\n'))
+
+ss = ''
+for ii in range(fetch_num_more):
+  ss += '<tr id="rec"><td id="rec">' + recent_fetches[ii][0] + '</td><td id="rec"><a href=\'' + recent_fetches[ii][1] + '\'>' + \
+    recent_fetches[ii][1].split('/')[-1] + '</a></td></tr>\n'
+more_recent_output = more_recent_output.replace('@@@more-recent-fetches@@@', ss.strip('\n'))
 
 # Write output HTML
-fout = open(index_out, 'w')
-fout.write(index_output)
-fout.close()
+write_out(index_out, index_output)
+write_out(collections_out, collections_output)
+write_out(more_recent_out, more_recent_output)
 
-fout = open(collections_out, 'w')
-fout.write(collections_output)
-fout.close()
