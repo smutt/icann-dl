@@ -50,7 +50,6 @@ class DL_Group():
     if os.path.exists(fname):
       return
 
-    logit(uri + ' ' + fname)
     try:
       req = requests.get(uri, stream=True)
       if req.status_code == 200:
@@ -59,6 +58,7 @@ class DL_Group():
             if chunk: # filter out keep-alive new chunks
               f.write(chunk)
         os.chmod(fname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644
+        logit(uri + ' ' + fname)
       else:
         logit("err:dl_bad_response:" + uri)
     except requests.RequestException:
