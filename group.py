@@ -293,6 +293,7 @@ class Ceo(DL_Group):
     self.path = 'icann/ceo/board'
     self.uri = 'https://www.icann.org/reports-to-board'
     self.regex.append(re.compile('^.*/uploads/board_report/attachment/.*\.pdf$'))
+    self.regex.append(re.compile('^.*/en/files/.*\.pdf$'))
 
 # GAC
 class Gac(DL_Group):
