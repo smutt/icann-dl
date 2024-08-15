@@ -46,7 +46,8 @@ for key,gr in group.groups.items():
   local_files = gr.local_files()
   for ll in gr.get_links():
     remote_file = Util.parse_url(ll).path.split('/')[-1]
-    if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files and gr.clean_filename(remote_file) not in local_files:
+    if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files \
+       and gr.clean_filename(remote_file) not in local_files:
       if ARGS.debug:
         print(ll)
       else:
