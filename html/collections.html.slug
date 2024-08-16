@@ -114,11 +114,11 @@
   </tr>
   <tr>
     <td id="col"></td>
-    <td id="col"><a href="https://gnso.icann.org/en/library?tid[36]=36">
-        Presentations</a></td>
-    <td id="col">@@@files-gnso_pres@@@</td>
-    <td id="col">@@@size-gnso_pres@@@</td>
-    <td id="col"><a href='/ham/soac/gnso/pres'>ham/soac/gnso/pres</a></td>
+    <td id="col"><a href="https://gnso.icann.org/en/council/correspondence">
+        Correspondence</a></td>
+    <td id="col">@@@files-gnso_cor@@@</td>
+    <td id="col">@@@size-gnso_cor@@@</td>
+    <td id="col"><a href='/ham/soac/gnso/cor'>ham/soac/gnso/cor</a></td>
   </tr>
   <tr>
     <td id="col"></td>

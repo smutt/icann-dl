@@ -150,12 +150,11 @@ class DL_Group():
 #####################
 
 '''
-There are 2 groups that need updating every January for the new year.
+These are groups that need updating every January for the new year.
 Alac - create new year directory
 Icann_cor - create new year directory, update sub_dir URL for new year
-
+Gnso_cor - add new self.uri for ew year
 Then test using fetch.py -d -g 
-
 '''
 
 # ALAC
@@ -338,6 +337,17 @@ class Gnso(DL_Group):
   # Wrapper for _local_files()
   def local_files(self):
     return self._local_files(self.root_path)
+
+# GNSO Correspodence
+class Gnso_cor(Gnso):
+  def __init__(self):
+    super().__init__()
+    self.path = 'soac/gnso/cor'
+    self.uri = 'https://gnso.icann.org/en/council/correspondence/2024'
+    self.regex = []
+    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile('.*\.ppt$'))
+    self.regex.append(re.compile('.*\.pptx$'))
 
 # GNSO Presentations
 class Gnso_pres(Gnso):
@@ -540,6 +550,7 @@ groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
 groups['ge_gac'] = Ge_gac()
+groups['gnso_cor'] = Gnso_cor()
 groups['gnso_pres'] = Gnso_pres()
 groups['gnso_rep'] = Gnso_rep()
 groups['gnso_tran'] = Gnso_tran()
