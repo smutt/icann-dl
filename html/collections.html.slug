@@ -1,12 +1,12 @@
 <html>
 <head>
-<title>ICANN Hamster Collections</title>
+<title>Icann Haz Collections</title>
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
-  <div class='biggest'>ICANN Hamster Collections</div>
+  <div class='biggest'>Icann Haz Collections</div>
   <table>
-  <tr><th id="col">icann.org</th><th id="col"></th><th id="col">Files</th><th id="col">Size (MB)</th><th id="col">icann-hamster.nl</th></tr>
+  <tr><th id="col">icann.org</th><th id="col"></th><th id="col">Files</th><th id="col">Size (MB)</th><th id="col">icannhaz.org</th></tr>
   <tr><td id="col" colspan='2'><a href="https://atlarge.icann.org/policy-summary">
         ALAC Publications</a></td>
     <td id="col">@@@files-alac@@@</td>

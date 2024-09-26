@@ -1,25 +1,14 @@
 <html>
 <head>
-  <title>ICANN Hamster</title>
+  <title>Icann Haz</title>
   <link rel="stylesheet" type="text/css" href="index.css"/>
-  <script type='text/javascript'>
-    function prepend() {
-        if(document.getElementById('qs').value.startsWith('site:icann-hamster.nl')) { return }
-        document.getElementById('qs').value = 'site:icann-hamster.nl ' + document.getElementById('qs').value 
-    }
-  </script>
 </head>
 <body>
-  <div class='biggest'>ICANN Hamster</div>
+  <div class='biggest'>Icann Haz</div>
   <div class='big'>An unofficial public collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
     Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.<br/><br/>
 
   <a href='collections.html'>Browse the Collections</a><br/><br/></div>
-
-  Search with Google
-  <form action="https://www.google.com/search" method="get" onsubmit="prepend();">
-    <input type="text" id="qs" name="q"/>
-  </form>
 
   <div class='bigger'>Recent Finds</div>
   <table>
@@ -36,28 +25,28 @@
 
   <div class='bigger'>rsync</div>
   Please do not mass download files over HTTPS. For mirroring please use either sftp or rsync.<br/>
-  <a href='https://en.wikipedia.org/wiki/Rsync'>rsync</a> is the preferred method for mirroring. ICANN Hamster runs an rsync server on TCP port 873. No password is required.<br/>
+  <a href='https://en.wikipedia.org/wiki/Rsync'>rsync</a> is the preferred method for mirroring. Icann Haz runs an rsync server on TCP port 873. No password is required.<br/>
   For a graphical frontend to rsync try <a href='https://en.wikipedia.org/wiki/Grsync'>grsync</a> or
   <a href='https://apps.apple.com/us/app/grsyncx/id1506997025'>grsyncx</a> for Mac OS X.<br/><br/>
 
   Test before downloading anything using the '-n' switch.
-  <div class='cli'>rsync -nrtv icann-hamster.nl::ham . </div>
+  <div class='cli'>rsync -nrtv icannhaz.org::ham . </div>
 
   When you are ready download everything (except audio) to your current directory.
-  <div class='cli'>rsync -rtv icann-hamster.nl::ham . </div>
+  <div class='cli'>rsync -rtv icannhaz.org::ham . </div>
 
   Specific directories can be singled out for downloading. Below we only download GAC Communiques.
-  <div class='cli'>rsync -rtv icann-hamster.nl::ham/soac/gac/com . </div>
+  <div class='cli'>rsync -rtv icannhaz.org::ham/soac/gac/com . </div>
 
   Specific directories can be excluded from downloading. Below we tell rsync to not download ICANN Correspondence.
-  <div class='cli'>rsync -rtv --exclude="ham/icann/cor/*" icann-hamster.nl::ham .</div>
+  <div class='cli'>rsync -rtv --exclude="ham/icann/cor/*" icannhaz.org::ham .</div>
 
   <div class='bigger'>sftp</div>
-  <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. ICANN Hamster runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
+  <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. Icann Haz runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
 
   <table>
     <tr><th id="sftp">Hostname</th><th id="sftp">Username</th> <th id="sftp">Password</th></tr>
-    <tr><td id="sftp">icann-hamster.nl</td><td id="sftp">pub</td><td id="sftp">h@mster</td></tr>
+    <tr><td id="sftp">icannhaz.org</td><td id="sftp">pub</td><td id="sftp">h@mster</td></tr>
   </table>
 
 
@@ -86,14 +75,11 @@ This site is maintained by Andrew McConachie as a public service in the hope tha
     <li><a href='https://www.google.com/'>Google</a></li>
     <ul>
       <li>Below we use Google to search all SSAC reports for the string "IANA"</li>
-      <li><a href="https://www.google.com/search?q=site%3Aicann-hamster.nl%2Fham%2Fsoac%2Fssac%2Freports+IANA">
-          <div class='cli'>site:icann-hamster.nl/ham/soac/ssac/reports IANA</div>
+      <li><a href="https://www.google.com/search?q=site%3Aicannhaz.org%2Fham%2Fsoac%2Fssac%2Freports+IANA">
+          <div class='cli'>site:icannhaz.org/ham/soac/ssac/reports IANA</div>
       </a></li>
     </ul>
   </ul>
-
-  <div class='bigger'>What's up with hamsters?</div>
-  <i>Hamsteren</i> in Dutch means <i>to hoard.</i> It's similar to the English phrase <i>to squirrel away</i>. A Japanese friend of mine told me that <i> to marmot</i> has a similar meaning in Japanese. If you know more examples of languages that use small critters to suggest hoarding please send me a mail and tell me about them.
 
 </body>
 </html>
