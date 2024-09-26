@@ -179,22 +179,6 @@ class Alac(DL_Group):
       rv.extend(self._get_links(doc, self.regex, ['option', 'value']))
     return rv
 
-# Action Request Register Reports
-class Arr(DL_Group):
-  def __init__(self):
-    super().__init__()
-    self.path = 'icann/arr'
-    self.uri = 'https://features.icann.org/board-advice'
-    self.regex.append(re.compile('.*\.pdf$'))
-    self.regex.append(re.compile('.*\.xlsx$'))
-
-  def local_files(self):
-    return self._local_files(self.path) | self._local_files('soac/alac') | self._local_files('soac/gac') | \
-      self._local_files('soac/ssac') | self._local_files('soac/rssac') | self._local_files('icann/cor')
-
-  #def download(self, remote):
-  #  print(self._real_filename(remote))
-
 # Stub class for audio
 # Audio files are never automatically fetched, we manage them manually.
 # This is just a stub class for counting the files and bytes
@@ -205,19 +189,6 @@ class Audio(DL_Group):
     super().__init__()
     self.enabled = False
     self.path = ''
-
-# ICANN Bylaws
-# An experiment
-class Bylaws(DL_Group):
-  base_dir = '/home/smutt/temp/bylaws/'
-
-  def __init__(self):
-    super().__init__()
-    self.enabled = False
-    self.path = ''
-    self.uri = 'https://www.icann.org/resources/pages/governance/bylaws-archive-en'
-    self.regex.append(re.compile('^/resources/pages/bylaws-.*-en$'))
-    self.regex.append(re.compile('^/en/about/governance/bylaws/bylaws-.*-en.htm$'))
 
 # CCNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple CCNSO groups
@@ -536,9 +507,7 @@ class Ssac_dnssec(DL_Group):
 # All our groups
 groups = {}
 groups['alac'] = Alac()
-#groups['arr'] = Arr() # Disabled until fixed
 groups['audio'] = Audio()
-#groups['bylaws'] = Bylaws()
 groups['ccnso_cor'] = Ccnso_cor()
 groups['ccnso_guide'] = Ccnso_guide()
 groups['ccnso_min'] = Ccnso_min()
