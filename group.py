@@ -453,7 +453,8 @@ class Rssac(DL_Group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/rssac/pub'
-    self.uri = 'https://www.icann.org/groups/rssac/documents'
+    self.uri = 'https://www.icann.org/en/rssac/publications'
+    self.regex.append(re.compile('.*/root-server-system-advisory-committee-rssac-publications/.*\.pdf$'))
     self.regex.append(re.compile('.*/system/files/files/.*rssac-.*\.pdf$'))
     self.regex.append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
@@ -462,16 +463,16 @@ class Rssac_min(DL_Group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/rssac/min'
-    self.uri = 'https://www.icann.org/resources/pages/rssac-meetings-2014-05-06-en'
-    self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
+    self.uri = 'https://www.icann.org/en/rssac/meetings'
+    self.regex.append(re.compile('.*/en/files/meetings/.*\.pdf$'))
 
 # RSSAC Caucus Meeting Minutes
 class Rssac_c_min(DL_Group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/rssac/caucus/min'
-    self.uri = 'https://www.icann.org/resources/pages/rssac-caucus-meetings-2015-04-15-en'
-    self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
+    self.uri = 'https://www.icann.org/en/rssac/caucus/meetings'
+    self.regex.append(re.compile('.*/en/files/root-server-system-advisory-committee-rssac-caucus/.*\.pdf$'))
 
 # RZERC Publications
 class Rzerc(DL_Group):
