@@ -1,10 +1,10 @@
 <html>
 <head>
-  <title>ICANN Hamster Recent Finds</title>
+  <title>Icann Haz Recent Finds</title>
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
-  <div class='biggest'>ICANN Hamster Recent Finds</div>
+  <div class='biggest'>Icann Haz Recent Finds</div>
 
   <table>
     @@@more-recent-fetches@@@
