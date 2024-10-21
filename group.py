@@ -17,18 +17,10 @@
 #
 #  Copyright (C) 2023, 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
+import funk
 import os
-import stat
 import re
-import requests
-from bs4 import BeautifulSoup
-from urllib3 import util as Util
-from datetime import datetime, date
-
-# Basic logging to stdout
-# TODO: For now this remains a global func
-def logit(s):
-  print(datetime.isoformat(datetime.utcnow()) + ' ' + s.strip())
+from datetime import date
 
 class DL_Group():
   base_dir = '/var/www/htdocs/icann-hamster.nl/ham/' # Where the local fun starts
@@ -44,106 +36,20 @@ class DL_Group():
     self.exclude.append(re.compile('.*/rsep-process-workflow-14jun19-en\.pdf$'))
     self.exclude.append(re.compile('.*/mosapi-specification\.pdf$'))
 
-  # Grab a file and write to disk
-  # Takes a remote URI and a local filename
-  def _download(self, uri, fname):
-    if os.path.exists(fname):
-      return
-
-    try:
-      req = requests.get(uri, stream=True)
-      if req.status_code == 200:
-        with open(fname, 'wb') as f:
-          for chunk in req.iter_content(chunk_size=1024):
-            if chunk: # filter out keep-alive new chunks
-              f.write(chunk)
-        os.chmod(fname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644
-        logit(uri + ' ' + fname)
-      else:
-        logit("err:dl_bad_response:" + uri)
-    except requests.RequestException:
-      logit("err:dl_req_exception:" + uri)
-
-  # Wrapper for _download()
+  # Wrapper for funk.download()
   def download(self, remote):
-    return self._download(remote, self.base_dir + self.path + '/' + self.clean_filename(remote.split('/')[-1]))
+    return funk.download(remote, self.base_dir + self.path + '/' + funk.clean_filename(remote.split('/')[-1]))
 
-  # Return dict of files existing locally on disk for group
-  # Whitespaces in files are escaped with %20
-  def _local_files(self, path):
-    rv = {}
-    for _, _, files in os.walk(self.base_dir + path):
-      for ff in files:
-        rv[ff.strip()] = True
-    return rv
-
-  # Wrapper for _local_files()
+  # Wrapper for funk.local_files()
   def local_files(self):
-    return self._local_files(self.path)
+    return funk.local_files(self.base_dir + self.path)
 
-  # Should we exclude passed link
-  def is_excluded(self, s):
-    for pattern in self.exclude:
-      if pattern.match(s):
-        return True
-    return False
-
-  # Grab links in tags matching regex
-  # URI => the URI to grab and parse
-  # regex => regex for matching the links
-  # tags => a list of [html_tag, attribute] to match regex against
-  # Returns deduplicated list of links
-  def _get_links(self, URI, regex, tags):
-    links = []
-    url_t = Util.parse_url(URI)
-
-    try:
-      req = requests.get(URI)
-    except requests.RequestException:
-      logit("err:req_exception:" + URI)
-      return []
-
-    if req.status_code == 200:
-      soup = BeautifulSoup(req.text, 'html.parser')
-      for tag in soup.find_all(tags[0]):
-        link = tag.get(tags[1])
-        if link is None:
-          continue
-        if not self.is_excluded(link):
-          for reg in regex:
-            if reg.match(link):
-              link = link.split('?')[0] # Strip any trailing garbage
-              if Util.parse_url(link).host is None:
-                links.append(url_t.scheme + '://' + url_t.host + link)
-              elif len(Util.parse_url(link).host) < len('icann.org'): # Relative path missing leading /
-                links.append(url_t.scheme + '://' + url_t.host + '/' + link)
-              else:
-                links.append(link)
-    return list(dict.fromkeys(links))
-
-  # Wrapper for _get_links()
+  # Wrapper for funk.get_links()
   def get_links(self):
-    return self._get_links(self.uri, self.regex, ['a', 'href'])
+    return funk.get_links(self.uri, self.regex, ['a', 'href'], self.exclude)
 
-  # Converts a dirty filename to a clean filename
   def clean_filename(self, fname):
-    return fname.replace(" ", "-").replace("%20", "-")
-
-  # Returns the real filename of passed URI by reading HTTP headers
-  # TODO: Does not work because the icann.org webserver hangs forever if you send it an HTTP HEAD request
-  def _real_filename(self, uri):
-    try:
-      print("Trying requests.head")
-      req = requests.head(uri, allow_redirects=True, timeout=2)
-      if req.status_code == 200:
-        if 'content-disposition' in req.headers:
-          return req.headers['content-disposition']
-        else:
-          return False
-      else:
-        logit("err:rf_bad_response:" + uri)
-    except requests.RequestException:
-      logit("err:rf_req_exception:" + uri)
+    return funk.clean_filename(fname)
 
 #####################
 # Individual Groups #
@@ -170,13 +76,13 @@ class Alac(DL_Group):
   def download(self, remote):
     this_year = str(date.today().year)
     if this_year in os.listdir(self.base_dir + '/' + self.path):
-      return self._download(remote, self.base_dir + self.path + '/' + \
-                            this_year + '/' + self.clean_filename(remote.split('/')[-1]))
+      return funk.download(remote, self.base_dir + self.path + '/' + \
+                            this_year + '/' + funk.clean_filename(remote.split('/')[-1]))
 
   def get_links(self):
     rv = []
-    for doc in self._get_links(self.uri, self.top_regex, ['a', 'href']):
-      rv.extend(self._get_links(doc, self.regex, ['option', 'value']))
+    for doc in funk.get_links(self.uri, self.top_regex, ['a', 'href'], self.exclude):
+      rv.extend(funk.get_links(doc, self.regex, ['option', 'value'], self.exclude))
     return rv
 
 # Stub class for audio
@@ -199,7 +105,7 @@ class Ccnso(DL_Group):
 
   # Wrapper for _local_files()
   def local_files(self):
-    return self._local_files(self.root_path)
+    return funk.local_files(self.base_dir + self.root_path)
 
 # CCNSO Correspondence
 class Ccnso_cor(Ccnso):
@@ -277,8 +183,8 @@ class Gac(DL_Group):
 
   def get_links(self):
     rv = []
-    for page in self._get_links(self.uri, self.option_regex, ['option', 'value']):
-      rv.extend(self._get_links(page, self.regex, ['a', 'href']))
+    for page in funk.get_links(self.uri, self.option_regex, ['option', 'value'], self.exclude):
+      rv.extend(funk.get_links(page, self.regex, ['a', 'href'], self.exclude))
     return rv
 
 # Government Engagement Publications
@@ -307,7 +213,7 @@ class Gnso(DL_Group):
 
   # Wrapper for _local_files()
   def local_files(self):
-    return self._local_files(self.root_path)
+    return funk.local_files(self.base_dir + self.root_path)
 
 # GNSO Correspodence
 class Gnso_cor(Gnso):
@@ -386,18 +292,18 @@ class Icann_cor(DL_Group):
     rv = []
     this_year = str(date.today().year)
     if this_year in self.sub_dir:
-      for ll in self._get_links(self.sub_dir[this_year], self.regex, ['a', 'href']):
+      for ll in funk.get_links(self.sub_dir[this_year], self.regex, ['a', 'href'], self.exclude):
         if ll.endswith('.pdf'): # 2012 and 2013 sometimes added another level of redirection
           rv.append(ll)
         else:
-          for mm in self._get_links(ll, self.regex, ['a', 'href']):
+          for mm in funk.get_links(ll, self.regex, ['a', 'href'], self.exclude):
             rv.append(mm)
     return rv
 
   def download(self, remote):
     this_year = str(date.today().year)
     if this_year in self.sub_dir:
-      return self._download(remote, self.base_dir + self.path + '/' + this_year + '/' + self.clean_filename(remote.split('/')[-1]))
+      return funk.download(remote, self.base_dir + self.path + '/' + this_year + '/' + funk.clean_filename(remote.split('/')[-1]))
 
 # ICANN Correspondence Sent Externally
 class Icann_ext(DL_Group):
@@ -436,7 +342,7 @@ class Octo_archive(DL_Group):
     self.regex2.append(re.compile('/.*\.pdf$'))
 
   def local_files(self):
-    return self._local_files(self.path) | self._local_files('soac/ssac/reports')
+    return funk.local_files(self.base_dir + self.path) | funk.local_files(self.base_dir + 'soac/ssac/reports')
 
   def get_links(self):
     rv = []
@@ -444,7 +350,7 @@ class Octo_archive(DL_Group):
       if ll.endswith('.pdf'):
         rv.append(ll)
       else:
-        for mm in self._get_links(ll, self.regex2, ['a', 'href']):
+        for mm in funk.get_links(ll, self.regex2, ['a', 'href'], self.exclude):
           rv.append(mm)
     return rv
 
