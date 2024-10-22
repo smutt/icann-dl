@@ -20,7 +20,7 @@
 from datetime import datetime
 import math
 import os
-import group
+import ham_group as group
 
 www_base = '/var/www/htdocs/icann-hamster.nl/'
 

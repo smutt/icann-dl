@@ -22,7 +22,7 @@ import os
 import re
 from datetime import date
 
-class DL_Group():
+class Ham_group():
   base_dir = '/var/www/htdocs/icann-hamster.nl/ham/' # Where the local fun starts
 
   def __init__(self):
@@ -64,7 +64,7 @@ Then test using fetch.py -d -g
 '''
 
 # ALAC
-class Alac(DL_Group):
+class Alac(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/alac/pub'
@@ -88,8 +88,8 @@ class Alac(DL_Group):
 # Stub class for audio
 # Audio files are never automatically fetched, we manage them manually.
 # This is just a stub class for counting the files and bytes
-class Audio(DL_Group):
-  base_dir = '/var/www/htdocs/icann-hamster.nl/audio/' # Overridden from DL_Group
+class Audio(Ham_group):
+  base_dir = '/var/www/htdocs/icann-hamster.nl/audio/' # Overridden from Ham_group
 
   def __init__(self):
     super().__init__()
@@ -98,7 +98,7 @@ class Audio(DL_Group):
 
 # CCNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple CCNSO groups
-class Ccnso(DL_Group):
+class Ccnso(Ham_group):
   def __init__(self):
     super().__init__()
     self.root_path = 'soac/ccnso'
@@ -163,7 +163,7 @@ class Ccnso_tran(Ccnso):
     self.regex.append(re.compile('.*\.pdf$'))
 
 # CEO Reports to the Board
-class Ceo(DL_Group):
+class Ceo(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/ceo/board'
@@ -172,7 +172,7 @@ class Ceo(DL_Group):
     self.regex.append(re.compile('^.*/en/files/.*\.pdf$'))
 
 # GAC
-class Gac(DL_Group):
+class Gac(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/gac/com'
@@ -188,7 +188,7 @@ class Gac(DL_Group):
     return rv
 
 # Government Engagement Publications
-class Ge(DL_Group):
+class Ge(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/ge/pub'
@@ -196,7 +196,7 @@ class Ge(DL_Group):
     self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 # Government Engagement Reports to the GAC
-class Ge_gac(DL_Group):
+class Ge_gac(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/ge/gac'
@@ -206,7 +206,7 @@ class Ge_gac(DL_Group):
 
 # GNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple GNSO groups
-class Gnso(DL_Group):
+class Gnso(Ham_group):
   def __init__(self):
     super().__init__()
     self.root_path = 'soac/gnso'
@@ -256,7 +256,7 @@ class Gnso_tran(Gnso):
     self.regex.append(re.compile('.*\.pdf$'))
 
 # ICANN Correspondence
-class Icann_cor(DL_Group):
+class Icann_cor(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/cor'
@@ -306,7 +306,7 @@ class Icann_cor(DL_Group):
       return funk.download(remote, self.base_dir + self.path + '/' + this_year + '/' + funk.clean_filename(remote.split('/')[-1]))
 
 # ICANN Correspondence Sent Externally
-class Icann_ext(DL_Group):
+class Icann_ext(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/ext'
@@ -314,7 +314,7 @@ class Icann_ext(DL_Group):
     self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 # OCTO Publications
-class Octo(DL_Group):
+class Octo(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/octo/pub'
@@ -322,7 +322,7 @@ class Octo(DL_Group):
     self.regex.append(re.compile('.*/octo-.*\.pdf$'))
 
 # OCTO Commissioned Publications
-class Octo_com(DL_Group):
+class Octo_com(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/octo/com'
@@ -330,7 +330,7 @@ class Octo_com(DL_Group):
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
 
 # OCTO Archive
-class Octo_archive(DL_Group):
+class Octo_archive(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'icann/octo/archive'
@@ -355,7 +355,7 @@ class Octo_archive(DL_Group):
     return rv
 
 # RSSAC Publications
-class Rssac(DL_Group):
+class Rssac(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/rssac/pub'
@@ -365,7 +365,7 @@ class Rssac(DL_Group):
     self.regex.append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
 # RSSAC Meeting Minutes
-class Rssac_min(DL_Group):
+class Rssac_min(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/rssac/min'
@@ -373,7 +373,7 @@ class Rssac_min(DL_Group):
     self.regex.append(re.compile('.*/en/files/meetings/.*\.pdf$'))
 
 # RSSAC Caucus Meeting Minutes
-class Rssac_c_min(DL_Group):
+class Rssac_c_min(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/rssac/caucus/min'
@@ -381,7 +381,7 @@ class Rssac_c_min(DL_Group):
     self.regex.append(re.compile('.*/en/files/root-server-system-advisory-committee-rssac-caucus/.*\.pdf$'))
 
 # RZERC Publications
-class Rzerc(DL_Group):
+class Rzerc(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/rzerc/pub'
@@ -389,7 +389,7 @@ class Rzerc(DL_Group):
     self.regex.append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
 
 # SSAC Reports
-class Ssac(DL_Group):
+class Ssac(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/ssac/reports'
@@ -397,7 +397,7 @@ class Ssac(DL_Group):
     self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/.*\.pdf$'))
 
 # SSAC Correspondence
-class Ssac_cor(DL_Group):
+class Ssac_cor(Ham_group):
   def __init__(self):
     super().__init__()
     self.path = 'soac/ssac/cor'
@@ -405,7 +405,7 @@ class Ssac_cor(DL_Group):
     self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-correspondence/.*\.pdf'))
 
 # SSAC DNSSEC Workshop (now called DNSSEC & Security Workshop)
-class Ssac_dnssec(DL_Group):
+class Ssac_dnssec(Ham_group):
   def __init__(self):
     super().__init__()
     self.enabled = False

@@ -18,7 +18,7 @@
 #  Copyright (C) 2022 2024, Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import argparse
-import group
+import ham_group as group
 import os
 import stat
 import xml.etree.ElementTree as ET
@@ -46,7 +46,7 @@ def get_files(fname, min_ts):
       return (None, None, None)
     else:
       start = len(toks[0])
-      end = line.find(group.DL_Group.base_dir)
+      end = line.find(group.Ham_group.base_dir)
       return (toks[0], line[start:end].strip(), line[end:].strip())
 
   rv = {}
@@ -109,7 +109,7 @@ for k,v in new_files.items():
   UID = str(uuid.uuid5(uuid.NAMESPACE_URL, fname)) # uuid.RFC_4122 is broken
 
   new_entry = "<entry>\n<title>" + fname + "</title> \
-    <link href=\"" + link_base + "/" + k.split(group.DL_Group.base_dir)[1] + "\"/> \
+    <link href=\"" + link_base + "/" + k.split(group.Ham_group.base_dir)[1] + "\"/> \
     <id>urn:uuid:" + UID + "</id> \
     <updated>" + datetime.utcnow().isoformat(timespec='seconds') + 'Z' + "</updated> \
     <summary/></entry>"

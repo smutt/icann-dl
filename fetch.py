@@ -18,7 +18,7 @@
 #  Copyright (C) 2022, 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import argparse
-import group
+import ham_group as group
 from urllib import parse as Url_parse
 from urllib3 import util as Util
 
