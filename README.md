@@ -1,2 +1,2 @@
 # icann-dl
-The code that runs https://icann-hamster.nl/
+The code that runs https://icannhaz.org/
