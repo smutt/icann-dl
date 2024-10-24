@@ -4,27 +4,23 @@
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
-  <div class='biggest'>Icann Haz</div>
-  <div class='big'>An unofficial public collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
-    Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.<br/><br/>
+  <div class='bigger'>Icann Haz Search</div>
+  <form id="icannhaz-search" method="get" action="https://search.icannhaz.org/cgi/omega">
+    <input name="P" type="search" placeholder="Enter search term" required autofocus>
+  </form>
 
-  <a href='collections.html'>Browse the Collections</a><br/><br/></div>
-
-  <div class='bigger'>Recent Finds</div>
+  <div class='bigger'>Icann Haz Recent Finds</div>
   <table>
     @@@recent-fetches@@@
   </table>
   <a href='more_recent.html'>[Even More Recent Finds]</a>
   <br/>
 
-  <div class='bigger'>Atom</div>
-  An <a href='feed.xml'>Atom feed</a> is updated when new files are added.
+  <div class='bigger'>Icann Haz Tour</div>
+  <a href='collections.html'>Browse the Collections</a></div>
 
-  <div class='bigger'>OCR</div>
-  Optical character recognition is done with <a href='http://www.tobias-elze.de/pdfsandwich/'>pdfsandwich</a>. PDFs that have been OCR'd end with _ocr.pdf. For example, if document.pdf requires OCR processing a new file called document_ocr.pdf will be created with text. Both files will be kept. We currently have @@@ocr-total@@@ OCR'd files.<br/>
-
-  <div class='bigger'>rsync</div>
-  Please do not mass download files over HTTPS. For mirroring please use either sftp or rsync.<br/>
+  <div class='bigger'>Icann Haz Copy</div>
+  Please do not mass download files over HTTPS. For mirroring please use either rsync or sftp.<br/>
   <a href='https://en.wikipedia.org/wiki/Rsync'>rsync</a> is the preferred method for mirroring. Icann Haz runs an rsync server on TCP port 873. No password is required.<br/>
   For a graphical frontend to rsync try <a href='https://en.wikipedia.org/wiki/Grsync'>grsync</a> or
   <a href='https://apps.apple.com/us/app/grsyncx/id1506997025'>grsyncx</a> for Mac OS X.<br/><br/>
@@ -41,7 +37,6 @@
   Specific directories can be excluded from downloading. Below we tell rsync to not download ICANN Correspondence.
   <div class='cli'>rsync -rtv --exclude="ham/icann/cor/*" icannhaz.org::ham .</div>
 
-  <div class='bigger'>sftp</div>
   <a href='https://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol'>sftp</a> is provided for users who wish to mirror over an encrypted connection. Icann Haz runs an sftp server on port 22. It's a bit slower than rsync and may require more fiddling to remain up-to-date. <a href='https://en.wikipedia.org/wiki/Cyberduck'>Cyberduck</a> is a popular sftp client. <a href='https://en.wikipedia.org/wiki/Rclone'>Rclone</a> provides archiving over sftp similar to rysnc.<br/><br/>
 
   <table>
@@ -49,8 +44,22 @@
     <tr><td id="sftp">icannhaz.org</td><td id="sftp">pub</td><td id="sftp">h@mster</td></tr>
   </table>
 
+  <div class='bigger'>Icann Haz Updates</div>
+  An <a href='feed.xml'>Atom feed</a> is updated when new files are added.
 
-  <div class='bigger'>Future Plans</div>
+  <div class='bigger'>Icann Haz Character Recognition</div>
+  Optical character recognition is done with <a href='http://www.tobias-elze.de/pdfsandwich/'>pdfsandwich</a>. PDFs that have been OCR'd end with _ocr.pdf. For example, if document.pdf requires OCR processing a new file called document_ocr.pdf will be created with text. Both files will be kept. We currently host @@@ocr-total@@@ OCR'd files.<br/>
+
+  <div class='bigger'>Icann Haz Local Search</div>
+  Having a pile of PDFs is great and all, but how do you find stuff in them? In no particular order, below are some applications that can help with this.
+  <ul>
+    <li><a href='https://www.houdah.com/houdahSpot/'>Houdah Spot</a></li>
+    <li><a href='https://www.zotero.org/'>Zotero</a></li>
+    <li><a href='https://gitlab.com/pdfgrep/pdfgrep'>pdfgrep</a></li>
+    <li><a href='http://www.recoll.org/'>Recoll</a></li>
+  </ul>
+
+  <div class='bigger'>Icann Haz Dreams</div>
   The initial focus has been on low hanging fruit, below are some ideas for future improvements.
 
   <ul>
@@ -60,26 +69,8 @@
     <li>Search Functionality</li>
   </ul>
 
-
-  <div class='bigger'>Bug Reports / Feature Requests</div>
+  <div class='bigger'>Icann Haz Complaint</div>
 This site is maintained by Andrew McConachie as a public service in the hope that it is useful. For bug reports and feature requests please raise an issue on <a href='https://github.com/smutt/icann-dl'>Github</a>. For questions, concerns, or rants please contact Andrew @ andrew@depht.com.
-
-
-  <div class='bigger'>Applications / Search</div>
-  Having a pile of PDFs is great and all, but how do you find stuff in them? In no particular order, below are some applications that can help with this.
-  <ul>
-    <li><a href='https://www.houdah.com/houdahSpot/'>Houdah Spot</a></li>
-    <li><a href='https://www.zotero.org/'>Zotero</a></li>
-    <li><a href='https://gitlab.com/pdfgrep/pdfgrep'>pdfgrep</a></li>
-    <li><a href='http://www.recoll.org/'>Recoll</a></li>
-    <li><a href='https://www.google.com/'>Google</a></li>
-    <ul>
-      <li>Below we use Google to search all SSAC reports for the string "IANA"</li>
-      <li><a href="https://www.google.com/search?q=site%3Aicannhaz.org%2Fham%2Fsoac%2Fssac%2Freports+IANA">
-          <div class='cli'>site:icannhaz.org/ham/soac/ssac/reports IANA</div>
-      </a></li>
-    </ul>
-  </ul>
 
 </body>
 </html>
