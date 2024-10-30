@@ -35,6 +35,9 @@ class Ham_group():
     self.exclude.append(re.compile('.*/gdd-ops-handbook-registry-operators-15aug18-en\.pdf$'))
     self.exclude.append(re.compile('.*/rsep-process-workflow-14jun19-en\.pdf$'))
     self.exclude.append(re.compile('.*/mosapi-specification\.pdf$'))
+    self.exclude.append(re.compile('.*/delegation-of-authority-guidelines-08nov16-en.pdf$'))
+    self.exclude.append(re.compile('.*/delegation-of-authority-guidelines-16mar17-en.pdf$'))
+    self.exclude.append(re.compile('.*/delegation-of-authority-guidelines-24oct24-en.pdf$'))
 
   # Wrapper for funk.download()
   def download(self, remote):
