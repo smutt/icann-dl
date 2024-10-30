@@ -5,7 +5,7 @@
 </head>
 <body>
   <div class='bigger'>Icann Haz Search</div>
-  <form id="icannhaz-search" method="get" action="https://search.icannhaz.org/cgi/omega">
+  <form id="icannhaz-search" method="get" action="https://search.icannhaz.org/cgi/haz">
     <input name="P" type="search" placeholder="Enter search term" required autofocus>
   </form>
 
