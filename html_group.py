@@ -86,6 +86,7 @@ class Html_group():
     try:
       proc = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, universal_newlines=True)
       proc.wait(timeout=120) # Give up after 2 minutes
+      funk.logit(url + ' ' + out_path)
 
     except subprocess.TimeoutExpired as e:
       funk.logit("_html_download: subprocess TimeoutExpired" + str(e))
@@ -101,12 +102,9 @@ class Html_group():
       raise MonolithException
 
 class Board(Html_group):
-  # 6 March 2004 is the first available resolutions page
-  # https://www.icann.org/en/board-activities-and-meetings?board-meeting-type=regular&board-meeting-type=special&board-meeting-type=organizational&board-meeting-type=workshops&start-date=01-01-2004&end-date=01-01-2005&document-types=approved-resolutions&expand-all=true
-
   def __init__(self):
     super().__init__()
-    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?board-meeting-type=regular&board-meeting-type=special&board-meeting-type=organizational&board-meeting-type=workshops&start-date=01-01-2004&end-date=01-01-2005&document-types=approved-resolutions&expand-all=true'
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-2024&end-date=31-12-2024&document-types=approved-resolutions&expand-all=true'
     self.path = 'icann/board/resolutions'
     self.regex.append(re.compile('.*/materials/approved-resolutions-.*'))
 
