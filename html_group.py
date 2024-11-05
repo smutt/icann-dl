@@ -21,10 +21,7 @@ import funk
 import re
 import os
 import stat
-import argparse
 import subprocess
-from urllib import parse as Url_parse
-from urllib3 import util as Util
 from bs4 import BeautifulSoup
 
 # Generic exception class for anything monolith related
@@ -41,6 +38,7 @@ class Html_group():
     self.enabled = True
     self.regex = [] # Compiled regex to match to download
     self.exclude = [] # Compiled regex to exclude for all groups
+    self.help_text = '' # Help text displayed with the group. Intended to be overridden.
     return
 
   # Wrapper for funk.get_links()
@@ -101,60 +99,15 @@ class Html_group():
       funk.logit("_html_download: general subprocess error")
       raise MonolithException
 
+# ICANN Board Resolutions
 class Board(Html_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'ICANN Board Resolutions'
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-2024&end-date=31-12-2024&document-types=approved-resolutions&expand-all=true'
     self.path = 'icann/board/resolutions'
     self.regex.append(re.compile('.*/materials/approved-resolutions-.*'))
 
-
-###################
-# BEGIN EXECUTION #
-###################
 # All our groups
 groups = {}
-groups['board-resolutions'] = Board()
-
-ap = argparse.ArgumentParser(description='Fetch content from icann.org.')
-ap.add_argument('-d', '--debug', action='store_true', help='Fetch nothing. Instead print what URLs would be fetched.')
-ap.add_argument('-e', '--exclude', type=str, action='store', default=None,
-                choices=groups.keys(), help='Fetch all groups except excluded group.')
-ap.add_argument('-g', '--group', type=str, action='store', default='all',
-                choices=groups.keys(), help='Fetch single group then exit.')
-ap.add_argument('-u', '--url', type=str, action='store', help='Use passed start URL for group. Requires --group.')
-ARGS = ap.parse_args()
-
-if ARGS.url:
-  if not ARGS.group:
-    print("--url requires --group")
-    exit(1)
-
-  if ARGS.group not in groups:
-    print("group not found")
-    exit(1)
-
-  groups[ARGS.group].uri = ARGS.url
-
-
-if ARGS.exclude != None:
-  del groups[ARGS.exclude]
-
-for key,gr in groups.items():
-  if ARGS.group != 'all' and ARGS.group != key:
-    continue
-
-  if ARGS.group == 'all' and not gr.enabled: # Skip disabled groups unless --group is passed
-    continue
-
-  local_files = gr.local_files()
-  for ll in gr.get_links():
-    remote_file = Util.parse_url(ll).path.split('/')[-1].rsplit('.', maxsplit=1)[0] # Strip remote dir and dot suffix
-    if remote_file not in local_files:
-      if ARGS.debug:
-        print(ll)
-      else:
-        gr.download(ll)
-    else:
-      if ARGS.debug:
-        print('Skipping ' + ll)
+groups['board_res'] = Board()

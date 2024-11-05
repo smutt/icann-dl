@@ -28,6 +28,7 @@ class Ham_group():
   def __init__(self):
     self.enabled = True
     self.regex = []
+    self.help_text = '' # Help text displayed with the group. Intended to be overridden
 
     self.exclude = [] # Links to exclude for all groups
     self.exclude.append(re.compile('.*/didp-response-process-29oct13-en\.pdf$'))
@@ -395,6 +396,7 @@ class Rzerc(Ham_group):
 class Ssac(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'SSAC Reports'
     self.path = 'soac/ssac/reports'
     self.uri = 'https://www.icann.org/en/ssac/publications'
     self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/.*\.pdf$'))

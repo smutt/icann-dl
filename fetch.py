@@ -18,23 +18,60 @@
 #  Copyright (C) 2022, 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import argparse
-import ham_group as group
+import ham_group
+import html_group
 from urllib import parse as Url_parse
 from urllib3 import util as Util
 
 ###################
 # BEGIN EXECUTION #
 ###################
-ap = argparse.ArgumentParser(description='Fetch PDFs from icann.org. By default fetches all groups.')
-ap.add_argument('-d', '--debug', action='store_true', help='Fetch nothing. Instead print what URLs would be fetched.')
+ap = argparse.ArgumentParser(description='Fetch stuff from icann.org. By default fetches all groups in set.')
+ap.add_argument(dest='group_set', choices=['ham', 'html'], help='Set of groups to use')
+ap.add_argument('-d', '--debug', action='store_true', help='Fetch nothing. Instead print what URLs would be fetched')
 ap.add_argument('-e', '--exclude', type=str, action='store', default=None,
-                choices=group.groups.keys(), help='Fetch all groups except excluded group')
+                help='Fetch all groups except excluded group')
 ap.add_argument('-g', '--group', type=str, action='store', default='all',
-                choices=group.groups.keys(), help='Fetch single group then exit')
+                help='Fetch single group then exit')
+ap.add_argument('-l', '--list', dest='group_list', action='store_true', help='List groups in set then exit')
+ap.add_argument('-u', '--url', type=str, action='store', help='Use passed start URL for group. Requires --group.')
 ARGS = ap.parse_args()
 
+if ARGS.group_set == 'ham':
+  group = ham_group
+elif ARGS.group_set == 'html':
+  group = html_group
+else:
+  print('Invalid group set')
+  exit(1)
+
+if ARGS.group_list:
+  for gr in group.groups.keys():
+    if len(gr) > 7: # tab_len
+      print(gr + '\t || ' + group.groups[gr].help_text)
+    else:
+      print(gr + '\t\t || ' + group.groups[gr].help_text)
+  exit(0)
+
 if ARGS.exclude != None:
+  if ARGS.exclude not in group.groups:
+    print('Invalid group')
+    exit(1)
   del group.groups[ARGS.exclude]
+
+if ARGS.group != 'all':
+  if ARGS.group not in group.groups:
+    print('Invalid group')
+    exit(1)
+
+if ARGS.url:
+  if ARGS.group == 'all':
+    print("--url requires --group")
+    exit(1)
+  if ARGS.group not in group.groups:
+    print("group not found")
+    exit(1)
+  groups[ARGS.group].uri = ARGS.url
 
 for key,gr in group.groups.items():
   if ARGS.group != 'all' and ARGS.group != key:
@@ -45,9 +82,13 @@ for key,gr in group.groups.items():
 
   local_files = gr.local_files()
   for ll in gr.get_links():
-    remote_file = Util.parse_url(ll).path.split('/')[-1]
+    if ARGS.group_set == 'ham': # TODO: Get rid of this IF statement
+      remote_file = Util.parse_url(ll).path.split('/')[-1]
+    elif ARGS.group_set == 'html':
+      remote_file = Util.parse_url(ll).path.split('/')[-1].rsplit('.', maxsplit=1)[0] # Strip remote dir and dot suffix
+
     if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files \
-       and gr.clean_filename(remote_file) not in local_files:
+      and gr.clean_filename(remote_file) not in local_files:
       if ARGS.debug:
         print(ll)
       else:
