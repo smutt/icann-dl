@@ -67,9 +67,9 @@
 
   <ul>
     <li>Add more collections</li>
-    <li>Add more information to Atom entries</li>
-    <li>Create language specific meta-collections of PDFs using symlinks</li>
-    <li>Search Functionality</li>
+    <li>Better search functionality (e.g., per collection, faceted search)</li>
+    <li>Add atom feed for html recent finds</li>
+    <li>Post recent finds to fediverse</li>
   </ul>
 
   <div class='bigger'>Icann Haz Complaint</div>
