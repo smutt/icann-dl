@@ -20,7 +20,7 @@
 from datetime import datetime
 import math
 import os
-import ham_group as group
+import ham_group
 
 www_base = '/var/www/htdocs/icann-hamster.nl/'
 
@@ -78,7 +78,7 @@ more_recent_output = read_in(more_recent_in)
 
 total_count = total_MB = total_OCR = 0
 
-for name,gr in group.groups.items():
+for name,gr in ham_group.groups.items():
   count = count_files(lambda x: 1, gr.base_dir + gr.path)
   MB = math.ceil(count_files(lambda x: x.stat().st_blocks, gr.base_dir + gr.path) / 2000)
   OCR = count_files(is_ocr, gr.base_dir + gr.path)
@@ -105,10 +105,6 @@ recent_fetches = []
 while len(recent_fetches) < fetch_num_more or len(fetches) == 0:
   line = fetches.pop().strip()
   if not line.split()[1].startswith('https://'):
-    continue
-
-  # Ugly hack for ARR reports, see issue 7 in Github, remove when fixed
-  if 'advice-status-current' in line:
     continue
 
   ts = datetime.fromisoformat(line.split()[0]).strftime('%a %b %d')

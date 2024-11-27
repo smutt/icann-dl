@@ -4,6 +4,9 @@
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
+  <div class='big'>An unofficial public collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
+    Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.<br/><br/>
+
   <div class='bigger'>Icann Haz Search</div>
   <form id="icannhaz-search" method="get" action="https://search.icannhaz.org/cgi/haz">
     <input name="P" type="search" placeholder="Enter search term" required autofocus>
@@ -13,7 +16,7 @@
   <table>
     @@@recent-fetches@@@
   </table>
-  <a href='more_recent.html'>[Even More Recent Finds]</a>
+  <a href='more_recent.html'>[Moar Recent Finds]</a>
   <br/>
 
   <div class='bigger'>Icann Haz Tour</div>

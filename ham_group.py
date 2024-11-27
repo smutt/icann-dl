@@ -64,7 +64,7 @@ These are groups that need updating every January for the new year.
 Alac - create new year directory
 Icann_cor - create new year directory, update sub_dir URL for new year
 Gnso_cor - add new self.uri for ew year
-Then test using fetch.py -d -g 
+Then test using fetch.py ham -d -g $GROUP
 '''
 
 # ALAC
@@ -89,9 +89,37 @@ class Alac(Ham_group):
       rv.extend(funk.get_links(doc, self.regex, ['option', 'value'], self.exclude))
     return rv
 
+# ASO Minutes
+class Aso_min(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ASO Meeting Minutes'
+    self.path = 'soac/aso/min'
+    self.uri = 'https://aso.icann.org/aso-ac/meetings/ac-meeting-minutes/'
+    self.regex.append(re.compile('.*\.pdf$'))
+
+# ASO Policy
+class Aso_policy(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ASO Global Policies'
+    self.path = 'soac/aso/policy'
+    self.uri = 'https://aso.icann.org/policy/global/current-global-policies/'
+    self.regex.append(re.compile('.*\.pdf$'))
+
+# ASO Historical
+class Aso_pres(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ASO Presentations'
+    self.path = 'soac/aso/pres'
+    self.uri = 'https://aso.icann.org/documents/presentations/'
+    self.regex.append(re.compile('.*\.pdf$'))
+
 # Stub class for audio
 # Audio files are never automatically fetched, we manage them manually.
 # This is just a stub class for counting the files and bytes
+# TODO: Get this into it's own file and out of ham_group.py
 class Audio(Ham_group):
   base_dir = '/var/www/htdocs/icann-hamster.nl/audio/' # Overridden from Ham_group
 
@@ -419,6 +447,9 @@ class Ssac_dnssec(Ham_group):
 # All our groups
 groups = {}
 groups['alac'] = Alac()
+groups['aso_min'] = Aso_min()
+groups['aso_pol'] = Aso_policy()
+groups['aso_pres'] = Aso_pres()
 groups['audio'] = Audio()
 groups['ccnso_cor'] = Ccnso_cor()
 groups['ccnso_guide'] = Ccnso_guide()
