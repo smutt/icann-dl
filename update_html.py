@@ -21,6 +21,7 @@ from datetime import datetime
 import math
 import os
 import ham_group
+import html_group
 
 www_base = '/var/www/htdocs/icann-hamster.nl/'
 
@@ -78,16 +79,17 @@ more_recent_output = read_in(more_recent_in)
 
 total_count = total_MB = total_OCR = 0
 
-for name,gr in ham_group.groups.items():
-  count = count_files(lambda x: 1, gr.base_dir + gr.path)
-  MB = math.ceil(count_files(lambda x: x.stat().st_blocks, gr.base_dir + gr.path) / 2000)
-  OCR = count_files(is_ocr, gr.base_dir + gr.path)
-  total_count += count
-  total_MB += MB
-  total_OCR += OCR
+for group_set in [ham_group, html_group]:
+  for name, gr in group_set.groups.items():
+    count = count_files(lambda x: 1, gr.base_dir + gr.path)
+    MB = math.ceil(count_files(lambda x: x.stat().st_blocks, gr.base_dir + gr.path) / 2000)
+    OCR = count_files(is_ocr, gr.base_dir + gr.path)
+    total_count += count
+    total_MB += MB
+    total_OCR += OCR
 
-  collections_output = collections_output.replace('@@@files-' + name + '@@@', "{:,}".format(count))
-  collections_output = collections_output.replace('@@@size-' + name + '@@@', "{:,}".format(MB))
+    collections_output = collections_output.replace('@@@files-' + name + '@@@', "{:,}".format(count))
+    collections_output = collections_output.replace('@@@size-' + name + '@@@', "{:,}".format(MB))
 
 index_output = index_output.replace('@@@files-total@@@', "{:,}".format(total_count))
 index_output = index_output.replace('@@@size-total@@@', "{:,}".format(total_MB))

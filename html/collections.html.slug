@@ -30,15 +30,15 @@
     <td id="col">@@@size-icann_cor@@@</td>
     <td id="col"><a href='/ham/icann/cor'>ham/icann/cor</a></td>
   </tr>
-    <tr><td></td>
-      <td id="col" colspan='2'><a href="https://www.icann.org/reports-to-board">
+  <tr><td></td>
+    <td id="col" colspan='2'><a href="https://www.icann.org/reports-to-board">
       ICANN CEO Reports</a></td>
     <td id="col">@@@files-ceo@@@</td>
     <td id="col">@@@size-ceo@@@</td>
     <td id="col"><a href='/ham/icann/ceo/board'>ham/icann/ceo/board</a></td>
   </tr>
-    <tr><td></td>
-      <td id="col" colspan='2'><a href="https://www.icann.org/en/government-engagement/submissions-to-external-bodies">
+  <tr><td></td>
+    <td id="col" colspan='2'><a href="https://www.icann.org/en/government-engagement/submissions-to-external-bodies">
       ICANN Submissions to External Bodies</a></td>
     <td id="col">@@@files-icann_ext@@@</td>
     <td id="col">@@@size-icann_ext@@@</td>
@@ -273,10 +273,11 @@
     <td id="col"><b>html</b></td>
   </tr>
   <tr><td></td>
-    <td id="col" colspan='2'>Archived HTML</a></td>
-    <td id="col">WIP</td>
-    <td id="col">WIP</td>
-    <td id="col"><a href='/html/'>html</a></td>
+    <td id="col" colspan='2'><a href="https://www.icann.org/en/board-activities-and-meetings">
+      ICANN Board Resolutions</a></td>
+    <td id="col">@@@files-board_res@@@</td>
+    <td id="col">@@@size-board_res@@@</td>
+    <td id="col"><a href='/html/icann/board/resolutions'>html/icann/board/resolutions</a></td>
   </tr>
 
   <tr>
