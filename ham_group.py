@@ -71,6 +71,7 @@ Then test using fetch.py ham -d -g $GROUP
 class Alac(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'ALAC Publications'
     self.path = 'soac/alac/pub'
     self.uri = 'https://atlarge.icann.org/policy-summary?page=1'
     self.top_regex = []
@@ -125,6 +126,7 @@ class Audio(Ham_group):
 
   def __init__(self):
     super().__init__()
+    self.help_text = 'Stub Group for audio recordings'
     self.enabled = False
     self.path = ''
 
@@ -143,6 +145,7 @@ class Ccnso(Ham_group):
 class Ccnso_cor(Ccnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CCNSO Correspondence'
     self.path = 'soac/ccnso/cor'
     self.uri = 'https://ccnso.icann.org/en/library?tid[19]=19&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
@@ -151,6 +154,7 @@ class Ccnso_cor(Ccnso):
 class Ccnso_guide(Ccnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CCNSO Guidelines'
     self.path = 'soac/ccnso/guide'
     self.uri = 'https://ccnso.icann.org/en/library?tid[25]=25&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
@@ -159,6 +163,7 @@ class Ccnso_guide(Ccnso):
 class Ccnso_min(Ccnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CCNSO Minutes'
     self.path = 'soac/ccnso/min'
     self.uri = 'https://ccnso.icann.org/en/library?tid[28]=28&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
@@ -167,6 +172,7 @@ class Ccnso_min(Ccnso):
 class Ccnso_pres(Ccnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CCNSO Presentations'
     self.path = 'soac/ccnso/pres'
     self.uri = 'https://ccnso.icann.org/en/library?tid[36]=36&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
@@ -175,6 +181,7 @@ class Ccnso_pres(Ccnso):
 class Ccnso_rep(Ccnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CCNSO Reports'
     self.path = 'soac/ccnso/reports'
     self.uri = 'https://ccnso.icann.org/en/library?tid[41]=41&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
@@ -183,6 +190,7 @@ class Ccnso_rep(Ccnso):
 class Ccnso_tech(Ccnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CCNSO Tech Day'
     self.enabled = False
     self.path = 'soac/ccnso/techday'
 
@@ -190,6 +198,7 @@ class Ccnso_tech(Ccnso):
 class Ccnso_tran(Ccnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CCNSO Transcripts'
     self.path = 'soac/ccnso/tran'
     self.uri = 'https://ccnso.icann.org/en/library?tid[51]=51&page=0'
     self.regex.append(re.compile('.*\.pdf$'))
@@ -198,6 +207,7 @@ class Ccnso_tran(Ccnso):
 class Ceo(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'CEO Reports to the Board'
     self.path = 'icann/ceo/board'
     self.uri = 'https://www.icann.org/reports-to-board'
     self.regex.append(re.compile('^.*/uploads/board_report/attachment/.*\.pdf$'))
@@ -207,6 +217,7 @@ class Ceo(Ham_group):
 class Gac(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'GAC Communiques'
     self.path = 'soac/gac/com'
     self.uri = 'https://gac.icann.org/contentMigrated/icann1-singapore-communique'
     self.regex.append(re.compile('^.*/.*communique.*\.pdf[\?language_id.*]?', flags=re.ASCII | re.IGNORECASE))
@@ -223,6 +234,7 @@ class Gac(Ham_group):
 class Ge(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'Government Engagement Publications'
     self.path = 'icann/ge/pub'
     self.uri = 'https://www.icann.org/en/government-engagement/publications?page=1'
     self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
@@ -231,6 +243,7 @@ class Ge(Ham_group):
 class Ge_gac(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'Government Engagement Reports to GAC'
     self.path = 'icann/ge/gac'
     self.uri = 'https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities'
     self.regex = []
@@ -251,6 +264,7 @@ class Gnso(Ham_group):
 class Gnso_cor(Gnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'GNSO Correspondence'
     self.path = 'soac/gnso/cor'
     self.uri = 'https://gnso.icann.org/en/council/correspondence/2024'
     self.regex = []
@@ -262,6 +276,7 @@ class Gnso_cor(Gnso):
 class Gnso_pres(Gnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'GNSO Presentations'
     self.path = 'soac/gnso/pres'
     self.uri = 'https://gnso.icann.org/en/library?tid[36]=36'
     self.regex = []
@@ -273,6 +288,7 @@ class Gnso_pres(Gnso):
 class Gnso_rep(Gnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'GNSO Reports'
     self.path = 'soac/gnso/reports'
     self.uri = 'https://gnso.icann.org/en/library?tid[41]=41'
     self.regex = []
@@ -282,6 +298,7 @@ class Gnso_rep(Gnso):
 class Gnso_tran(Gnso):
   def __init__(self):
     super().__init__()
+    self.help_text = 'GNSO Transcripts'
     self.path = 'soac/gnso/tran'
     self.uri = 'https://gnso.icann.org/en/library?tid[51]=51'
     self.regex = []
@@ -291,6 +308,7 @@ class Gnso_tran(Gnso):
 class Icann_cor(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'ICANN Correspondence'
     self.path = 'icann/cor'
     self.regex.append(re.compile('.*/correspondence/.*\.pdf$'))
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
@@ -341,6 +359,7 @@ class Icann_cor(Ham_group):
 class Icann_ext(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'ICANN Government Engagement Submissions to External Bodies'
     self.path = 'icann/ext'
     self.uri = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
     self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
@@ -349,6 +368,7 @@ class Icann_ext(Ham_group):
 class Octo(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'OCTO Publications'
     self.path = 'icann/octo/pub'
     self.uri = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
     self.regex.append(re.compile('.*/octo-.*\.pdf$'))
@@ -357,6 +377,7 @@ class Octo(Ham_group):
 class Octo_com(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'OCTO Commissioned Publications'
     self.path = 'icann/octo/com'
     self.uri = 'https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en'
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
@@ -365,6 +386,7 @@ class Octo_com(Ham_group):
 class Octo_archive(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'OCTO Archive'
     self.path = 'icann/octo/archive'
     self.uri = 'https://www.icann.org/octo-document-archive'
     self.regex.append(re.compile('/en.*\.pdf$'))
@@ -390,6 +412,7 @@ class Octo_archive(Ham_group):
 class Rssac(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'RSSAC Publications'
     self.path = 'soac/rssac/pub'
     self.uri = 'https://www.icann.org/en/rssac/publications'
     self.regex.append(re.compile('.*/root-server-system-advisory-committee-rssac-publications/.*\.pdf$'))
@@ -400,6 +423,7 @@ class Rssac(Ham_group):
 class Rssac_min(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'RSSAC Minutes'
     self.path = 'soac/rssac/min'
     self.uri = 'https://www.icann.org/en/rssac/meetings'
     self.regex.append(re.compile('.*/en/files/meetings/.*\.pdf$'))
@@ -408,6 +432,7 @@ class Rssac_min(Ham_group):
 class Rssac_c_min(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'RSSAC Caucus Minutes'
     self.path = 'soac/rssac/caucus/min'
     self.uri = 'https://www.icann.org/en/rssac/caucus/meetings'
     self.regex.append(re.compile('.*/en/files/root-server-system-advisory-committee-rssac-caucus/.*\.pdf$'))
@@ -416,6 +441,7 @@ class Rssac_c_min(Ham_group):
 class Rzerc(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'RZERC'
     self.path = 'soac/rzerc/pub'
     self.uri = 'https://www.icann.org/en/rzerc#documents'
     self.regex.append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
@@ -433,6 +459,7 @@ class Ssac(Ham_group):
 class Ssac_cor(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'SSAC Correspondence'
     self.path = 'soac/ssac/cor'
     self.uri = 'https://www.icann.org/en/ssac/correspondence'
     self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-correspondence/.*\.pdf'))
@@ -441,6 +468,7 @@ class Ssac_cor(Ham_group):
 class Ssac_dnssec(Ham_group):
   def __init__(self):
     super().__init__()
+    self.help_text = 'SSAC DNSSEC Workshop'
     self.enabled = False
     self.path = 'soac/ssac/dnssec/'
 
