@@ -56,6 +56,11 @@ class Html_group():
     else:
       return url.split('/')[-1] + self.html_suffix
 
+  # Stub to satisfy fetch.py
+  # So far we have not needed to implement this
+  def clean_filename(self, fname):
+    return fname
+
   # Season the soup
   def stamp_file(self, url):
     f_in = self.staging_dir + self.path + '/' + self.convert_filename(url) 
