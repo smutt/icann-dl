@@ -25,7 +25,7 @@ import xml.etree.ElementTree as ET
 from datetime import datetime, date
 import uuid
 
-dl_log = '/home/smutt/log/fetch.log'
+dl_log = '/home/smutt/log/fetch_ham.log'
 atom_lastrun = '/home/smutt/log/atom_feed.lastrun'
 atom_xml = '/home/smutt/www/icann-hamster.nl/feed.xml'
 atom_ns = 'http://www.w3.org/2005/Atom'
