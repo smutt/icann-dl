@@ -38,29 +38,29 @@ ap.add_argument('-u', '--url', type=str, action='store', help='Use passed start 
 ARGS = ap.parse_args()
 
 if ARGS.group_set == 'ham':
-  group = ham_group
+  group_set = ham_group
 elif ARGS.group_set == 'html':
-  group = html_group
+  group_set = html_group
 else:
   print('Invalid group set')
   exit(1)
 
 if ARGS.group_list:
-  for gr in group.groups.keys():
+  for gr in group_set.groups.keys():
     if len(gr) > 7: # tab_len
-      print(gr + '\t || ' + group.groups[gr].help_text)
+      print(gr + '\t || ' + group_set.groups[gr].help_text)
     else:
-      print(gr + '\t\t || ' + group.groups[gr].help_text)
+      print(gr + '\t\t || ' + group_set.groups[gr].help_text)
   exit(0)
 
 if ARGS.exclude != None:
-  if ARGS.exclude not in group.groups:
+  if ARGS.exclude not in group_set.groups:
     print('Invalid group')
     exit(1)
-  del group.groups[ARGS.exclude]
+  del group_set.groups[ARGS.exclude]
 
 if ARGS.group != 'all':
-  if ARGS.group not in group.groups:
+  if ARGS.group not in group_set.groups:
     print('Invalid group')
     exit(1)
 
@@ -68,12 +68,12 @@ if ARGS.url:
   if ARGS.group == 'all':
     print("--url requires --group")
     exit(1)
-  if ARGS.group not in group.groups:
+  if ARGS.group not in group_set.groups:
     print("group not found")
     exit(1)
-  groups[ARGS.group].uri = ARGS.url
+  group_set.groups[ARGS.group].uri = ARGS.url
 
-for key,gr in group.groups.items():
+for key,gr in group_set.groups.items():
   if ARGS.group != 'all' and ARGS.group != key:
     continue
 
