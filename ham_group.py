@@ -63,7 +63,7 @@ class Ham_group():
 These are groups that need updating every January for the new year.
 Alac - create new year directory
 Icann_cor - create new year directory, update sub_dir URL for new year
-Gnso_cor - add new self.uri for ew year
+Gnso_cor - add new self.uri for new year
 Then test using fetch.py ham -d -g $GROUP
 '''
 
@@ -266,7 +266,7 @@ class Gnso_cor(Gnso):
     super().__init__()
     self.help_text = 'GNSO Correspondence'
     self.path = 'soac/gnso/cor'
-    self.uri = 'https://gnso.icann.org/en/council/correspondence/2024'
+    self.uri = 'https://gnso.icann.org/en/council/correspondence/2025'
     self.regex = []
     self.regex.append(re.compile('.*\.pdf$'))
     self.regex.append(re.compile('.*\.ppt$'))
@@ -336,7 +336,8 @@ class Icann_cor(Ham_group):
     self.sub_dir['2021'] = 'https://www.icann.org/resources/pages/correspondence-2021'
     self.sub_dir['2022'] = 'https://www.icann.org/resources/pages/correspondence-2022'
     self.sub_dir['2023'] = 'https://www.icann.org/resources/pages/correspondence-2023'
-    self.sub_dir['2024'] = 'https://www.icann.org/resources/pages/correspondence'
+    self.sub_dir['2024'] = 'https://www.icann.org/resources/pages/correspondence-2024'
+    self.sub_dir['2025'] = 'https://www.icann.org/resources/pages/correspondence'
 
   def get_links(self):
     rv = []

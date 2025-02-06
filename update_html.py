@@ -27,7 +27,7 @@ www_base = '/var/www/htdocs/icann-hamster.nl/'
 
 fetch_num = 10 # How many of the last fetches to display on index.html
 fetch_num_more = 100 # How many of the last fetches to display on more_recent.html
-fetch_log = os.environ['HOME'] + '/log/fetch.log'
+fetch_log = os.environ['HOME'] + '/log/fetch_ham.log'
 
 index_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
 index_out = www_base + 'index.html'
