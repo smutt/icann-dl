@@ -15,8 +15,9 @@
 #  You should have received a copy of the GNU General Public License
 #  along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
-#  Copyright (C) 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
+#  Copyright (C) 2024, 2025 Andrew McConachie, <andrew.mcconachie@icann.org>
 
+import datetime
 import funk
 import re
 import os
@@ -65,13 +66,18 @@ class Html_group():
   def stamp_file(self, url):
     f_in = self.staging_dir + self.path + '/' + self.convert_filename(url) 
     f_out = self.base_dir + self.path + '/' + self.convert_filename(url)
-    with open(f_in, 'r') as pot:
-      with open(f_out, 'w') as bowl:
-        soup = BeautifulSoup(pot, 'html.parser')
-        soup.body.insert(0, "<a href=\"" + url + "\">Original page on icann.org</a>")
-        bowl.write(soup.prettify(formatter=None))
-    os.chmod(f_out, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644 
-    os.remove(f_in)
+
+    try:
+      with open(f_in, 'r') as pot:
+        with open(f_out, 'w') as bowl:
+          soup = BeautifulSoup(pot, 'html.parser')
+          soup.body.insert(0, "<a href=\"" + url + "\">Original page on icann.org</a>")
+          bowl.write(soup.prettify(formatter=None))
+      os.chmod(f_out, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644 
+      os.remove(f_in)
+
+    except:
+      funk.logit("err:stamp_exception:" + f_in)
 
   # Wrapper for _html_download()
   def download(self, url):
@@ -108,11 +114,48 @@ class Html_group():
 class Board(Html_group):
   def __init__(self):
     super().__init__()
+    this_year = str(datetime.date.today().year)
     self.help_text = 'ICANN Board Resolutions'
-    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-2024&end-date=31-12-2024&document-types=approved-resolutions&expand-all=true'
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
+      + '&end-date=31-12-' + this_year + '&document-types=approved-resolutions&expand-all=true'
     self.path = 'icann/board/resolutions'
     self.regex.append(re.compile('.*/materials/approved-resolutions-.*'))
 
+# ICANN Blog
+class Blog(Html_group):
+  def __init__(self):
+    super().__init__()
+    self.enabled = False
+    self.year = '2025'
+    self.help_text = 'ICANN Blogs'
+    self.uri = ''
+    self.path = 'icann/blog/' + self.year
+    self.regex.append(re.compile('.*/blogs/details/.*'))
+
+  def get_links(self):
+    rv = []
+    week = datetime.timedelta(weeks=1)
+    day = datetime.date.fromisoformat(self.year + '-01-01')
+
+    done = False
+    while not done:
+      end = day + week
+      if str(end.year) != self.year:
+        end = self.year + '-12-31'
+        done = True
+
+      uri = 'https://www.icann.org/en/blogs?page=1&from-page-date=' \
+        + str(day) + '&to-page-date=' + str(end)
+      day = end
+
+      print(uri)
+      links = funk.get_links(uri, self.regex, ['a', 'href'], self.exclude)
+      if len(links) > 0:
+        rv.extend(links)
+
+    return rv
+
 # All our groups
 groups = {}
+groups['blog'] = Blog()
 groups['board_res'] = Board()
