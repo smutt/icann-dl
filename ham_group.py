@@ -63,13 +63,6 @@ class Ham_group():
 # Individual Groups #
 #####################
 
-'''
-These are groups that need updating every January for the new year.
-Alac - create new year directory
-Icann_cor - create new year directory, update sub_dir URL for new year
-Then test using fetch.py ham -d -g $GROUP
-'''
-
 # ALAC
 class Alac(Ham_group):
   def __init__(self):
