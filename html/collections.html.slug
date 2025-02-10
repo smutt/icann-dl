@@ -274,10 +274,17 @@
   </tr>
   <tr><td></td>
     <td id="col" colspan='2'><a href="https://www.icann.org/en/board-activities-and-meetings">
-      ICANN Board Resolutions</a></td>
+      Board Resolutions</a></td>
     <td id="col">@@@files-board_res@@@</td>
     <td id="col">@@@size-board_res@@@</td>
     <td id="col"><a href='/html/icann/board/resolutions'>html/icann/board/resolutions</a></td>
+  </tr>
+  <tr><td></td>
+    <td id="col" colspan='2'><a href="https://www.icann.org/en/blogs">
+      Blog Entries</a></td>
+    <td id="col">@@@files-blog@@@</td>
+    <td id="col">@@@size-blog@@@</td>
+    <td id="col"><a href='/html/icann/blog'>html/icann/blog</a></td>
   </tr>
 
   <tr>

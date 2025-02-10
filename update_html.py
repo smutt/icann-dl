@@ -81,9 +81,14 @@ total_count = total_MB = total_OCR = 0
 
 for group_set in [ham_group, html_group]:
   for name, gr in group_set.groups.items():
-    count = count_files(lambda x: 1, gr.base_dir + gr.path)
-    MB = math.ceil(count_files(lambda x: x.stat().st_blocks, gr.base_dir + gr.path) / 2000)
-    OCR = count_files(is_ocr, gr.base_dir + gr.path)
+    try:
+      path = gr.top_path
+    except:
+      path = gr.path
+
+    count = count_files(lambda x: 1, gr.base_dir + path)
+    MB = math.ceil(count_files(lambda x: x.stat().st_blocks, gr.base_dir + path) / 2000)
+    OCR = count_files(is_ocr, gr.base_dir + path)
     total_count += count
     total_MB += MB
     total_OCR += OCR

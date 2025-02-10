@@ -126,6 +126,7 @@ class Blog(Html_group):
   def __init__(self):
     super().__init__()
     self.help_text = 'ICANN Blogs'
+    self.top_path = 'icann/blog'
     today = datetime.date.today()
     self.path = 'icann/blog/' + str(today.year)
     self.regex.append(re.compile('.*/blogs/details/.*'))
