@@ -114,8 +114,8 @@ class Html_group():
 class Board(Html_group):
   def __init__(self):
     super().__init__()
-    this_year = str(datetime.date.today().year)
     self.help_text = 'ICANN Board Resolutions'
+    this_year = str(datetime.date.today().year)
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&document-types=approved-resolutions&expand-all=true'
     self.path = 'icann/board/resolutions'
@@ -125,35 +125,14 @@ class Board(Html_group):
 class Blog(Html_group):
   def __init__(self):
     super().__init__()
-    self.enabled = False
-    self.year = '2025'
     self.help_text = 'ICANN Blogs'
-    self.uri = ''
-    self.path = 'icann/blog/' + self.year
+    today = datetime.date.today()
+    self.path = 'icann/blog/' + str(today.year)
     self.regex.append(re.compile('.*/blogs/details/.*'))
 
-  def get_links(self):
-    rv = []
-    week = datetime.timedelta(weeks=1)
-    day = datetime.date.fromisoformat(self.year + '-01-01')
-
-    done = False
-    while not done:
-      end = day + week
-      if str(end.year) != self.year:
-        end = self.year + '-12-31'
-        done = True
-
-      uri = 'https://www.icann.org/en/blogs?page=1&from-page-date=' \
-        + str(day) + '&to-page-date=' + str(end)
-      day = end
-
-      print(uri)
-      links = funk.get_links(uri, self.regex, ['a', 'href'], self.exclude)
-      if len(links) > 0:
-        rv.extend(links)
-
-    return rv
+    t_delta = datetime.timedelta(weeks=1)
+    self.uri = 'https://www.icann.org/en/blogs?page=1&from-page-date=' \
+        + str(today - t_delta) + '&to-page-date=' + str(today)
 
 # All our groups
 groups = {}
