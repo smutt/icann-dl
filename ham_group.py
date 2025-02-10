@@ -46,7 +46,11 @@ class Ham_group():
 
   # Wrapper for funk.local_files()
   def local_files(self):
-    return funk.local_files(self.base_dir + self.path)
+    try:
+      path = self.top_path
+    except:
+      path = self.path
+    return funk.local_files(self.base_dir + path)
 
   # Wrapper for funk.get_links()
   def get_links(self):
@@ -63,7 +67,6 @@ class Ham_group():
 These are groups that need updating every January for the new year.
 Alac - create new year directory
 Icann_cor - create new year directory, update sub_dir URL for new year
-Gnso_cor - add new self.uri for new year
 Then test using fetch.py ham -d -g $GROUP
 '''
 
@@ -72,17 +75,12 @@ class Alac(Ham_group):
   def __init__(self):
     super().__init__()
     self.help_text = 'ALAC Publications'
-    self.path = 'soac/alac/pub'
+    self.top_path = 'soac/alac/pub'
+    self.path = 'soac/alac/pub/' + str(date.today().year)
     self.uri = 'https://atlarge.icann.org/policy-summary?page=1'
     self.top_regex = []
     self.top_regex.append(re.compile('^.*/advice_statements/.*$'))
     self.regex.append(re.compile('.*/uploads/advice_statement_document/document/.*\.pdf$'))
-
-  def download(self, remote):
-    this_year = str(date.today().year)
-    if this_year in os.listdir(self.base_dir + '/' + self.path):
-      return funk.download(remote, self.base_dir + self.path + '/' + \
-                            this_year + '/' + funk.clean_filename(remote.split('/')[-1]))
 
   def get_links(self):
     rv = []
@@ -266,7 +264,7 @@ class Gnso_cor(Gnso):
     super().__init__()
     self.help_text = 'GNSO Correspondence'
     self.path = 'soac/gnso/cor'
-    self.uri = 'https://gnso.icann.org/en/council/correspondence/2025'
+    self.uri = 'https://gnso.icann.org/en/council/correspondence/' + str(date.today().year)
     self.regex = []
     self.regex.append(re.compile('.*\.pdf$'))
     self.regex.append(re.compile('.*\.ppt$'))
@@ -309,52 +307,12 @@ class Icann_cor(Ham_group):
   def __init__(self):
     super().__init__()
     self.help_text = 'ICANN Correspondence'
-    self.path = 'icann/cor'
+    self.top_path = 'icann/cor'
+    self.path = 'icann/cor' + str(date.today().year)
+    self.uri = 'https://www.icann.org/resources/pages/correspondence'
     self.regex.append(re.compile('.*/correspondence/.*\.pdf$'))
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
     self.regex.append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
-
-    self.sub_dir = {} # Before 2003 there are no PDFs
-    self.sub_dir['2003'] = 'https://www.icann.org/resources/pages/2003-2012-10-11-en'
-    self.sub_dir['2004'] = 'https://www.icann.org/resources/pages/2004-2012-10-11-en'
-    self.sub_dir['2005'] = 'https://www.icann.org/resources/pages/2005-2012-10-11-en'
-    self.sub_dir['2006'] = 'https://www.icann.org/resources/pages/2006-2012-10-11-en'
-    self.sub_dir['2007'] = 'https://www.icann.org/resources/pages/2007-2012-10-11-en'
-    self.sub_dir['2008'] = 'https://www.icann.org/resources/pages/2008-2012-10-11-en'
-    self.sub_dir['2009'] = 'https://www.icann.org/resources/pages/2009-2012-10-11-en'
-    self.sub_dir['2010'] = 'https://www.icann.org/resources/pages/2010-2012-10-11-en'
-    self.sub_dir['2011'] = 'https://www.icann.org/resources/pages/2011-2012-02-25-en'
-    self.sub_dir['2012'] = 'https://www.icann.org/resources/pages/2012-2013-01-10-en'
-    self.sub_dir['2013'] = 'https://www.icann.org/resources/pages/2013-2014-01-24-en'
-    self.sub_dir['2014'] = 'https://www.icann.org/resources/pages/2014-2014-01-24-en'
-    self.sub_dir['2015'] = 'https://www.icann.org/resources/pages/correspondence-2015'
-    self.sub_dir['2016'] = 'https://www.icann.org/resources/pages/correspondence-2016'
-    self.sub_dir['2017'] = 'https://www.icann.org/resources/pages/correspondence-2017'
-    self.sub_dir['2018'] = 'https://www.icann.org/resources/pages/correspondence-2018'
-    self.sub_dir['2019'] = 'https://www.icann.org/resources/pages/correspondence-2019'
-    self.sub_dir['2020'] = 'https://www.icann.org/resources/pages/correspondence-2020'
-    self.sub_dir['2021'] = 'https://www.icann.org/resources/pages/correspondence-2021'
-    self.sub_dir['2022'] = 'https://www.icann.org/resources/pages/correspondence-2022'
-    self.sub_dir['2023'] = 'https://www.icann.org/resources/pages/correspondence-2023'
-    self.sub_dir['2024'] = 'https://www.icann.org/resources/pages/correspondence-2024'
-    self.sub_dir['2025'] = 'https://www.icann.org/resources/pages/correspondence'
-
-  def get_links(self):
-    rv = []
-    this_year = str(date.today().year)
-    if this_year in self.sub_dir:
-      for ll in funk.get_links(self.sub_dir[this_year], self.regex, ['a', 'href'], self.exclude):
-        if ll.endswith('.pdf'): # 2012 and 2013 sometimes added another level of redirection
-          rv.append(ll)
-        else:
-          for mm in funk.get_links(ll, self.regex, ['a', 'href'], self.exclude):
-            rv.append(mm)
-    return rv
-
-  def download(self, remote):
-    this_year = str(date.today().year)
-    if this_year in self.sub_dir:
-      return funk.download(remote, self.base_dir + self.path + '/' + this_year + '/' + funk.clean_filename(remote.split('/')[-1]))
 
 # ICANN Correspondence Sent Externally
 class Icann_ext(Ham_group):
