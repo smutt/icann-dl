@@ -393,10 +393,41 @@ class Rssac_c_min(Ham_group):
 class Rzerc(Ham_group):
   def __init__(self):
     super().__init__()
-    self.help_text = 'RZERC'
+    self.help_text = 'RZERC Publications'
     self.path = 'soac/rzerc/pub'
     self.uri = 'https://www.icann.org/en/rzerc#documents'
     self.regex.append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
+
+# RZERC Correspondence
+class Rzerc_cor(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'RZERC Correspondence'
+    self.path = 'soac/rzerc/cor'
+    self.uri = 'https://www.icann.org/en/rzerc/rzerc-correspondence'
+    self.regex.append(re.compile('.*/uploads/ckeditor/.*\.pdf$'))
+
+# RZERC Minutes
+class Rzerc_min(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'RZERC Minutes'
+    self.path = 'soac/rzerc/min'
+    self.uri = 'https://www.icann.org/rzerc'
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*inute.*\.pdf$'))
+
+# RZERC Transcipts
+class Rzerc_tran(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'RZERC Transcripts'
+    self.path = 'soac/rzerc/tran'
+    self.uri = 'https://www.icann.org/rzerc'
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*ranscrip.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*[Tt]eleconference.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*ELECONFERENCE.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*ecording.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*[Mm]onthly_[Mm]eeting.*\.pdf$'))
 
 # SSAC Reports
 class Ssac(Ham_group):
@@ -455,6 +486,9 @@ groups['rssac'] = Rssac()
 groups['rssac_c_min'] = Rssac_c_min()
 groups['rssac_min'] = Rssac_min()
 groups['rzerc'] = Rzerc()
+groups['rzerc_cor'] = Rzerc_cor()
+groups['rzerc_min'] = Rzerc_min()
+groups['rzerc_tran'] = Rzerc_tran()
 groups['ssac'] = Ssac()
 groups['ssac_cor'] = Ssac_cor()
 groups['ssac_dnssec'] = Ssac_dnssec()

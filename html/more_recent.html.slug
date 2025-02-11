@@ -4,7 +4,7 @@
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
-  <div class='biggest'>Icann Haz Moar Recent Finds</div>
+  <div class='biggest'><a href="/">Icann Haz</a> Moar Recent Finds</div>
 
   <table>
     @@@more-recent-fetches@@@

@@ -4,7 +4,7 @@
   <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body>
-  <div class='biggest'>Icann Haz Collections</div>
+  <div class='biggest'><a href="/">Icann Haz</a> Collections</div>
   <table>
     <tr><th id="col">rsync repo</th><th id="col">icann.org</th><th id="col"></th><th id="col">Files</th>
       <th id="col">Size (MB)</th><th id="col">icannhaz.org</th></tr>
@@ -43,13 +43,6 @@
     <td id="col">@@@files-icann_ext@@@</td>
     <td id="col">@@@size-icann_ext@@@</td>
     <td id="col"><a href='/ham/icann/ext'>ham/icann/ext</a></td>
-  </tr>
-  <tr><td></td>
-    <td id="col" colspan='2'><a href="https://www.icann.org/rzerc#documents">
-      RZERC Publications</a></td>
-    <td id="col">@@@files-rzerc@@@</td>
-    <td id="col">@@@size-rzerc@@@</td>
-    <td id="col"><a href='/ham/soac/rzerc/pub'>ham/soac/rzerc/pub</a></td>
   </tr>
 
   <tr><td></td>
@@ -240,6 +233,42 @@
     <td id="col">@@@files-rssac@@@</td>
     <td id="col">@@@size-rssac@@@</td>
     <td id="col"><a href='/ham/soac/rssac/pub'>ham/soac/rssac/pub</a></td>
+  </tr>
+
+  <tr><td></td>
+    <td id="col"><a href='https://www.icann.org/rzerc'>RZERC</a></td>
+  </tr>
+  <tr><td></td>
+    <td id="col"></td>
+    <td id="col"><a href="https://www.icann.org/rzerc#documents">
+      Publications</a></td>
+    <td id="col">@@@files-rzerc@@@</td>
+    <td id="col">@@@size-rzerc@@@</td>
+    <td id="col"><a href='/ham/soac/rzerc/pub'>ham/soac/rzerc/pub</a></td>
+  </tr>
+  <tr><td></td>
+    <td id="col"></td>
+    <td id="col"><a href="https://www.icann.org/en/rzerc/rzerc-correspondence">
+      Correspondence</a></td>
+    <td id="col">@@@files-rzerc_cor@@@</td>
+    <td id="col">@@@size-rzerc_cor@@@</td>
+    <td id="col"><a href='/ham/soac/rzerc/cor'>ham/soac/rzerc/cor</a></td>
+  </tr>
+  <tr><td></td>
+    <td id="col"></td>
+    <td id="col"><a href="https://www.icann.org/rzerc#meetings">
+      Minutes</a></td>
+    <td id="col">@@@files-rzerc_min@@@</td>
+    <td id="col">@@@size-rzerc_min@@@</td>
+    <td id="col"><a href='/ham/soac/rzerc/min'>ham/soac/rzerc/min</a></td>
+  </tr>
+  <tr><td></td>
+    <td id="col"></td>
+    <td id="col"><a href="https://www.icann.org/rzerc#meetings">
+      Transcripts</a></td>
+    <td id="col">@@@files-rzerc_tran@@@</td>
+    <td id="col">@@@size-rzerc_tran@@@</td>
+    <td id="col"><a href='/ham/soac/rzerc/tran'>ham/soac/rzerc/tran</a></td>
   </tr>
 
   <tr><td></td>
