@@ -30,7 +30,7 @@ class MonolithException(Exception):
   pass
 
 class Html_group():
-  base_dir = '/var/www/htdocs/icann-hamster.nl/html/' # Where the local fun starts
+  base_dir = '/var/www/htdocs/icannhaz.org/html/' # Where the local fun starts
   staging_dir = '/home/smutt/staging/html/' # Temporary storage after download
   mono_bin = '/home/smutt/bin/monolith' # monolith binary
   html_suffix = '_archive.html' # Local ending for downloaded HTML
@@ -63,6 +63,7 @@ class Html_group():
     return fname
 
   # Season the soup
+  # Returns output path
   def stamp_file(self, url):
     f_in = self.staging_dir + self.path + '/' + self.convert_filename(url) 
     f_out = self.base_dir + self.path + '/' + self.convert_filename(url)
@@ -75,9 +76,11 @@ class Html_group():
           bowl.write(soup.prettify(formatter=None))
       os.chmod(f_out, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644 
       os.remove(f_in)
+      return f_out
 
     except:
       funk.logit("err:stamp_exception:" + f_in)
+      return f_out
 
   # Wrapper for _html_download()
   def download(self, url):
@@ -86,7 +89,8 @@ class Html_group():
     except MonolithException:
       funk.logit("download failed: " + url)
       return
-    self.stamp_file(url)
+    out_path = self.stamp_file(url)
+    funk.logit(url + ' ' + out_path)
 
   # Call external program to download and save remote HTML to dest_dir
   def _html_download(self, url, dest_dir):
@@ -95,7 +99,6 @@ class Html_group():
     try:
       proc = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, universal_newlines=True)
       proc.wait(timeout=120) # Give up after 2 minutes
-      funk.logit(url + ' ' + out_path)
 
     except subprocess.TimeoutExpired as e:
       funk.logit("_html_download: subprocess TimeoutExpired" + str(e))
