@@ -53,8 +53,11 @@
   <div class='bigger'>Icann Haz Character Recognition</div>
   Optical character recognition is done with <a href='http://www.tobias-elze.de/pdfsandwich/'>pdfsandwich</a>. PDFs that have been OCR'd end with _ocr.pdf. For example, if document.pdf requires OCR processing a new file called document_ocr.pdf will be created with text. Both files will be kept. We currently host @@@ocr-total@@@ OCR'd files.<br/>
 
+  <div class='bigger'>Icann Haz HTML</div>
+  Archiving HTML is done with <a href='https://lib.rs/crates/monolith'>Monolith</a>. Icann Haz is not a <a href="https://archive.org">general purpose HTML archiver</a>. Similarly to PDFs and other files archived from icann.org, Icann Haz focuses on content that is intended to be published once and remain unchanged. HTML content currently being archived is listed in <a href="/collections.html">Collections</a>.
+
   <div class='bigger'>Icann Haz Local Search</div>
-  Having a pile of PDFs is great and all, but how do you find stuff in them? In no particular order, below are some applications that can help with this.
+  Having a pile of PDFs on your local machine is great and all, but how do you find stuff in them? In no particular order, below are some applications that people tell me are good at this.
   <ul>
     <li><a href='https://www.houdah.com/houdahSpot/'>Houdah Spot</a></li>
     <li><a href='https://www.zotero.org/'>Zotero</a></li>
