@@ -108,12 +108,12 @@ else:
 for cc in conf:
   new_files = get_files(cc['dl_log'], last_run, cc['base_dir'])
   if len(new_files) == 0:
-    exit(0)
+    continue
 
   if ARGS.debug:
     for key,val in new_files.items():
       print(val['ts'] + ' :: ' + key + ' :: ' + val['remote'])
-    exit(0)
+    continue
 
   tree = ET.parse(cc['atom_xml'])
   ET.register_namespace('', atom_ns)
