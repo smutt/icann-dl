@@ -423,11 +423,11 @@ class Rzerc_tran(Ham_group):
     self.help_text = 'RZERC Transcripts'
     self.path = 'soac/rzerc/tran'
     self.uri = 'https://www.icann.org/rzerc'
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*ranscrip.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*[Tt]eleconference.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*ELECONFERENCE.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*ecording.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*[Mm]onthly_[Mm]eeting.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ranscrip.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*[Tt]eleconference.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ELECONFERENCE.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ecording.*\.pdf$'))
+    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*[Mm]onthly_[Mm]eeting.*\.pdf$'))
 
 # SSAC Reports
 class Ssac(Ham_group):
