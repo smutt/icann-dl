@@ -301,7 +301,7 @@ class Icann_cor(Ham_group):
     super().__init__()
     self.help_text = 'ICANN Correspondence'
     self.top_path = 'icann/cor'
-    self.path = 'icann/cor' + str(date.today().year)
+    self.path = 'icann/cor/' + str(date.today().year)
     self.uri = 'https://www.icann.org/resources/pages/correspondence'
     self.regex.append(re.compile('.*/correspondence/.*\.pdf$'))
     self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
