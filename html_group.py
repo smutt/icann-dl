@@ -113,6 +113,19 @@ class Html_group():
       funk.logit("_html_download: general subprocess error")
       raise MonolithException
 
+# ICANN Announcements
+class Announce(Html_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ICANN Announcements'
+    self.top_path = 'icann/announcements'
+    today = datetime.date.today()
+    self.path = 'icann/announcements/' + str(today.year)
+    self.regex.append(re.compile('.*/announcements/details/.*'))
+    t_delta = datetime.timedelta(weeks=1)
+    self.uri = 'https://www.icann.org/en/announcements?page=1&from-page-date=' \
+        + str(today - t_delta) + '&to-page-date=' + str(today)
+
 # ICANN Board Resolutions
 class Board(Html_group):
   def __init__(self):
@@ -140,5 +153,6 @@ class Blog(Html_group):
 
 # All our groups
 groups = {}
+groups['announce'] = Announce()
 groups['blog'] = Blog()
 groups['board_res'] = Board()
