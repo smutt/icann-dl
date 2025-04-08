@@ -48,7 +48,11 @@
   </table>
 
   <div class='bigger'>Icann Haz Updates</div>
-  An <a href='feed.xml'>Atom feed</a> is updated when new files are added.
+  Two atom feeds are updated when new items are added.
+  <ul>
+    <li><a href='feed.xml'>feed.xml</a> is updated when a file is added (e.g., .pdf, .pptx).</li>
+    <li><a href='feed_html.xml'>feed_html.xml</a> is updated when an HTML page is added.</li>
+  </ul>
 
   <div class='bigger'>Icann Haz Character Recognition</div>
   Optical character recognition is done with <a href='http://www.tobias-elze.de/pdfsandwich/'>pdfsandwich</a>. PDFs that have been OCR'd end with _ocr.pdf. For example, if document.pdf requires OCR processing a new file called document_ocr.pdf will be created with text. Both files will be kept. We currently host @@@ocr-total@@@ OCR'd files.<br/>
@@ -71,7 +75,6 @@
   <ul>
     <li>Add more collections</li>
     <li>Better search functionality (e.g., per collection, faceted search)</li>
-    <li>Add atom feed for html recent finds</li>
     <li>Post recent finds to fediverse</li>
   </ul>
 
