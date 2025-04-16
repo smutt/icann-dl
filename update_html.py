@@ -23,7 +23,7 @@ import os
 import ham_group
 import html_group
 
-www_base = '/var/www/htdocs/icann-hamster.nl/'
+www_base = '/var/www/htdocs/icann-hamster.nl/' # Line 118 will break when we change this
 
 fetch_num = 10 # How many of the last fetches to display on index.html
 fetch_num_more = 100 # How many of the last fetches to display on more_recent.html
@@ -120,13 +120,13 @@ while len(recent_fetches) < fetch_num_more or len(fetches) == 0:
 
 ss = ''
 for ii in range(fetch_num):
-  ss += '<tr id="rec"><td id="rec">' + recent_fetches[ii][0] + '</td><td id="rec"><a href=\'' + recent_fetches[ii][1] + '\'>' + \
-    recent_fetches[ii][1].split('/')[-1] + '</a></td></tr>\n'
+  ss += '<tr id=\"rec\"><td id=\"rec\">' + recent_fetches[ii][0] + '</td> <td><a href=\'' + recent_fetches[ii][1] + '\'>' + \
+  recent_fetches[ii][1].split('/')[-1] + '</a></td></tr>\n'
 index_output = index_output.replace('@@@recent-fetches@@@', ss.strip('\n'))
 
 ss = ''
 for ii in range(fetch_num_more):
-  ss += '<tr id="rec"><td id="rec">' + recent_fetches[ii][0] + '</td><td id="rec"><a href=\'' + recent_fetches[ii][1] + '\'>' + \
+  ss += '<tr id=\"rec\"><td id=\"rec\">' + recent_fetches[ii][0] + '</td><td><a href=\'' + recent_fetches[ii][1] + '\'>' + \
     recent_fetches[ii][1].split('/')[-1] + '</a></td></tr>\n'
 more_recent_output = more_recent_output.replace('@@@more-recent-fetches@@@', ss.strip('\n'))
 

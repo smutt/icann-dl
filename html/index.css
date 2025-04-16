@@ -55,4 +55,7 @@ div.cli {
 
 /* For the recent finds table */
 #rec {
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap;
 }
