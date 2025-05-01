@@ -126,8 +126,60 @@ class Announce(Html_group):
     self.uri = 'https://www.icann.org/en/announcements?page=1&from-page-date=' \
         + str(today - t_delta) + '&to-page-date=' + str(today)
 
+# ICANN Board Agendas
+class Board_agenda(Html_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ICANN Board Agendas'
+    this_year = str(datetime.date.today().year)
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
+      + '&end-date=31-12-' + this_year + '&document-types=agendas&expand-all=true'
+    self.path = 'icann/board/agendas'
+    self.regex.append(re.compile('.*/materials/agenda-.*'))
+
+# ICANN Board Briefings
+# Historical
+# Also exists in ham_group.py
+class Board_brief(Html_group):
+  def __init__(self):
+    super().__init__()
+    self.enabled = False
+    self.help_text = 'ICANN Board Briefings'
+    #this_year = str(datetime.date.today().year)
+    this_year = '1998'
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
+      + '&end-date=31-12-' + this_year + '&expand-all=true'
+    self.path = 'icann/board/brief'
+    self.regex.append(re.compile('^.*/materials/background-.*$'))
+    self.regex.append(re.compile('^.*/briefing-materials/(?!.*pdf)$'))
+
+# ICANN Board Minutes
+class Board_min(Html_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ICANN Board Minutes'
+    this_year = str(datetime.date.today().year)
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
+      + '&end-date=31-12-' + this_year + '&document-types=minutes&expand-all=true'
+    self.path = 'icann/board/min'
+    self.regex.append(re.compile('.*/materials/minutes-.*'))
+
+# ICANN Board Other
+# Everything else
+# Also found in ham_group.py
+class Board_other(Html_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ICANN Board Other'
+    this_year = str(datetime.date.today().year)
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
+      + '&end-date=31-12-' + this_year + '&expand-all=true'
+    self.path = 'icann/board/other'
+    self.regex.append(re.compile('.*/materials/preliminary-report-.*'))
+    self.regex.append(re.compile('.*/materials/secretary.*'))
+
 # ICANN Board Resolutions
-class Board(Html_group):
+class Board_res(Html_group):
   def __init__(self):
     super().__init__()
     self.help_text = 'ICANN Board Resolutions'
@@ -135,6 +187,7 @@ class Board(Html_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&document-types=approved-resolutions&expand-all=true'
     self.path = 'icann/board/resolutions'
+    self.regex.append(re.compile('.*/materials/resolutions-.*'))
     self.regex.append(re.compile('.*/materials/approved-resolutions-.*'))
 
 # ICANN Blog
@@ -155,4 +208,7 @@ class Blog(Html_group):
 groups = {}
 groups['announce'] = Announce()
 groups['blog'] = Blog()
-groups['board_res'] = Board()
+groups['board_agenda'] = Board_agenda()
+groups['board_min'] = Board_min()
+groups['board_other'] = Board_other()
+groups['board_res'] = Board_res()

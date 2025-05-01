@@ -301,43 +301,86 @@
   <tr>
     <td id="col"><b>html</b></td>
   </tr>
-  <tr><td></td>
-    <td id="col" colspan='2'><a href="https://www.icann.org/en/board-activities-and-meetings">
-      Board Resolutions</a></td>
-    <td id="col">@@@files-board_res@@@</td>
-    <td id="col">@@@size-board_res@@@</td>
-    <td id="col"><a href='/html/icann/board/resolutions'>html/icann/board/resolutions</a></td>
-  </tr>
-  <tr><td></td>
-    <td id="col" colspan='2'><a href="https://www.icann.org/en/announcements">
-      Announcements</a></td>
-    <td id="col">@@@files-announce@@@</td>
-    <td id="col">@@@size-announce@@@</td>
-    <td id="col"><a href='/html/icann/announcements'>html/icann/announcements</a></td>
-  </tr>
-  <tr><td></td>
-    <td id="col" colspan='2'><a href="https://www.icann.org/en/blogs">
-      Blog Entries</a></td>
-    <td id="col">@@@files-blog@@@</td>
-    <td id="col">@@@size-blog@@@</td>
-    <td id="col"><a href='/html/icann/blog'>html/icann/blog</a></td>
-  </tr>
+    <tr><td></td>
+      <td id="col"><a href='https://www.icann.org/en/board/about'>ICANN Board</a></td>
+    </tr>
 
-  <tr>
-    <td id="col"><b>audio</b></td>
-  </tr>
-  <tr><td></td>
-    <td id="col" colspan='2'>Audio Recordings</a></td>
-    <td id="col">@@@files-audio@@@</td>
-    <td id="col">@@@size-audio@@@</td>
-    <td id="col"><a href='/audio/'>audio</a></td>
-  </tr>
+    <tr><td></td>
+      <td id="col"></td>
+      <td id="col"><a href="https://www.icann.org/en/board-activities-and-meetings">
+          Agendas</a></td>
+      <td id="col">@@@files-board_agenda@@@</td>
+      <td id="col">@@@size-board_agenda@@@</td>
+      <td id="col"><a href='/html/icann/board/agendas'>html/icann/board/agendas</a></td>
+    </tr>
 
-  <tr></tr>
-  <tr><td id="col" colspan='3'><b>Totals</b></td>
-    <td id="col"><b>@@@files-total@@@</b></td>
-    <td id="col"><b>@@@size-total@@@</b></td>
-  </tr>
+    <tr><td></td>
+      <td id="col"></td>
+      <td id="col"><a href="https://www.icann.org/en/board-activities-and-meetings">
+          Briefings</a></td>
+      <td id="col">@@@files-board_brief@@@</td>
+      <td id="col">@@@size-board_brief@@@</td>
+      <td id="col"><a href='/virt/icann/board/brief/'>virt/icann/board/brief/</a></td>
+    </tr>
+
+    <tr><td></td>
+      <td id="col"></td>
+      <td id="col"><a href="https://www.icann.org/en/board-activities-and-meetings">
+          Minutes</a></td>
+      <td id="col">@@@files-board_min@@@</td>
+      <td id="col">@@@size-board_min@@@</td>
+      <td id="col"><a href='/html/icann/board/min'>html/icann/board/min</a></td>
+    </tr>
+
+    <tr><td></td>
+      <td id="col"></td>
+      <td id="col"><a href="https://www.icann.org/en/board-activities-and-meetings">
+          Resolutions</a></td>
+      <td id="col">@@@files-board_res@@@</td>
+      <td id="col">@@@size-board_res@@@</td>
+      <td id="col"><a href='/html/icann/board/resolutions'>html/icann/board/resolutions</a></td>
+    </tr>
+
+    <tr><td></td>
+      <td id="col"></td>
+      <td id="col"><a href="https://www.icann.org/en/board-activities-and-meetings">
+          Other</a></td>
+      <td id="col">@@@files-board_other@@@</td>
+      <td id="col">@@@size-board_other@@@</td>
+      <td id="col"><a href='/virt/icann/board/other'>virt/icann/board/other</a></td>
+    </tr>
+
+    <tr><td></td>
+      <td id="col" colspan='2'><a href="https://www.icann.org/en/announcements">
+          Announcements</a></td>
+      <td id="col">@@@files-announce@@@</td>
+      <td id="col">@@@size-announce@@@</td>
+      <td id="col"><a href='/html/icann/announcements'>html/icann/announcements</a></td>
+    </tr>
+
+    <tr><td></td>
+      <td id="col" colspan='2'><a href="https://www.icann.org/en/blogs">
+          Blog Entries</a></td>
+      <td id="col">@@@files-blog@@@</td>
+      <td id="col">@@@size-blog@@@</td>
+      <td id="col"><a href='/html/icann/blog'>html/icann/blog</a></td>
+    </tr>
+
+    <tr>
+      <td id="col"><b>audio</b></td>
+    </tr>
+    <tr><td></td>
+      <td id="col" colspan='2'>Audio Recordings</td>
+      <td id="col">@@@files-audio@@@</td>
+      <td id="col">@@@size-audio@@@</td>
+      <td id="col"><a href='/audio/'>audio</a></td>
+    </tr>
+
+    <tr></tr>
+    <tr><td id="col" colspan='3'><b>Totals</b></td>
+      <td id="col"><b>@@@files-total@@@</b></td>
+      <td id="col"><b>@@@size-total@@@</b></td>
+    </tr>
   </table></br>
 </body>
 </html>

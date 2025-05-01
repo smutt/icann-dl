@@ -121,6 +121,32 @@ class Audio(Ham_group):
     self.enabled = False
     self.path = ''
 
+# ICANN Board Briefings
+# Specific search broken for briefing materials, once fixed the url can get more specific
+class Board_brief(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ICANN Board Briefings'
+    this_year = str(date.today().year)
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
+      + '&end-date=31-12-' + this_year + '&expand-all=true'
+    self.path = 'icann/board/brief'
+    self.regex.append(re.compile('.*/briefing-materials/.*\.pdf'))
+
+# ICANN Board Other
+# Must be run after Board_brief
+# If we ever add another Board group this will need changing
+class Board_other(Ham_group):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'ICANN Board Other'
+    self.top_path = 'icann/board'
+    this_year = str(date.today().year)
+    self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
+      + '&end-date=31-12-' + this_year + '&expand-all=true'
+    self.path = 'icann/board/other'
+    self.regex.append(re.compile('.*\.pdf'))
+
 # CCNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple CCNSO groups
 class Ccnso(Ham_group):
@@ -462,6 +488,8 @@ groups['aso_min'] = Aso_min()
 groups['aso_pol'] = Aso_policy()
 groups['aso_pres'] = Aso_pres()
 groups['audio'] = Audio()
+groups['board_brief'] = Board_brief()
+groups['board_other'] = Board_other()
 groups['ccnso_cor'] = Ccnso_cor()
 groups['ccnso_guide'] = Ccnso_guide()
 groups['ccnso_min'] = Ccnso_min()
