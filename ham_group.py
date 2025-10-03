@@ -31,14 +31,14 @@ class Ham_group():
     self.help_text = '' # Help text displayed with the group. Intended to be overridden
 
     self.exclude = [] # Links to exclude for all groups
-    self.exclude.append(re.compile('.*/didp-response-process-29oct13-en\.pdf$'))
-    self.exclude.append(re.compile('.*/registrar-billing-faq-21dec21-en\.pdf$'))
-    self.exclude.append(re.compile('.*/gdd-ops-handbook-registry-operators-15aug18-en\.pdf$'))
-    self.exclude.append(re.compile('.*/rsep-process-workflow-14jun19-en\.pdf$'))
-    self.exclude.append(re.compile('.*/mosapi-specification\.pdf$'))
-    self.exclude.append(re.compile('.*/delegation-of-authority-guidelines-08nov16-en.pdf$'))
-    self.exclude.append(re.compile('.*/delegation-of-authority-guidelines-16mar17-en.pdf$'))
-    self.exclude.append(re.compile('.*/delegation-of-authority-guidelines-24oct24-en.pdf$'))
+    self.exclude.append(re.compile(r'.*/didp-response-process-29oct13-en\.pdf$'))
+    self.exclude.append(re.compile(r'.*/registrar-billing-faq-21dec21-en\.pdf$'))
+    self.exclude.append(re.compile(r'.*/gdd-ops-handbook-registry-operators-15aug18-en\.pdf$'))
+    self.exclude.append(re.compile(r'.*/rsep-process-workflow-14jun19-en\.pdf$'))
+    self.exclude.append(re.compile(r'.*/mosapi-specification\.pdf$'))
+    self.exclude.append(re.compile(r'.*/delegation-of-authority-guidelines-08nov16-en.pdf$'))
+    self.exclude.append(re.compile(r'.*/delegation-of-authority-guidelines-16mar17-en.pdf$'))
+    self.exclude.append(re.compile(r'.*/delegation-of-authority-guidelines-24oct24-en.pdf$'))
 
   # Wrapper for funk.download()
   def download(self, remote):
@@ -72,8 +72,8 @@ class Alac(Ham_group):
     self.path = 'soac/alac/pub/' + str(date.today().year)
     self.uri = 'https://atlarge.icann.org/policy-summary?page=1'
     self.top_regex = []
-    self.top_regex.append(re.compile('^.*/advice_statements/.*$'))
-    self.regex.append(re.compile('.*/uploads/advice_statement_document/document/.*\.pdf$'))
+    self.top_regex.append(re.compile(r'^.*/advice_statements/.*$'))
+    self.regex.append(re.compile(r'.*/uploads/advice_statement_document/document/.*\.pdf$'))
 
   def get_links(self):
     rv = []
@@ -88,7 +88,7 @@ class Aso_min(Ham_group):
     self.help_text = 'ASO Meeting Minutes'
     self.path = 'soac/aso/min'
     self.uri = 'https://aso.icann.org/aso-ac/meetings/ac-meeting-minutes/'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # ASO Policy
 class Aso_policy(Ham_group):
@@ -97,7 +97,7 @@ class Aso_policy(Ham_group):
     self.help_text = 'ASO Global Policies'
     self.path = 'soac/aso/policy'
     self.uri = 'https://aso.icann.org/policy/global/current-global-policies/'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # ASO Historical
 class Aso_pres(Ham_group):
@@ -106,7 +106,7 @@ class Aso_pres(Ham_group):
     self.help_text = 'ASO Presentations'
     self.path = 'soac/aso/pres'
     self.uri = 'https://aso.icann.org/documents/presentations/'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # Stub class for audio
 # Audio files are never automatically fetched, we manage them manually.
@@ -131,7 +131,7 @@ class Board_brief(Ham_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&expand-all=true'
     self.path = 'icann/board/brief'
-    self.regex.append(re.compile('.*/briefing-materials/.*\.pdf'))
+    self.regex.append(re.compile(r'.*/briefing-materials/.*\.pdf'))
 
 # ICANN Board Other
 # Must be run after Board_brief
@@ -145,7 +145,7 @@ class Board_other(Ham_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&expand-all=true'
     self.path = 'icann/board/other'
-    self.regex.append(re.compile('.*\.pdf'))
+    self.regex.append(re.compile(r'.*\.pdf'))
 
 # CCNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple CCNSO groups
@@ -154,7 +154,7 @@ class Ccnso(Ham_group):
     super().__init__()
     self.root_path = 'soac/ccnso'
 
-  # Wrapper for _local_files()
+  # Wrapper for local_files()
   def local_files(self):
     return funk.local_files(self.base_dir + self.root_path)
 
@@ -165,7 +165,7 @@ class Ccnso_cor(Ccnso):
     self.help_text = 'CCNSO Correspondence'
     self.path = 'soac/ccnso/cor'
     self.uri = 'https://ccnso.icann.org/en/library?tid[19]=19&page=0'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # CCNSO Guidelines
 class Ccnso_guide(Ccnso):
@@ -174,7 +174,7 @@ class Ccnso_guide(Ccnso):
     self.help_text = 'CCNSO Guidelines'
     self.path = 'soac/ccnso/guide'
     self.uri = 'https://ccnso.icann.org/en/library?tid[25]=25&page=0'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # CCNSO Meeting Minutes
 class Ccnso_min(Ccnso):
@@ -183,7 +183,7 @@ class Ccnso_min(Ccnso):
     self.help_text = 'CCNSO Minutes'
     self.path = 'soac/ccnso/min'
     self.uri = 'https://ccnso.icann.org/en/library?tid[28]=28&page=0'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # CCNSO Presentations (not Tech Day)
 class Ccnso_pres(Ccnso):
@@ -192,7 +192,7 @@ class Ccnso_pres(Ccnso):
     self.help_text = 'CCNSO Presentations'
     self.path = 'soac/ccnso/pres'
     self.uri = 'https://ccnso.icann.org/en/library?tid[36]=36&page=0'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # CCNSO Reports
 class Ccnso_rep(Ccnso):
@@ -201,7 +201,7 @@ class Ccnso_rep(Ccnso):
     self.help_text = 'CCNSO Reports'
     self.path = 'soac/ccnso/reports'
     self.uri = 'https://ccnso.icann.org/en/library?tid[41]=41&page=0'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # CCNSO Tech Day
 class Ccnso_tech(Ccnso):
@@ -218,7 +218,7 @@ class Ccnso_tran(Ccnso):
     self.help_text = 'CCNSO Transcripts'
     self.path = 'soac/ccnso/tran'
     self.uri = 'https://ccnso.icann.org/en/library?tid[51]=51&page=0'
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # CEO Reports to the Board
 class Ceo(Ham_group):
@@ -227,8 +227,8 @@ class Ceo(Ham_group):
     self.help_text = 'CEO Reports to the Board'
     self.path = 'icann/ceo/board'
     self.uri = 'https://www.icann.org/reports-to-board'
-    self.regex.append(re.compile('^.*/uploads/board_report/attachment/.*\.pdf$'))
-    self.regex.append(re.compile('^.*/en/files/.*\.pdf$'))
+    self.regex.append(re.compile(r'^.*/uploads/board_report/attachment/.*\.pdf$'))
+    self.regex.append(re.compile(r'^.*/en/files/.*\.pdf$'))
 
 # GAC
 class Gac(Ham_group):
@@ -237,9 +237,9 @@ class Gac(Ham_group):
     self.help_text = 'GAC Communiques'
     self.path = 'soac/gac/com'
     self.uri = 'https://gac.icann.org/contentMigrated/icann1-singapore-communique'
-    self.regex.append(re.compile('^.*/.*communique.*\.pdf[\?language_id.*]?', flags=re.ASCII | re.IGNORECASE))
+    self.regex.append(re.compile(r'^.*/.*communique.*\.pdf[\?language_id.*]?', flags=re.ASCII | re.IGNORECASE))
     self.option_regex = []
-    self.option_regex.append(re.compile('^/contentMigrated/icann.*-communique\?.*$'))
+    self.option_regex.append(re.compile(r'^/contentMigrated/icann.*-communique\?.*$'))
 
   def get_links(self):
     rv = []
@@ -254,7 +254,7 @@ class Ge(Ham_group):
     self.help_text = 'Government Engagement Publications'
     self.path = 'icann/ge/pub'
     self.uri = 'https://www.icann.org/en/government-engagement/publications?page=1'
-    self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 # Government Engagement Reports to the GAC
 class Ge_gac(Ham_group):
@@ -264,7 +264,7 @@ class Ge_gac(Ham_group):
     self.path = 'icann/ge/gac'
     self.uri = 'https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities'
     self.regex = []
-    self.regex.append(re.compile('.*/reports/public/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/reports/public/.*\.pdf$'))
 
 # GNSO Parent Class
 # The primary reason for doing this is to prevent the same file showing up in multiple GNSO groups
@@ -273,7 +273,7 @@ class Gnso(Ham_group):
     super().__init__()
     self.root_path = 'soac/gnso'
 
-  # Wrapper for _local_files()
+  # Wrapper for local_files()
   def local_files(self):
     return funk.local_files(self.base_dir + self.root_path)
 
@@ -285,9 +285,9 @@ class Gnso_cor(Gnso):
     self.path = 'soac/gnso/cor'
     self.uri = 'https://gnso.icann.org/en/council/correspondence/' + str(date.today().year)
     self.regex = []
-    self.regex.append(re.compile('.*\.pdf$'))
-    self.regex.append(re.compile('.*\.ppt$'))
-    self.regex.append(re.compile('.*\.pptx$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.ppt$'))
+    self.regex.append(re.compile(r'.*\.pptx$'))
 
 # GNSO Presentations
 class Gnso_pres(Gnso):
@@ -297,9 +297,9 @@ class Gnso_pres(Gnso):
     self.path = 'soac/gnso/pres'
     self.uri = 'https://gnso.icann.org/en/library?tid[36]=36'
     self.regex = []
-    self.regex.append(re.compile('.*\.pdf$'))
-    self.regex.append(re.compile('.*\.ppt$'))
-    self.regex.append(re.compile('.*\.pptx$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.ppt$'))
+    self.regex.append(re.compile(r'.*\.pptx$'))
 
 # GNSO Reports
 class Gnso_rep(Gnso):
@@ -309,7 +309,7 @@ class Gnso_rep(Gnso):
     self.path = 'soac/gnso/reports'
     self.uri = 'https://gnso.icann.org/en/library?tid[41]=41'
     self.regex = []
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # GNSO Transcripts
 class Gnso_tran(Gnso):
@@ -319,7 +319,7 @@ class Gnso_tran(Gnso):
     self.path = 'soac/gnso/tran'
     self.uri = 'https://gnso.icann.org/en/library?tid[51]=51'
     self.regex = []
-    self.regex.append(re.compile('.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.pdf$'))
 
 # ICANN Correspondence
 class Icann_cor(Ham_group):
@@ -329,9 +329,9 @@ class Icann_cor(Ham_group):
     self.top_path = 'icann/cor'
     self.path = 'icann/cor/' + str(date.today().year)
     self.uri = 'https://www.icann.org/resources/pages/correspondence'
-    self.regex.append(re.compile('.*/correspondence/.*\.pdf$'))
-    self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
-    self.regex.append(re.compile('^/en/news/correspondence/.*-to-.*-en$'))
+    self.regex.append(re.compile(r'.*/correspondence/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/system/files/files/.*\.pdf$'))
+    self.regex.append(re.compile(r'^/en/news/correspondence/.*-to-.*-en$'))
 
 # ICANN Correspondence Sent Externally
 class Icann_ext(Ham_group):
@@ -340,16 +340,24 @@ class Icann_ext(Ham_group):
     self.help_text = 'ICANN Government Engagement Submissions to External Bodies'
     self.path = 'icann/ext'
     self.uri = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
-    self.regex.append(re.compile('.*/en/files/government-engagement-ge/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 # OCTO Publications
+# UNDER CONSTRUCTION
 class Octo(Ham_group):
   def __init__(self):
     super().__init__()
+    self.enabled = False
     self.help_text = 'OCTO Publications'
     self.path = 'icann/octo/pub'
     self.uri = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
-    self.regex.append(re.compile('.*/octo-.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/octo-.*\.pdf$'))
+
+  # Wrapper for get_links()
+  # OCTO versioning requires we check if a new version has been uploaded
+  def get_links(self):
+    links = funk.get_links(self.uri, self.regex, ['a', 'href'], self.exclude)
+    return [rl for rl in funk.real_locations(links) if rl not in links]
 
 # OCTO Commissioned Publications
 class Octo_com(Ham_group):
@@ -358,7 +366,7 @@ class Octo_com(Ham_group):
     self.help_text = 'OCTO Commissioned Publications'
     self.path = 'icann/octo/com'
     self.uri = 'https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en'
-    self.regex.append(re.compile('.*/system/files/files/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/system/files/files/.*\.pdf$'))
 
 # OCTO Archive
 class Octo_archive(Ham_group):
@@ -367,11 +375,11 @@ class Octo_archive(Ham_group):
     self.help_text = 'OCTO Archive'
     self.path = 'icann/octo/archive'
     self.uri = 'https://www.icann.org/octo-document-archive'
-    self.regex.append(re.compile('/en.*\.pdf$'))
-    self.regex.append(re.compile('/news.*$'))
-    self.regex.append(re.compile('/en.*\.htm$'))
+    self.regex.append(re.compile(r'/en.*\.pdf$'))
+    self.regex.append(re.compile(r'/news.*$'))
+    self.regex.append(re.compile(r'/en.*\.htm$'))
     self.regex2 = []
-    self.regex2.append(re.compile('/.*\.pdf$'))
+    self.regex2.append(re.compile(r'/.*\.pdf$'))
 
   def local_files(self):
     return funk.local_files(self.base_dir + self.path) | funk.local_files(self.base_dir + 'soac/ssac/reports')
@@ -393,9 +401,9 @@ class Rssac(Ham_group):
     self.help_text = 'RSSAC Publications'
     self.path = 'soac/rssac/pub'
     self.uri = 'https://www.icann.org/en/rssac/publications'
-    self.regex.append(re.compile('.*/root-server-system-advisory-committee-rssac-publications/.*\.pdf$'))
-    self.regex.append(re.compile('.*/system/files/files/.*rssac-.*\.pdf$'))
-    self.regex.append(re.compile('^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
+    self.regex.append(re.compile(r'.*/root-server-system-advisory-committee-rssac-publications/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/system/files/files/.*rssac-.*\.pdf$'))
+    self.regex.append(re.compile(r'^/en/groups/rssac/rssac-iana-stewardship-transition-08may14-en.pdf$'))
 
 # RSSAC Meeting Minutes
 class Rssac_min(Ham_group):
@@ -404,7 +412,7 @@ class Rssac_min(Ham_group):
     self.help_text = 'RSSAC Minutes'
     self.path = 'soac/rssac/min'
     self.uri = 'https://www.icann.org/en/rssac/meetings'
-    self.regex.append(re.compile('.*/en/files/meetings/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/en/files/meetings/.*\.pdf$'))
 
 # RSSAC Caucus Meeting Minutes
 class Rssac_c_min(Ham_group):
@@ -413,7 +421,7 @@ class Rssac_c_min(Ham_group):
     self.help_text = 'RSSAC Caucus Minutes'
     self.path = 'soac/rssac/caucus/min'
     self.uri = 'https://www.icann.org/en/rssac/caucus/meetings'
-    self.regex.append(re.compile('.*/en/files/root-server-system-advisory-committee-rssac-caucus/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/en/files/root-server-system-advisory-committee-rssac-caucus/.*\.pdf$'))
 
 # RZERC Publications
 class Rzerc(Ham_group):
@@ -422,7 +430,7 @@ class Rzerc(Ham_group):
     self.help_text = 'RZERC Publications'
     self.path = 'soac/rzerc/pub'
     self.uri = 'https://www.icann.org/en/rzerc#documents'
-    self.regex.append(re.compile('.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/ckeditor/rzerc-0.*\.pdf$'))
 
 # RZERC Correspondence
 class Rzerc_cor(Ham_group):
@@ -431,7 +439,7 @@ class Rzerc_cor(Ham_group):
     self.help_text = 'RZERC Correspondence'
     self.path = 'soac/rzerc/cor'
     self.uri = 'https://www.icann.org/en/rzerc/rzerc-correspondence'
-    self.regex.append(re.compile('.*/uploads/ckeditor/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/ckeditor/.*\.pdf$'))
 
 # RZERC Minutes
 class Rzerc_min(Ham_group):
@@ -440,7 +448,7 @@ class Rzerc_min(Ham_group):
     self.help_text = 'RZERC Minutes'
     self.path = 'soac/rzerc/min'
     self.uri = 'https://www.icann.org/rzerc'
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/.*inute.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/iana_work_session_asset/attachment/.*inute.*\.pdf$'))
 
 # RZERC Transcipts
 class Rzerc_tran(Ham_group):
@@ -449,11 +457,11 @@ class Rzerc_tran(Ham_group):
     self.help_text = 'RZERC Transcripts'
     self.path = 'soac/rzerc/tran'
     self.uri = 'https://www.icann.org/rzerc'
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ranscrip.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*[Tt]eleconference.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ELECONFERENCE.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ecording.*\.pdf$'))
-    self.regex.append(re.compile('.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*[Mm]onthly_[Mm]eeting.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ranscrip.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*[Tt]eleconference.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ELECONFERENCE.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*ecording.*\.pdf$'))
+    self.regex.append(re.compile(r'.*/uploads/iana_work_session_asset/attachment/(?!.*inute).*[Mm]onthly_[Mm]eeting.*\.pdf$'))
 
 # SSAC Reports
 class Ssac(Ham_group):
@@ -462,7 +470,7 @@ class Ssac(Ham_group):
     self.help_text = 'SSAC Reports'
     self.path = 'soac/ssac/reports'
     self.uri = 'https://www.icann.org/en/ssac/publications'
-    self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/.*\.pdf$'))
+    self.regex.append(re.compile(r'.*icann.org/en/files/security-and-stability-advisory-committee-ssac-reports/.*\.pdf$'))
 
 # SSAC Correspondence
 class Ssac_cor(Ham_group):
@@ -471,7 +479,7 @@ class Ssac_cor(Ham_group):
     self.help_text = 'SSAC Correspondence'
     self.path = 'soac/ssac/cor'
     self.uri = 'https://www.icann.org/en/ssac/correspondence'
-    self.regex.append(re.compile('.*icann.org/en/files/security-and-stability-advisory-committee-ssac-correspondence/.*\.pdf'))
+    self.regex.append(re.compile(r'.*icann.org/en/files/security-and-stability-advisory-committee-ssac-correspondence/.*\.pdf'))
 
 # SSAC DNSSEC Workshop (now called DNSSEC & Security Workshop)
 class Ssac_dnssec(Ham_group):
