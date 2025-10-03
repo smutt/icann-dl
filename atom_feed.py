@@ -18,12 +18,13 @@
 #  Copyright (C) 2022 2024 2025, Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import argparse
+import basic
+import datetime as dd
 import ham_group
 import html_group
 import os
 import stat
 import xml.etree.ElementTree as ET
-from datetime import datetime, date
 import uuid
 
 ham = {}
@@ -40,10 +41,6 @@ conf = [ham, html]
 
 atom_lastrun = '/home/smutt/log/atom_feed.lastrun'
 atom_ns = 'http://www.w3.org/2005/Atom'
-
-# Basic logging to stdout
-def logit(s):
-  print(datetime.isoformat(datetime.utcnow()) + ' ' + s.strip())
 
 # Takes a log filename to read and a minimum timestamp
 # Returns dict of file dicts ==> local_name = {ts, remote_name}
@@ -67,7 +64,7 @@ def get_files(fname, min_ts, base_dir):
         continue
 
       try:
-        f_ts = datetime.fromisoformat(ts)
+        f_ts = dd.datetime.fromisoformat(ts)
       except:
         continue
 
@@ -86,7 +83,7 @@ ARGS = ap.parse_args()
 
 if ARGS.lastrun:
   try:
-    last_run = datetime.fromisoformat(ARGS.lastrun)
+    last_run = dd.datetime.fromisoformat(ARGS.lastrun)
   except:
     print('Bad --lastrun')
     exit(1)
@@ -95,14 +92,14 @@ else:
   last_run = None
   with open(atom_lastrun) as fh:
     for line in fh:
-      last_run = datetime.fromisoformat(line.strip())
+      last_run = dd.datetime.fromisoformat(line.strip())
 
   if last_run == None:
-    logit('err: Unable to determine lastrun time')
+    basic.logit('err: Unable to determine lastrun time')
     exit(1)
   else:
     fp = open(atom_lastrun, 'w')
-    fp.write(datetime.utcnow().isoformat(timespec='seconds'))
+    fp.write(basic.timestamp())
     fp.close()
 
 for cc in conf:
@@ -112,12 +109,12 @@ for cc in conf:
 
   if ARGS.debug:
     for key,val in new_files.items():
-      print(val['ts'] + ' :: ' + key + ' :: ' + val['remote'])
+      print(basic.timestamp(val['ts']) + ' :: ' + key + ' :: ' + val['remote'])
     continue
 
   tree = ET.parse(cc['atom_xml'])
   ET.register_namespace('', atom_ns)
-  tree.find('./{' + atom_ns + '}updated').text = datetime.utcnow().isoformat(timespec='seconds') + 'Z'
+  tree.find('./{' + atom_ns + '}updated').text = basic.timestamp() + 'Z'
 
   for k,v in new_files.items():
     fname = os.path.basename(k)
@@ -126,7 +123,7 @@ for cc in conf:
     new_entry = "<entry>\n<title>" + fname + "</title> \
       <link href=\"" + cc['link_base'] + "/" + k.split(cc['base_dir'])[1] + "\"/> \
       <id>urn:uuid:" + UID + "</id> \
-      <updated>" + datetime.utcnow().isoformat(timespec='seconds') + 'Z' + "</updated> \
+      <updated>" + basic.timestamp() + 'Z' + "</updated> \
       <summary/></entry>"
     tree.find('.').append(ET.fromstring(new_entry))
 
