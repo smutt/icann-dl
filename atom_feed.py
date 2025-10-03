@@ -32,18 +32,20 @@ ham['dl_log'] = '/home/smutt/log/fetch_ham.log'
 ham['atom_xml'] = '/home/smutt/www/icannhaz.org/feed.xml'
 ham['link_base'] = 'https://icannhaz.org/ham'
 ham['base_dir'] = ham_group.Ham_group.base_dir
+ham['print_pos'] = 2
 html = {}
 html['dl_log'] = '/home/smutt/log/fetch_html.log'
 html['atom_xml'] = '/home/smutt/www/icannhaz.org/feed_html.xml'
-html['link_base'] = 'https://icannhaz.org/html'
-html['base_dir'] = html_group.Html_group.base_dir
+html['link_base'] = 'https://'
+html['base_dir'] = 'https://'
+html['print_pos'] = 1
 conf = [ham, html]
 
 atom_lastrun = '/home/smutt/log/atom_feed.lastrun'
 atom_ns = 'http://www.w3.org/2005/Atom'
 
 # Takes a log filename to read and a minimum timestamp
-# Returns dict of file dicts ==> local_name = {ts, remote_name}
+# Returns list of new entry lists ==> [timestamp, remote, local]
 def get_files(fname, min_ts, base_dir):
   def parse_line(line, base_dir): # Returns a 3 tuple (ts, remote, local)
     toks = line.split()
@@ -56,7 +58,7 @@ def get_files(fname, min_ts, base_dir):
       end = line.find(base_dir)
       return (toks[0], line[start:end].strip(), line[end:].strip())
 
-  rv = {}
+  rv = []
   with open(fname) as fh:
     for line in fh:
       ts, remote, local = parse_line(line.strip(), base_dir)
@@ -70,7 +72,7 @@ def get_files(fname, min_ts, base_dir):
 
       if os.path.exists(local):
         if min_ts <= f_ts:
-          rv[local.replace("%", "%25")] = {'ts': ts, 'remote': remote}
+          rv.append([ts, remote, local.replace("%", "%25")])
   return rv
 
 ###################
@@ -107,25 +109,27 @@ for cc in conf:
   if len(new_files) == 0:
     continue
 
-  if ARGS.debug:
-    for key,val in new_files.items():
-      print(basic.timestamp(val['ts']) + ' :: ' + key + ' :: ' + val['remote'])
-    continue
-
   tree = ET.parse(cc['atom_xml'])
   ET.register_namespace('', atom_ns)
   tree.find('./{' + atom_ns + '}updated').text = basic.timestamp() + 'Z'
 
-  for k,v in new_files.items():
-    fname = os.path.basename(k)
+  for nf in new_files:
+    fname = os.path.basename(nf[2])
     UID = str(uuid.uuid5(uuid.NAMESPACE_URL, fname)) # uuid.RFC_4122 is broken
 
-    new_entry = "<entry>\n<title>" + fname + "</title> \
-      <link href=\"" + cc['link_base'] + "/" + k.split(cc['base_dir'])[1] + "\"/> \
-      <id>urn:uuid:" + UID + "</id> \
-      <updated>" + basic.timestamp() + 'Z' + "</updated> \
-      <summary/></entry>"
+    new_entry = "<entry> \
+      \n  <title>" + fname + "</title> \
+      \n  <link href=\"" + cc['link_base'] + "/" + nf[cc['print_pos']].split(cc['base_dir'])[1] + "\"/> \
+      \n  <id>urn:uuid:" + UID + "</id> \
+      \n  <updated>" + basic.timestamp() + 'Z' + "</updated> \
+      \n  <summary/> \
+      \n</entry>"
     tree.find('.').append(ET.fromstring(new_entry))
+    if ARGS.debug:
+      print(ET.tostring(ET.fromstring(new_entry), encoding='unicode'))
+
+  if ARGS.debug:
+    continue
 
   ET.indent(tree)
   tree.write(cc['atom_xml'], xml_declaration=True, encoding='UTF-8')
