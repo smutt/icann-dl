@@ -17,6 +17,7 @@
 #
 #  Copyright (C) 2024, 2025 Andrew McConachie, <andrew.mcconachie@icann.org>
 
+import basic
 import datetime
 import funk
 import re
@@ -79,7 +80,7 @@ class Html_group():
       return f_out
 
     except:
-      funk.logit("err:stamp_exception:" + f_in)
+      basic.logit("err:stamp_exception:" + f_in)
       return f_out
 
   # Wrapper for _html_download()
@@ -87,10 +88,10 @@ class Html_group():
     try:
       self._html_download(url, self.staging_dir + self.path + '/')
     except MonolithException:
-      funk.logit("download failed: " + url)
+      basic.logit("download failed: " + url)
       return
     out_path = self.stamp_file(url)
-    funk.logit(url + ' ' + out_path)
+    basic.logit(url + ' ' + out_path)
 
   # Call external program to download and save remote HTML to dest_dir
   def _html_download(self, url, dest_dir):
@@ -101,16 +102,16 @@ class Html_group():
       proc.wait(timeout=120) # Give up after 2 minutes
 
     except subprocess.TimeoutExpired as e:
-      funk.logit("_html_download: subprocess TimeoutExpired" + str(e))
+      basic.logit("_html_download: subprocess TimeoutExpired" + str(e))
       raise MonolithException
     except subprocess.CalledProcessError as e:
-      funk.logit("_html_download: subprocess CallProcessError" + str(e))
+      basic.logit("_html_download: subprocess CallProcessError" + str(e))
       raise MonolithException
     except OSError as e:
-      funk.logit("_html_download: subprocess OSError" + str(e))
+      basic.logit("_html_download: subprocess OSError" + str(e))
       raise MonolithException
     except subprocess.SubprocessError:
-      funk.logit("_html_download: general subprocess error")
+      basic.logit("_html_download: general subprocess error")
       raise MonolithException
 
 # ICANN Announcements
@@ -121,7 +122,7 @@ class Announce(Html_group):
     self.top_path = 'icann/announcements'
     today = datetime.date.today()
     self.path = 'icann/announcements/' + str(today.year)
-    self.regex.append(re.compile('.*/announcements/details/.*'))
+    self.regex.append(re.compile(r'.*/announcements/details/.*'))
     t_delta = datetime.timedelta(weeks=1)
     self.uri = 'https://www.icann.org/en/announcements?page=1&from-page-date=' \
         + str(today - t_delta) + '&to-page-date=' + str(today)
@@ -135,7 +136,7 @@ class Board_agenda(Html_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&document-types=agendas&expand-all=true'
     self.path = 'icann/board/agendas'
-    self.regex.append(re.compile('.*/materials/agenda-.*'))
+    self.regex.append(re.compile(r'.*/materials/agenda-.*'))
 
 # ICANN Board Briefings
 # Historical
@@ -150,8 +151,8 @@ class Board_brief(Html_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&expand-all=true'
     self.path = 'icann/board/brief'
-    self.regex.append(re.compile('^.*/materials/background-.*$'))
-    self.regex.append(re.compile('^.*/briefing-materials/(?!.*pdf)$'))
+    self.regex.append(re.compile(r'^.*/materials/background-.*$'))
+    self.regex.append(re.compile(r'^.*/briefing-materials/(?!.*pdf)$'))
 
 # ICANN Board Minutes
 class Board_min(Html_group):
@@ -162,7 +163,7 @@ class Board_min(Html_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&document-types=minutes&expand-all=true'
     self.path = 'icann/board/min'
-    self.regex.append(re.compile('.*/materials/minutes-.*'))
+    self.regex.append(re.compile(r'.*/materials/minutes-.*'))
 
 # ICANN Board Other
 # Everything else
@@ -175,8 +176,8 @@ class Board_other(Html_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&expand-all=true'
     self.path = 'icann/board/other'
-    self.regex.append(re.compile('.*/materials/preliminary-report-.*'))
-    self.regex.append(re.compile('.*/materials/secretary.*'))
+    self.regex.append(re.compile(r'.*/materials/preliminary-report-.*'))
+    self.regex.append(re.compile(r'.*/materials/secretary.*'))
 
 # ICANN Board Resolutions
 class Board_res(Html_group):
@@ -187,8 +188,8 @@ class Board_res(Html_group):
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
       + '&end-date=31-12-' + this_year + '&document-types=approved-resolutions&expand-all=true'
     self.path = 'icann/board/resolutions'
-    self.regex.append(re.compile('.*/materials/resolutions-.*'))
-    self.regex.append(re.compile('.*/materials/approved-resolutions-.*'))
+    self.regex.append(re.compile(r'.*/materials/resolutions-.*'))
+    self.regex.append(re.compile(r'.*/materials/approved-resolutions-.*'))
 
 # ICANN Blog
 class Blog(Html_group):
@@ -198,7 +199,7 @@ class Blog(Html_group):
     self.top_path = 'icann/blog'
     today = datetime.date.today()
     self.path = 'icann/blog/' + str(today.year)
-    self.regex.append(re.compile('.*/blogs/details/.*'))
+    self.regex.append(re.compile(r'.*/blogs/details/.*'))
 
     t_delta = datetime.timedelta(weeks=1)
     self.uri = 'https://www.icann.org/en/blogs?page=1&from-page-date=' \
