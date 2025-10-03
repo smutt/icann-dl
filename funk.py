@@ -17,6 +17,7 @@
 #
 #  Copyright (C) 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
+import basic
 import os
 import stat
 import re
@@ -38,7 +39,7 @@ def get_links(URI, regex, tags, excludes):
   try:
     req = requests.get(URI)
   except requests.RequestException:
-    logit("err:req_exception:" + URI)
+    basic.logit("err:req_exception:" + URI)
     return []
 
   if req.status_code == 200:
@@ -73,11 +74,11 @@ def download(uri, fname):
           if chunk: # filter out keep-alive new chunks
             f.write(chunk)
       os.chmod(fname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644
-      logit(uri + ' ' + fname)
+      basic.logit(uri + ' ' + fname)
     else:
-      logit("err:dl_bad_response:" + uri)
+      basic.logit("err:dl_bad_response:" + uri)
   except requests.RequestException:
-    logit("err:dl_req_exception:" + uri)
+    basic.logit("err:dl_req_exception:" + uri)
     
 # Return dict of files existing locally on disk under (path)
 # Whitespaces in files are escaped with %20
@@ -102,25 +103,22 @@ def is_excluded(excludes, s):
       return True
   return False
 
-# Log string (s) to stdout with timestamp
-def logit(s):
-  print(datetime.isoformat(datetime.utcnow()) + ' ' + s.strip())
+# Takes a list of URIs
+# Returns the list with additional redirected URIs appended to it
+# The icann.org webserver hangs forever if you send it an HTTP HEAD request
+def real_locations(URIs):
+  for URI in URIs:
+    try:
+      req = requests.get(URI, allow_redirects=True, timeout=2)
+    except requests.RequestException:
+      basic.logit("err:rf:req_exception:" + URI)
+      return
 
+    print(URI)
+    url_t = Util.parse_url(URI)
+    print(repr(req.history))
+    if len(req.history) > 0:
+      if 'location' in req.history[0].headers:
+        print(url_t.scheme + '://' + url_t.host + req.history[0].headers['location'])
 
-'''
-# Returns the real filename of passed URI by reading HTTP headers
-# TODO: Does not work because the icann.org webserver hangs forever if you send it an HTTP HEAD request
-def real_filename(self, uri):
-  try:
-    req = requests.head(uri, allow_redirects=True, timeout=2)
-    if req.status_code == 200:
-      if 'content-disposition' in req.headers:
-        return req.headers['content-disposition']
-      else:
-        return False
-    else:
-      logit("err:rf_bad_response:" + uri)
-  except requests.RequestException:
-    logit("err:rf_req_exception:" + uri)
-'''
-
+  return URIs
