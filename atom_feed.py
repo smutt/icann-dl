@@ -114,11 +114,11 @@ for cc in conf:
   tree.find('./{' + atom_ns + '}updated').text = basic.timestamp() + 'Z'
 
   for nf in new_files:
-    fname = os.path.basename(nf[2])
-    UID = str(uuid.uuid5(uuid.NAMESPACE_URL, fname)) # uuid.RFC_4122 is broken
+    title = os.path.basename(nf[cc['print_pos']])
+    UID = str(uuid.uuid5(uuid.NAMESPACE_URL, title)) # uuid.RFC_4122 is broken
 
     new_entry = "<entry> \
-      \n  <title>" + fname + "</title> \
+      \n  <title>" + title + "</title> \
       \n  <link href=\"" + cc['link_base'] + "/" + nf[cc['print_pos']].split(cc['base_dir'])[1] + "\"/> \
       \n  <id>urn:uuid:" + UID + "</id> \
       \n  <updated>" + basic.timestamp() + 'Z' + "</updated> \
