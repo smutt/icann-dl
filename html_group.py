@@ -51,6 +51,10 @@ class Html_group():
   def local_files(self):
     return [ff.rstrip(self.html_suffix) for ff in funk.local_files(self.base_dir + self.path)]
 
+  # Wrapper for funk.remote_file()
+  def remote_file(self, URL):
+    return funk.remote_file(URL).rsplit('.', maxsplit=1)[0]
+
   # Converts remote filename to local equivalant
   def convert_filename(self, url):
     if url.endswith(".html") or url.endswith(".htm"):

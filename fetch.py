@@ -21,7 +21,6 @@ import argparse
 import ham_group
 import html_group
 from urllib import parse as Url_parse
-from urllib3 import util as Util
 
 ###################
 # BEGIN EXECUTION #
@@ -82,11 +81,7 @@ for key,gr in group_set.groups.items():
 
   local_files = gr.local_files()
   for ll in gr.get_links():
-    if ARGS.group_set == 'ham': # TODO: Get rid of this IF statement
-      remote_file = Util.parse_url(ll).path.split('/')[-1]
-    elif ARGS.group_set == 'html':
-      remote_file = Util.parse_url(ll).path.split('/')[-1].rsplit('.', maxsplit=1)[0] # Strip remote dir and dot suffix
-
+    remote_file = gr.remote_file(ll)
     if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files \
       and gr.clean_filename(remote_file) not in local_files:
       if ARGS.debug:

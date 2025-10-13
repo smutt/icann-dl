@@ -90,9 +90,11 @@ def local_files(path):
       rv[ff.strip()] = True
   return rv
 
-# Converts a dirty filename (fname) to a clean filename
-def clean_filename(fname):
-  return fname.replace(" ", "-").replace("%20", "-")
+# Determine remote filename to compare to local_files
+# Takes a string URL
+# Returns a string filename
+def remote_file(URL):
+  return Util.parse_url(URL).path.split('/')[-1]
 
 # Should we exclude passed link
 # excludes => a list of compiled regexps to test

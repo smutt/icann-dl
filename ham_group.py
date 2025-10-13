@@ -42,7 +42,7 @@ class Ham_group():
 
   # Wrapper for funk.download()
   def download(self, remote):
-    return funk.download(remote, self.base_dir + self.path + '/' + funk.clean_filename(remote.split('/')[-1]))
+    return funk.download(remote, self.base_dir + self.path + '/' + self.clean_filename(remote.split('/')[-1]))
 
   # Wrapper for funk.local_files()
   def local_files(self):
@@ -52,12 +52,18 @@ class Ham_group():
       path = self.path
     return funk.local_files(self.base_dir + path)
 
+  # Wrapper for funk.remote_file()
+  def remote_file(self, URL):
+    return funk.remote_file(URL)
+
   # Wrapper for funk.get_links()
   def get_links(self):
     return funk.get_links(self.uri, self.regex, ['a', 'href'], self.exclude)
 
+  # Converts a dirty filename (fname) to a clean filename
   def clean_filename(self, fname):
-    return funk.clean_filename(fname)
+    return fname.replace(" ", "-").replace("%20", "-")
+
 
 #####################
 # Individual Groups #
