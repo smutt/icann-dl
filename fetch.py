@@ -20,7 +20,24 @@
 import argparse
 import ham_group
 import html_group
+import multiprocessing.pool
 from urllib import parse as Url_parse
+
+# Processes a single group
+def process_group(gr):
+  local_files = gr.local_files()
+  for ll in gr.get_links():
+    remote_file = gr.remote_file(ll)
+    if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files \
+      and gr.clean_filename(remote_file) not in local_files:
+      if ARGS.debug:
+        print(ll)
+      else:
+        gr.download(ll)
+    else:
+      if ARGS.debug:
+        print('Skipping ' + ll)
+
 
 ###################
 # BEGIN EXECUTION #
@@ -72,6 +89,7 @@ if ARGS.url:
     exit(1)
   group_set.groups[ARGS.group].uri = ARGS.url
 
+async_groups = []
 for key,gr in group_set.groups.items():
   if ARGS.group != 'all' and ARGS.group != key:
     continue
@@ -79,15 +97,11 @@ for key,gr in group_set.groups.items():
   if ARGS.group == 'all' and not gr.enabled: # Skip disabled groups unless --group is passed
     continue
 
-  local_files = gr.local_files()
-  for ll in gr.get_links():
-    remote_file = gr.remote_file(ll)
-    if remote_file not in local_files and Url_parse.unquote(remote_file) not in local_files \
-      and gr.clean_filename(remote_file) not in local_files:
-      if ARGS.debug:
-        print(ll)
-      else:
-        gr.download(ll)
-    else:
-      if ARGS.debug:
-        print('Skipping ' + ll)
+  if gr.async_safe:
+    async_groups.append(gr)
+    continue
+
+  process_group(gr)
+
+mpool = multiprocessing.pool.ThreadPool(processes=int(len(async_groups)/3))
+mpool.map(process_group, async_groups)

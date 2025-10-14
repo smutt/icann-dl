@@ -38,6 +38,7 @@ class Html_group():
 
   def __init__(self):
     self.enabled = True
+    self.async_safe = False # TODO: Revisit this
     self.regex = [] # Compiled regex to match to download
     self.exclude = [] # Compiled regex to exclude for all groups
     self.help_text = '' # Help text displayed with the group. Intended to be overridden.

@@ -27,6 +27,7 @@ class Ham_group():
 
   def __init__(self):
     self.enabled = True
+    self.async_safe = True
     self.regex = []
     self.help_text = '' # Help text displayed with the group. Intended to be overridden
 
@@ -132,6 +133,7 @@ class Audio(Ham_group):
 class Board_brief(Ham_group):
   def __init__(self):
     super().__init__()
+    self.async_safe = False
     self.help_text = 'ICANN Board Briefings'
     this_year = str(date.today().year)
     self.uri = 'https://www.icann.org/en/board-activities-and-meetings?start-date=01-01-' + this_year \
@@ -145,6 +147,7 @@ class Board_brief(Ham_group):
 class Board_other(Ham_group):
   def __init__(self):
     super().__init__()
+    self.async_safe = False
     self.help_text = 'ICANN Board Other'
     self.top_path = 'icann/board'
     this_year = str(date.today().year)
@@ -158,6 +161,7 @@ class Board_other(Ham_group):
 class Ccnso(Ham_group):
   def __init__(self):
     super().__init__()
+    self.async_safe = False
     self.root_path = 'soac/ccnso'
 
   # Wrapper for local_files()
@@ -277,6 +281,7 @@ class Ge_gac(Ham_group):
 class Gnso(Ham_group):
   def __init__(self):
     super().__init__()
+    self.async_safe = False
     self.root_path = 'soac/gnso'
 
   # Wrapper for local_files()
@@ -353,7 +358,7 @@ class Icann_ext(Ham_group):
 class Octo(Ham_group):
   def __init__(self):
     super().__init__()
-    self.enabled = False
+    self.async_safe = False
     self.help_text = 'OCTO Publications'
     self.path = 'icann/octo/pub'
     self.uri = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
@@ -363,7 +368,7 @@ class Octo(Ham_group):
   # OCTO versioning requires we check if a new version has been uploaded
   def get_links(self):
     links = funk.get_links(self.uri, self.regex, ['a', 'href'], self.exclude)
-    return [rl for rl in funk.real_locations(links) if rl not in links]
+    return links + funk.real_locations(links)
 
 # OCTO Commissioned Publications
 class Octo_com(Ham_group):

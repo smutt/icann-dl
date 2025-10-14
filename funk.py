@@ -18,6 +18,7 @@
 #  Copyright (C) 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
 import basic
+import multiprocessing.pool
 import os
 import stat
 import re
@@ -106,21 +107,20 @@ def is_excluded(excludes, s):
   return False
 
 # Takes a list of URIs
-# Returns the list with additional redirected URIs appended to it
-# The icann.org webserver hangs forever if you send it an HTTP HEAD request
+# Returns a new list with the real redirected URIs
+# The icann.org webserver hangs forever if you send it an HTTP HEAD request, it's intentionally unimplemented
 def real_locations(URIs):
-  for URI in URIs:
+  def get_location(URI):
     try:
       req = requests.get(URI, allow_redirects=True, timeout=2)
     except requests.RequestException:
       basic.logit("err:rf:req_exception:" + URI)
       return
 
-    print(URI)
     url_t = Util.parse_url(URI)
-    print(repr(req.history))
     if len(req.history) > 0:
       if 'location' in req.history[0].headers:
-        print(url_t.scheme + '://' + url_t.host + req.history[0].headers['location'])
+        return url_t.scheme + '://' + url_t.host + req.history[0].headers['location']
 
-  return URIs
+  mpool = multiprocessing.pool.ThreadPool(processes=int(len(URIs)/3))
+  return list(mpool.map(get_location, URIs))
