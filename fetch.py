@@ -103,5 +103,6 @@ for key,gr in group_set.groups.items():
 
   process_group(gr)
 
-mpool = multiprocessing.pool.ThreadPool(processes=int(len(async_groups)/3))
-mpool.map(process_group, async_groups)
+if len(async_groups) > 0:
+  mpool = multiprocessing.pool.ThreadPool(processes=max(1, int(len(async_groups)/3)))
+  mpool.map(process_group, async_groups)
