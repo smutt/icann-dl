@@ -120,7 +120,9 @@ def real_locations(URIs):
     url_t = Util.parse_url(URI)
     if len(req.history) > 0:
       if 'location' in req.history[0].headers:
-        return url_t.scheme + '://' + url_t.host + req.history[0].headers['location']
+        location = req.history[0].headers['location']
+        if len(location.strip()) > 0: # This should not be necessary, but alas
+          return url_t.scheme + '://' + url_t.host + location
 
   mpool = multiprocessing.pool.ThreadPool(processes=int(len(URIs)/3))
   return list(mpool.map(get_location, URIs))
