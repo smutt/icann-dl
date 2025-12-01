@@ -26,18 +26,18 @@ import re
 ###################
 # BEGIN EXECUTION #
 ###################
-ap = argparse.ArgumentParser(description='Scrape URL for PDFs and download to local working directory.')
+ap = argparse.ArgumentParser(description='Scrape URL for files and download to local working directory.')
 ap.add_argument(dest='url', help='URL to scrape')
 ap.add_argument('-d', '--debug', action='store_true', help='fetch nothing. Instead print what documents would be fetched')
 ap.add_argument('-e', '--exclude', type=str, action='store', default=None,
                 help='match links to regex for exclusion. Overrides inclusion.')
-ap.add_argument('-i', '--include', type=str, action='store', default=r'.*\.pdf$',
-                help=r'match links to regex for inclusion. Default: .*\.pdf$')
+ap.add_argument('-i', '--include', type=str, action='store', default='docx,dot,pdf,pptx',
+                help=r'Comma delineated list of file extensions to include in scrape. Default: docx,dot,pdf,pptx',)
 ARGS = ap.parse_args()
 hammy = ham_group.Ham_group()
 
-include_regex = exclude_regex = []
-include_regex.append(re.compile(ARGS.include))
+include_regex = [re.compile(r'.*\.' + item + r'$') for item in ARGS.include.split(',')]
+exclude_regex = []
 if ARGS.exclude:
   exclude_regex = list(re.compile(ARGS.exclude))
 else:
