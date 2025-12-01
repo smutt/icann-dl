@@ -124,7 +124,10 @@ def real_locations(URIs):
       if 'location' in req.history[-1].headers:
         location = req.history[-1].headers['location']
         if len(location.strip()) > 0:
-          return url_t.scheme + '://' + url_t.host + location
+          if location.startswith('http'):
+            return location.strip()
+          else:
+            return url_t.scheme + '://' + url_t.host + location
 
-  mpool = multiprocessing.pool.ThreadPool(processes=int(len(URIs)/3))
+  mpool = multiprocessing.pool.ThreadPool(processes=max(1, int(len(URIs)/3)))
   return [URI for URI in mpool.map(get_location, URIs) if URI != None]
