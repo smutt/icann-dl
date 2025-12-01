@@ -311,6 +311,18 @@ class Gnso(Ham_group):
   def local_files(self):
     return funk.local_files(self.base_dir + self.root_path)
 
+# GNSO Elections
+class Gnso_elect(Gnso):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'GNSO Elections'
+    self.path = 'soac/gnso/elections'
+    self.uri = 'https://gnso.icann.org/en/council/elections'
+    self.regex = []
+    self.regex.append(re.compile(r'.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.ppt$'))
+    self.regex.append(re.compile(r'.*\.pptx$'))
+
 # GNSO Correspodence
 class Gnso_cor(Gnso):
   def __init__(self):
@@ -543,6 +555,7 @@ groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
 groups['ge_gac'] = Ge_gac()
+groups['gnso_elect'] = Gnso_elect()
 groups['gnso_cor'] = Gnso_cor()
 groups['gnso_pres'] = Gnso_pres()
 groups['gnso_rep'] = Gnso_rep()
