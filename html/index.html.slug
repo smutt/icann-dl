@@ -76,8 +76,11 @@
     <li>Post recent finds to fediverse</li>
   </ul>
 
+  <div class='bigger'>Icann Haz Mission</div>
+  The primary mission of IcannHaz.org is to archive documentation from ICANN and its community that <i>should</i> remain immutable. IcannHaz.org is not interested in archiving files that regularly change or which are created with an intent that they be mutable. The secondary mission of IcannHaz.org is to notify the Internet Community when new documents are posted to icann.org and increase awareness of documents created by ICANN and its community.
+
   <div class='bigger'>Icann Haz Complaint</div>
-This site is maintained by Andrew McConachie as a public service in the hope that it is useful. For bug reports and feature requests please raise an issue on <a href='https://github.com/smutt/icann-dl'>Github</a>. For questions, concerns, or rants please contact Andrew @ andrew@depht.com.
+  This site is maintained by Andrew McConachie as a public service in the hope that it is useful. For bug reports and feature requests please raise an issue on <a href='https://github.com/smutt/icann-dl'>Github</a>. For questions, concerns, or rants please contact Andrew @ andrew@depht.com.
 
 </body>
 </html>
