@@ -329,7 +329,7 @@ class Gnso_pres(Gnso):
     super().__init__()
     self.help_text = 'GNSO Presentations'
     self.path = 'soac/gnso/pres'
-    self.uri = 'https://gnso.icann.org/en/library?tid[36]=36'
+    self.uri = 'https://gnso.icann.org/en/council/presentations'
     self.regex = []
     self.regex.append(re.compile(r'.*\.pdf$'))
     self.regex.append(re.compile(r'.*\.ppt$'))
