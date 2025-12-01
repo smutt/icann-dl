@@ -26,13 +26,16 @@ import re
 ###################
 # BEGIN EXECUTION #
 ###################
-ap = argparse.ArgumentParser(description='Scrape URL for files and download to local working directory.')
-ap.add_argument(dest='url', help='URL to scrape')
-ap.add_argument('-d', '--debug', action='store_true', help='fetch nothing. Instead print what documents would be fetched')
+ap = argparse.ArgumentParser(description=r'Scrape URL for files and download to local working directory.')
+ap.add_argument(dest='url', help=r'URL to scrape')
+ap.add_argument('-d', '--debug', action='store_true', help=r'fetch nothing. Instead print what documents would be fetched')
 ap.add_argument('-e', '--exclude', type=str, action='store', default=None,
-                help='match links to regex for exclusion. Overrides inclusion.')
+                help=r'match links to regex for exclusion. Overrides inclusion.')
 ap.add_argument('-i', '--include', type=str, action='store', default='docx,dot,pdf,pptx',
                 help=r'Comma delineated list of file extensions to include in scrape. Default: docx,dot,pdf,pptx',)
+ap.add_argument('-l', '--check_locals', type=str, action='store', default=None,
+                help=r'Check local_files and do not download files that already exist locally. Takes name of ham_group.',)
+
 ARGS = ap.parse_args()
 hammy = ham_group.Ham_group()
 
@@ -44,6 +47,11 @@ else:
   exclude_regex = hammy.exclude
 
 links = funk.get_links(ARGS.url, include_regex, ['a', 'href'], exclude_regex)
+if ARGS.check_locals:
+  gr = getattr(ham_group, ARGS.check_locals)()
+  #gr = ham_group.group()
+  links =[ll for ll in links if ll not in gr.local_files()]
+
 actions = []
 for ll in links:
   action = {}
