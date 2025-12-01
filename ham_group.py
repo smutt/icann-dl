@@ -311,6 +311,23 @@ class Gnso(Ham_group):
   def local_files(self):
     return funk.local_files(self.base_dir + self.root_path)
 
+# GNSO Policy Briefings
+class Gnso_brief(Gnso):
+  def __init__(self):
+    super().__init__()
+    self.async_safe = False
+    self.help_text = 'GNSO Policy Briefings'
+    self.path = 'soac/gnso/briefs'
+    self.uri = 'http://go.icann.org/gnsobriefing'
+    self.regex = []
+    self.regex.append(re.compile(r'.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.ppt$'))
+    self.regex.append(re.compile(r'.*\.pptx$'))
+
+  # Wrapper for get_links() to follow a redirect
+  def get_links(self):
+    return funk.real_locations([self.uri])
+
 # GNSO Drafts
 class Gnso_draft(Gnso):
   def __init__(self):
@@ -359,6 +376,18 @@ class Gnso_pres(Gnso):
     self.regex.append(re.compile(r'.*\.ppt$'))
     self.regex.append(re.compile(r'.*\.pptx$'))
 
+# GNSO Procedures
+class Gnso_proc(Gnso):
+  def __init__(self):
+    super().__init__()
+    self.help_text = 'GNSO Procedures'
+    self.path = 'soac/gnso/procedures'
+    self.uri = 'https://gnso.icann.org/en/council/procedures'
+    self.regex = []
+    self.regex.append(re.compile(r'.*\.pdf$'))
+    self.regex.append(re.compile(r'.*\.ppt$'))
+    self.regex.append(re.compile(r'.*\.pptx$'))
+
 # GNSO Reports
 class Gnso_rep(Gnso):
   def __init__(self):
@@ -401,7 +430,6 @@ class Icann_ext(Ham_group):
     self.regex.append(re.compile(r'.*/en/files/government-engagement-ge/.*\.pdf$'))
 
 # OCTO Publications
-# UNDER CONSTRUCTION
 class Octo(Ham_group):
   def __init__(self):
     super().__init__()
@@ -567,10 +595,12 @@ groups['ceo'] = Ceo()
 groups['gac'] = Gac()
 groups['ge'] = Ge()
 groups['ge_gac'] = Ge_gac()
+groups['gnso_brief'] = Gnso_brief()
 groups['gnso_draft'] = Gnso_draft()
 groups['gnso_elect'] = Gnso_elect()
 groups['gnso_cor'] = Gnso_cor()
 groups['gnso_pres'] = Gnso_pres()
+groups['gnso_proc'] = Gnso_proc()
 groups['gnso_rep'] = Gnso_rep()
 groups['gnso_tran'] = Gnso_tran()
 groups['icann_cor'] = Icann_cor()
