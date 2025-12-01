@@ -23,11 +23,12 @@ import os
 import ham_group
 import html_group
 
-www_base = '/var/www/htdocs/icann-hamster.nl/' # Line 118 will break when we change this
+www_base = '/var/www/htdocs/icannhaz.org/'
 
 fetch_num = 10 # How many of the last fetches to display on index.html
 fetch_num_more = 100 # How many of the last fetches to display on more_recent.html
 fetch_log = os.environ['HOME'] + '/log/fetch_ham.log'
+fetch_log_prev = os.environ['HOME'] + '/log/fetch_ham.log.1'
 
 index_in =  os.path.dirname(os.path.realpath(__file__)) + '/html/index.html.slug'
 index_out = www_base + 'index.html'
@@ -103,20 +104,34 @@ index_output = index_output.replace('@@@ocr-total@@@', "{:,}".format(total_OCR))
 collections_output = collections_output.replace('@@@files-total@@@', "{:,}".format(total_count))
 collections_output = collections_output.replace('@@@size-total@@@', "{:,}".format(total_MB))
 
-# Create list of most recent downloaded docs
-fin = open(fetch_log, 'r')
+# Build list of fetched documents from previous and current log files
+fin = open(fetch_log_prev, 'r')
 fetches = list(fin)
+fin.close()
+fin = open(fetch_log, 'r')
+fetches += list(fin)
 fin.close()
 
 recent_fetches = []
-while len(recent_fetches) < fetch_num_more or len(fetches) == 0:
+while (len(recent_fetches) < fetch_num_more) and len(fetches) > 0:
   line = fetches.pop().strip()
-  if not line.split()[1].startswith('https://'):
-    continue
+  if line.find('||') == -1: # Old style: TODO: Delete once we have enough new style entries
+    if not line.split()[1].startswith('https://'):
+      continue
 
-  ts = datetime.fromisoformat(line.split()[0]).strftime('%a %b %d')
-  linky = line.split(www_base)[1].replace("%", "%25")
-  recent_fetches.append([ts, linky])
+    www_base_parent = '/'.join(www_base.split('/')[:-2]) + '/'
+    ts = datetime.fromisoformat(line.split()[0]).strftime('%a %b %d')
+    escaped = line.split(www_base_parent)[1].replace("%", "%25") # Escape % but mangle path
+    linky = '/'.join(escaped.split('/')[1:])
+    recent_fetches.append([ts, linky])
+
+  else: # New style
+    if not line.split('||')[2].startswith('https://'):
+      continue
+
+    ts = datetime.fromisoformat(line.split('||')[0].strip()).strftime('%a %b %d')
+    linky = line.split('||')[2].replace("%", "%25")
+    recent_fetches.append([ts, linky])
 
 ss = ''
 for ii in range(fetch_num):

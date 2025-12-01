@@ -17,13 +17,16 @@
 #
 #  Copyright (C) 2023, 2024 Andrew McConachie, <andrew.mcconachie@icann.org>
 
+import basic
 import funk
 import os
 import re
+import requests
+import stat
 from datetime import date
 
 class Ham_group():
-  base_dir = '/var/www/htdocs/icann-hamster.nl/ham/' # Where the local fun starts
+  base_dir = '/var/www/htdocs/icannhaz.org/ham/' # Where the local fun starts
 
   def __init__(self):
     self.enabled = True
@@ -41,9 +44,29 @@ class Ham_group():
     self.exclude.append(re.compile(r'.*/delegation-of-authority-guidelines-16mar17-en.pdf$'))
     self.exclude.append(re.compile(r'.*/delegation-of-authority-guidelines-24oct24-en.pdf$'))
 
-  # Wrapper for funk.download()
+  # Wrapper for _download()
   def download(self, remote):
-    return funk.download(remote, self.base_dir + self.path + '/' + self.clean_filename(remote.split('/')[-1]))
+    return self._download(remote, self.base_dir + self.path + '/' + self.clean_filename(remote.split('/')[-1]))
+
+  # Grab a file and write to disk
+  # Takes a remote URI and a local filename
+  def _download(self, url, fname):
+    if os.path.exists(fname):
+      return
+
+    try:
+      req = requests.get(url, stream=True)
+      if req.status_code == 200:
+        with open(fname, 'wb') as f:
+          for chunk in req.iter_content(chunk_size=1024):
+            if chunk: # filter out keep-alive new chunks
+              f.write(chunk)
+        os.chmod(fname, stat.S_IRUSR | stat.S_IWUSR | stat.S_IRGRP | stat.S_IROTH) # 0644
+        basic.logit('||' + self.help_text + '||' + url + '||' + fname)
+      else:
+        basic.logit("err:dl_bad_response:" + url)
+    except requests.RequestException:
+      basic.logit("err:dl_req_exception:" + url)
 
   # Wrapper for funk.local_files()
   def local_files(self):
@@ -120,7 +143,7 @@ class Aso_pres(Ham_group):
 # This is just a stub class for counting the files and bytes
 # TODO: Get this into it's own file and out of ham_group.py
 class Audio(Ham_group):
-  base_dir = '/var/www/htdocs/icann-hamster.nl/audio/' # Overridden from Ham_group
+  base_dir = '/var/www/htdocs/icannhaz.org/audio/' # Overridden from Ham_group
 
   def __init__(self):
     super().__init__()
@@ -261,7 +284,7 @@ class Gac(Ham_group):
 class Ge(Ham_group):
   def __init__(self):
     super().__init__()
-    self.help_text = 'Government Engagement Publications'
+    self.help_text = 'ICANN GE Publications'
     self.path = 'icann/ge/pub'
     self.uri = 'https://www.icann.org/en/government-engagement/publications?page=1'
     self.regex.append(re.compile(r'.*/en/files/government-engagement-ge/.*\.pdf$'))
@@ -270,7 +293,7 @@ class Ge(Ham_group):
 class Ge_gac(Ham_group):
   def __init__(self):
     super().__init__()
-    self.help_text = 'Government Engagement Reports to GAC'
+    self.help_text = 'ICANN GE Reports to GAC'
     self.path = 'icann/ge/gac'
     self.uri = 'https://gac.icann.org/activity/bi-monthly-report-icann-gse-ge-governments-and-igos-engagement-activities'
     self.regex = []
@@ -348,7 +371,7 @@ class Icann_cor(Ham_group):
 class Icann_ext(Ham_group):
   def __init__(self):
     super().__init__()
-    self.help_text = 'ICANN Government Engagement Submissions to External Bodies'
+    self.help_text = 'ICANN Submissions to External Bodies'
     self.path = 'icann/ext'
     self.uri = 'https://www.icann.org/en/government-engagement/submissions-to-external-bodies'
     self.regex.append(re.compile(r'.*/en/files/government-engagement-ge/.*\.pdf$'))
@@ -359,7 +382,7 @@ class Octo(Ham_group):
   def __init__(self):
     super().__init__()
     self.async_safe = False
-    self.help_text = 'OCTO Publications'
+    self.help_text = 'ICANN OCTO Publications'
     self.path = 'icann/octo/pub'
     self.uri = 'https://www.icann.org/resources/pages/octo-publications-2019-05-24-en'
     self.regex.append(re.compile(r'.*/octo-.*\.pdf$'))
@@ -374,7 +397,7 @@ class Octo(Ham_group):
 class Octo_com(Ham_group):
   def __init__(self):
     super().__init__()
-    self.help_text = 'OCTO Commissioned Publications'
+    self.help_text = 'ICANN OCTO Commissioned Publications'
     self.path = 'icann/octo/com'
     self.uri = 'https://www.icann.org/resources/pages/octo-commissioned-documents-2020-11-05-en'
     self.regex.append(re.compile(r'.*/system/files/files/.*\.pdf$'))
@@ -383,7 +406,7 @@ class Octo_com(Ham_group):
 class Octo_archive(Ham_group):
   def __init__(self):
     super().__init__()
-    self.help_text = 'OCTO Archive'
+    self.help_text = 'ICANN OCTO Archive'
     self.path = 'icann/octo/archive'
     self.uri = 'https://www.icann.org/octo-document-archive'
     self.regex.append(re.compile(r'/en.*\.pdf$'))

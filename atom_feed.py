@@ -32,13 +32,13 @@ ham['dl_log'] = '/home/smutt/log/fetch_ham.log'
 ham['atom_xml'] = '/home/smutt/www/icannhaz.org/feed.xml'
 ham['link_base'] = 'https://icannhaz.org/ham'
 ham['base_dir'] = ham_group.Ham_group.base_dir
-ham['print_pos'] = 2
+ham['print_pos'] = 3
 html = {}
 html['dl_log'] = '/home/smutt/log/fetch_html.log'
 html['atom_xml'] = '/home/smutt/www/icannhaz.org/feed_html.xml'
 html['link_base'] = 'https://'
 html['base_dir'] = 'https://'
-html['print_pos'] = 1
+html['print_pos'] = 2
 conf = [ham, html]
 
 atom_lastrun = '/home/smutt/log/atom_feed.lastrun'
@@ -47,32 +47,31 @@ atom_ns = 'http://www.w3.org/2005/Atom'
 # Takes a log filename to read and a minimum timestamp
 # Returns list of new entry lists ==> [timestamp, remote, local]
 def get_files(fname, min_ts, base_dir):
-  def parse_line(line, base_dir): # Returns a 3 tuple (ts, remote, local)
-    toks = line.split()
-    if len(toks) == 3:
-      return (toks[0], toks[1], toks[2])
-    elif len(toks) < 3:
-      return (None, None, None)
-    else:
-      start = len(toks[0])
-      end = line.find(base_dir)
-      return (toks[0], line[start:end].strip(), line[end:].strip())
+  # Returns a 4 tuple (ts, help_text, remote, local) (new)
+  def parse_line(line, base_dir):
+      toks = line.split('||')
+      if len(toks) == 4:
+        return (toks[0].strip(), toks[1].strip(), toks[2].strip(), toks[3].strip())
+      else:
+        return (None, None, None, None)
 
   rv = []
   with open(fname) as fh:
     for line in fh:
-      ts, remote, local = parse_line(line.strip(), base_dir)
+      ts, group, remote, local = parse_line(line.strip(), base_dir)
+
       if ts == None:
         continue
 
       try:
         f_ts = dd.datetime.fromisoformat(ts)
       except:
+        basic.logit('err: Invalid date encountered in logfile')
         continue
 
       if os.path.exists(local):
         if min_ts <= f_ts:
-          rv.append([ts, remote, local.replace("%", "%25")])
+          rv.append([ts, group, remote, local.replace("%", "%25")])
   return rv
 
 ###################
@@ -87,7 +86,7 @@ if ARGS.lastrun:
   try:
     last_run = dd.datetime.fromisoformat(ARGS.lastrun)
   except:
-    print('Bad --lastrun')
+    basic.logit('Bad --lastrun')
     exit(1)
 
 else:
@@ -114,7 +113,7 @@ for cc in conf:
   tree.find('./{' + atom_ns + '}updated').text = basic.timestamp() + 'Z'
 
   for nf in new_files:
-    title = os.path.basename(nf[cc['print_pos']])
+    title = nf[1] + '|' + os.path.basename(nf[cc['print_pos']])
     UID = str(uuid.uuid5(uuid.NAMESPACE_URL, title)) # uuid.RFC_4122 is broken
 
     new_entry = "<entry> \

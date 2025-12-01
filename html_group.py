@@ -96,7 +96,7 @@ class Html_group():
       basic.logit("download failed: " + url)
       return
     out_path = self.stamp_file(url)
-    basic.logit(url + ' ' + out_path)
+    basic.logit('||' + self.help_text + '||' + url + '||' + out_path)
 
   # Call external program to download and save remote HTML to dest_dir
   def _html_download(self, url, dest_dir):

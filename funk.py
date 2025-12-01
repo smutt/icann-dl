@@ -61,6 +61,7 @@ def get_links(URI, regex, tags, excludes):
               links.append(link)
   return list(dict.fromkeys(links))
 
+'''
 # Grab a file and write to disk
 # Takes a remote URI and a local filename
 def download(uri, fname):
@@ -80,7 +81,8 @@ def download(uri, fname):
       basic.logit("err:dl_bad_response:" + uri)
   except requests.RequestException:
     basic.logit("err:dl_req_exception:" + uri)
-    
+'''
+
 # Return dict of files existing locally on disk under (path)
 # Whitespaces in files are escaped with %20
 # path => a UNIX path 

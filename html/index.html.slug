@@ -7,8 +7,8 @@
   <div class='big'>An unofficial public collection of mostly PDF files downloaded from <a href='https://www.icann.org'>icann.org</a>.
     Currently hosting @@@size-total@@@ Megabytes in @@@files-total@@@ files.</div><br/>
 
-  <div class='bigger'>Icann Haz Search</div>
-  Try our full text <a href="https://search.icannhaz.org/search.html">search</a>.
+<!--  <div class='bigger'>Icann Haz Search</div>
+  Try our full text <a href="https://search.icannhaz.org/search.html">search</a>. -->
 
   <div class='bigger'>Icann Haz Recent Finds</div>
   <table>
