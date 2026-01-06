@@ -49,8 +49,7 @@ else:
 links = funk.get_links(ARGS.url, include_regex, ['a', 'href'], exclude_regex)
 if ARGS.check_locals:
   gr = getattr(ham_group, ARGS.check_locals)()
-  #gr = ham_group.group()
-  links =[ll for ll in links if ll not in gr.local_files()]
+  links = [ll for ll in links if ll not in gr.local_files()]
 
 actions = []
 for ll in links:
