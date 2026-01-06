@@ -4,7 +4,7 @@ BASE=/var/www/htdocs/icannhaz.org
 STAGE=/home/smutt/staging
 YEAR=$(($(date +%Y) + 1))
 
-for DIR in ham/soac/alac/pub ham/icann/cor/ html/icann/blog/ html/icann/announcements
+for DIR in ham/soac/alac/pub ham/soac/gnso/tran ham/icann/cor/ html/icann/blog/ html/icann/announcements
 do
 	mkdir -m 755 $BASE/$DIR/$YEAR
 done
