@@ -389,6 +389,8 @@ class Gnso_proc(Gnso):
     self.regex.append(re.compile(r'.*\.pptx$'))
 
 # GNSO Reports
+# TODO: Needs work and some thinking
+# https://gnso.icann.org/en/group-activities/active
 class Gnso_rep(Gnso):
   def __init__(self):
     super().__init__()
@@ -399,14 +401,16 @@ class Gnso_rep(Gnso):
     self.regex.append(re.compile(r'.*\.pdf$'))
 
 # GNSO Transcripts
+# TODO: Create new group_set for transcripts and move this there
 class Gnso_tran(Gnso):
   def __init__(self):
     super().__init__()
+    self.enabled = False
     self.help_text = 'GNSO Transcripts'
-    self.path = 'soac/gnso/tran'
-    self.uri = 'https://gnso.icann.org/en/library?tid[51]=51'
+    self.path = 'soac/gnso/tran/' + str(date.today().year)
+    self.uri = 'https://gnso.icann.org/en/group-activities/calendar/'
     self.regex = []
-    self.regex.append(re.compile(r'.*\.pdf$'))
+    self.regex.append(re.compile(r'.*transcript.*\.pdf$'))
 
 # ICANN Correspondence
 class Icann_cor(Ham_group):
